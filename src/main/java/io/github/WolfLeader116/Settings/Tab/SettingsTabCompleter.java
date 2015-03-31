@@ -3,6 +3,7 @@ package io.github.WolfLeader116.Settings.Tab;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
@@ -14,7 +15,7 @@ public class SettingsTabCompleter
   {
     if (cmd.getName().equalsIgnoreCase(""))
     {
-      List<String> list = new ArrayList();
+      List<String> list = new ArrayList<String>();
       if (args.length == 0)
       {
         list.add("help");

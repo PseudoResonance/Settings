@@ -1,135 +1,91 @@
+// Change this to your plugins package.
 package io.github.WolfLeader116.Settings;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.World;
+
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.Plugin;
 
-public class Config
-{
-  private final Plugin PLUGIN;
-  private final String FILENAME;
-  private final File FOLDER;
-  private FileConfiguration config;
-  private File configFile;
-  
-  public Config(String filename, Settings instance)
-  {
-    if (!filename.endsWith(".yml")) {
-      filename = filename + ".yml";
-    }
-    this.FILENAME = filename;
-    this.PLUGIN = instance;
-    this.FOLDER = this.PLUGIN.getDataFolder();
-    this.config = null;
-    this.configFile = null;
-    reload();
-  }
-  
-  public Config(File folder, String filename, Settings instance)
-  {
-    if (!filename.endsWith(".yml")) {
-      filename = filename + ".yml";
-    }
-    this.FILENAME = filename;
-    this.PLUGIN = instance;
-    this.FOLDER = folder;
-    this.config = null;
-    this.configFile = null;
-    reload();
-  }
-  
-  public FileConfiguration getConfig()
-  {
-    if (this.config == null) {
-      reload();
-    }
-    return this.config;
-  }
-  
-  public void reload()
-  {
-    if (!this.FOLDER.exists()) {
-      try
-      {
-        if (this.FOLDER.mkdir()) {
-          this.PLUGIN.getLogger().log(Level.INFO, 
-            "Folder " + this.FOLDER.getName() + " created.");
-        } else {
-          this.PLUGIN.getLogger().log(
-            Level.WARNING, 
-            "Unable to create folder " + this.FOLDER.getName() + 
-            ".");
-        }
-      }
-      catch (Exception localException) {}
-    }
-    this.configFile = new File(this.FOLDER, this.FILENAME);
-    if (!this.configFile.exists()) {
-      try
-      {
-        this.configFile.createNewFile();
-      }
-      catch (IOException localIOException) {}
-    }
-    this.config = YamlConfiguration.loadConfiguration(this.configFile);
-  }
-  
-  public void saveDefaultConfig()
-  {
-    if (this.configFile == null) {
-      this.configFile = new File(this.PLUGIN.getDataFolder(), this.FILENAME);
-    }
-    if (!this.configFile.exists()) {
-      this.PLUGIN.saveResource(this.FILENAME, false);
-    }
-  }
-  
-  public void save()
-  {
-    if ((this.config == null) || (this.configFile == null)) {
-      return;
-    }
-    try
-    {
-      getConfig().save(this.configFile);
-    }
-    catch (IOException ex)
-    {
-      this.PLUGIN.getLogger().log(Level.WARNING, 
-        "Could not save config to " + this.configFile.getName(), ex);
-    }
-  }
-  
-  public void set(String path, Object o)
-  {
-    getConfig().set(path, o);
-  }
-  
-  public void setLocation(String path, Location l)
-  {
-    getConfig().set(path + ".w", l.getWorld().getName());
-    getConfig().set(path + ".x", Double.valueOf(l.getX()));
-    getConfig().set(path + ".y", Double.valueOf(l.getY()));
-    getConfig().set(path + ".z", Double.valueOf(l.getZ()));
-    getConfig().set(path + ".yaw", Float.valueOf(l.getYaw()));
-    getConfig().set(path + ".pitch", Float.valueOf(l.getPitch()));
-    save();
-  }
-  
-  public Location getLocation(String path)
-  {
-    Location l = new Location(Bukkit.getWorld(getConfig().getString(
-      path + ".w")), getConfig().getDouble(path + ".x"), getConfig()
-      .getDouble(path + ".y"), getConfig().getDouble(path + ".z"), 
-      Float.parseFloat(getConfig().getDouble(new StringBuilder(String.valueOf(path)).append(".yaw").toString())), 
-      Float.parseFloat(getConfig().getDouble(new StringBuilder(String.valueOf(path)).append(".pitch").toString())));
-    return l;
-  }
+public class Config {
+	
+	/*
+	 Simple Custom YML file utility class by @SE Plugins.
+	 
+	 This utility may be updated from time to time to make your life even easier, so check back at the original post/github page every once in a while.
+	 
+	 An example plugin using this utility is available on the github page, get the link from the post on Bukkit.
+	 
+	 Remember to make an object to this class from any class that needs to access the methods. For an example, look at the example plugin.
+	 */
+	
+	// Create an object to the class that extends Java Plugin. CHANGE MainClass so it points to the name of your main class.
+	public static Settings plugin;
+	public Config(Settings plugin){
+		Config.plugin = plugin;
+	}
+	
+	/*
+	  Initialize the file configuration and file. To change the names/ make several custom config files 
+	  		just change the "customConfig" and "customConfigFile" names and wherever else they may be present below.
+	 */
+	private FileConfiguration customConfig = null;
+	private File customConfigFile = null;
+
+	/*
+	 Setup the reload method as well as create the file if it is not present. IMPORTANT READ BELOW:
+	 	1) Change the "customConfigFile.yml" fields to whatever you want the actual file to be named (or leave it the same if you wish)
+	 	2) Make sure you fixed the object to the main class at the top of the class (pointing to the name of the class that extense Java Plugin)
+	 */
+	public void reloadCustomConfig(){
+		if (customConfigFile == null){
+			customConfigFile = new File(plugin.getDataFolder(), "playerdata.yml");
+		}
+	
+		customConfig = YamlConfiguration.loadConfiguration(customConfigFile);
+		
+		// Looks for the default file in the jar. Make sure you create the file and add the defaults. (name of it must be whatever you switched "customConfigFile.yml" for.
+		InputStream defConfigStream = plugin.getResource("playerdata.yml");
+		if(defConfigStream != null){
+			@SuppressWarnings("deprecation")
+			YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+			customConfig.setDefaults(defConfig);
+		}
+	}
+
+		// Get's the custom config file. You will call this method whenever getting a value from the file. If the file doesn't yet exist, it will be created with the defaults copied.
+	public FileConfiguration getCustomConfig(){
+		if(customConfig == null){
+			reloadCustomConfig();
+		}
+		return customConfig;
+	}
+
+		/*
+		 	Saves all changes / stuffs to the custom config file. If an errors occurs while saving, it will be logged in the console.
+		 	You should call this method in the onDisable() method in your main class to prevent loosing changes.
+		 */
+	public void saveCustomConfig(){
+		if(customConfig == null || customConfigFile == null){
+			return;
+		}
+		try{
+			getCustomConfig().save(customConfigFile);
+		} catch (IOException ex){
+			plugin.getLogger().log(Level.SEVERE, "Could not save config to " + customConfigFile, ex);
+		}
+	}
+
+		// This isn't required and shouldn't be used unless you know what you're doing with it.
+	public void saveDefaultConfig(){
+		if(customConfigFile == null){
+			customConfigFile = new File(plugin.getDataFolder(), "homeLocations.yml");
+		}
+		if(!customConfigFile.exists()){
+			plugin.saveResource("playerdata.yml", false);
+		}
+	}
+
 }
