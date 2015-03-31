@@ -23,18 +23,18 @@ public class SettingsCMD
       {
         if (args.length == 0)
         {
-          log.info("===---Settings Info---===");
-          log.info("Settings made by WolfLeader116.");
           log.info("Use /settings help for more help.");
+          log.info("Settings made by WolfLeader116.");
+          log.info("===---Settings Info---===");
         }
         else if (args.length >= 1)
         {
           if (args[0].equalsIgnoreCase("help"))
           {
-            log.info("===---Settings Help---===");
-            log.info("/settings Displays info on the plugin.");
-            log.info("/settings help Shows this page.");
             log.info("/settings set <setting> <value> <player> Sets a setting for the specified player.");
+            log.info("/settings help Shows this page.");
+            log.info("/settings Displays info on the plugin.");
+            log.info("===---Settings Help---===");
           }
           else if (args[0].equalsIgnoreCase("set"))
           {
@@ -85,6 +85,12 @@ public class SettingsCMD
                     Bukkit.getPlayer(args[3]).setAllowFlight(true);
                     log.info(args[3] + "'s fly mode has been set to true");
                     player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to true by the console");
+                  } else if (c.getCustomConfig().getString("fly." + Bukkit.getPlayer(args[3]).getUniqueId().toString()) == null) {
+                      c.getCustomConfig().set("fly." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+                      c.saveCustomConfig();
+                      Bukkit.getPlayer(args[3]).setAllowFlight(true);
+                      log.info(args[3] + "'s fly mode has been set to true");
+                      player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to true by the console");
                   }
                 }
                 else
