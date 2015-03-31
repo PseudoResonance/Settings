@@ -1,0 +1,18 @@
+name: Settings
+author: WolfLeader116
+main: io.github.WolfLeader116.Settings.Settings
+version: 1.1.1
+description: Settings plugin.
+commands:
+  Settings:
+    description: Settings help command.
+permissions:
+  settings.set:
+    description: Lets the player set their settings.
+  settings.set.other:
+    description: Lets the player set other players settings.
+  settings.*:
+    description: Gives the player all settings permissions.
+    children:
+      settings.set: true
+      settings.set.other: true
