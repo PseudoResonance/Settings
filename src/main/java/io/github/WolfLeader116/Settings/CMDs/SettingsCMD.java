@@ -187,7 +187,7 @@ public class SettingsCMD
                   }
                   else
                   {
-                    sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "The value " + args[2] + " is not possible. Possible values are true/false.");
+                    sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
                   }
                 }
                 else
