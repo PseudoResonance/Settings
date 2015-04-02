@@ -27,8 +27,6 @@ public class Settings
 {
   public static Settings plugin;
   
-  Config c = new Config("playerdata", Settings.plugin);
-  
   public void onEnable()
   {
     getCommand("settings").setExecutor(new SettingsCMD());
@@ -52,6 +50,7 @@ public class Settings
   @EventHandler
   public void onPlayerJoin(PlayerJoinEvent e)
   {
+	Config c = new Config("playerdata", Settings.plugin);
     String player = e.getPlayer().getName();
     Player eplayer = e.getPlayer();
     ScoreboardManager manager = Bukkit.getScoreboardManager();
