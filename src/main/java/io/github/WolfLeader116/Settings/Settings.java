@@ -95,7 +95,7 @@ public class Settings
 	staff.setScore(Bukkit.getServer().getOnlinePlayers().size());
   }*/
   
-  public static Inventory myInventory = Bukkit.createInventory(null, 9, "My custom Inventory!");
+  public static Inventory myInventory = Bukkit.createInventory(null, 9, ChatColor.DARK_BLUE + "Player Settings");
   
   static {
 	ItemStack feather = new ItemStack(Material.FEATHER);
