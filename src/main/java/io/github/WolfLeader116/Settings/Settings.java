@@ -29,15 +29,14 @@ public class Settings
   
   public Config c = new Config(this);
   
-  ScoreboardManager manager = Bukkit.getScoreboardManager();
-  Scoreboard board = manager.getNewScoreboard();
-  Objective objective = board.registerNewObjective("status", "dummy");
-  
   public void onEnable()
   {
     getCommand("settings").setExecutor(new SettingsCMD());
     getCommand("settings").setTabCompleter(new SettingsTabCompleter());
     Bukkit.getServer().getPluginManager().registerEvents(this, this);
+    ScoreboardManager manager = Bukkit.getScoreboardManager();
+    Scoreboard board = manager.getNewScoreboard();
+    Objective objective = board.registerNewObjective("status", "dummy");
 	objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 	objective.setDisplayName(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Marvel " + ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "Craft " + ChatColor.RED + "" + ChatColor.BOLD + "Status");
     onlineplayers();
@@ -55,6 +54,11 @@ public class Settings
   {
     String player = e.getPlayer().getName();
     Player eplayer = e.getPlayer();
+    ScoreboardManager manager = Bukkit.getScoreboardManager();
+    Scoreboard board = manager.getNewScoreboard();
+    Objective objective = board.registerNewObjective("status", "dummy");
+	objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+	objective.setDisplayName(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Marvel " + ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "Craft " + ChatColor.RED + "" + ChatColor.BOLD + "Status");
     eplayer.setScoreboard(board);
     onlineplayers();
     /*onlinestaff();*/
@@ -72,11 +76,21 @@ public class Settings
   }
 
   public void onlineplayers() {
+	ScoreboardManager manager = Bukkit.getScoreboardManager();
+	Scoreboard board = manager.getNewScoreboard();
+	Objective objective = board.registerNewObjective("status", "dummy");
+	objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+	objective.setDisplayName(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Marvel " + ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "Craft " + ChatColor.RED + "" + ChatColor.BOLD + "Status");
 	Score players = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Players:");
 	players.setScore(Bukkit.getServer().getOnlinePlayers().size());
   }
 
   /*public void onlinestaff() {
+	ScoreboardManager manager = Bukkit.getScoreboardManager();
+	Scoreboard board = manager.getNewScoreboard();
+	Objective objective = board.registerNewObjective("status", "dummy");
+	objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+	objective.setDisplayName(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Marvel " + ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "Craft " + ChatColor.RED + "" + ChatColor.BOLD + "Status");
 	Score staff = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Staff:");
 	staff.setScore(Bukkit.getServer().getOnlinePlayers().size());
   }*/
@@ -102,9 +116,9 @@ public class Settings
 	Inventory inventory = event.getInventory();
     if (inventory.getName().equals(myInventory.getName())) {
       if (clicked.getType() == Material.FEATHER) {
-    	event.setCancelled(true);
+    	player.chat("/settings set fly toggle");
     	player.closeInventory();
-    	player.getInventory().setItem(4, feather);
+    	player.openInventory(myInventory);
       }
     }
   }
