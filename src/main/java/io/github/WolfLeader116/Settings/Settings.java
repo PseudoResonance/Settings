@@ -118,7 +118,6 @@ public class Settings
       if (clicked.getType() == Material.FEATHER) {
     	player.chat("/settings set fly toggle");
     	player.closeInventory();
-    	player.openInventory(myInventory);
       }
     }
   }
