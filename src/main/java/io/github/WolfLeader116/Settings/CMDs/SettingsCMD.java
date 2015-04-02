@@ -1,7 +1,10 @@
 package io.github.WolfLeader116.Settings.CMDs;
 
 import io.github.WolfLeader116.Settings.Config;
+import io.github.WolfLeader116.Settings.Settings;
+
 import java.util.logging.Logger;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -29,8 +32,12 @@ public class SettingsCMD
         }
         else if (args.length >= 1)
         {
-          if (args[0].equalsIgnoreCase("help"))
+          if (args[0].equalsIgnoreCase("inv")) {
+        	  log.info("You can't run this command!");
+          }
+          else if (args[0].equalsIgnoreCase("help"))
           {
+        	log.info("/settings inv Opens the settings GUI.");
             log.info("/settings set <setting> <value> <player> Sets a setting for the specified player.");
             log.info("/settings help Shows this page.");
             log.info("/settings Displays info on the plugin.");
@@ -119,7 +126,11 @@ public class SettingsCMD
         }
         else if (args.length >= 1)
         {
-          if (args[0].equalsIgnoreCase("help"))
+          if (args[0].equalsIgnoreCase("inv")) {
+        	Player splayer = (Player) sender;
+        	splayer.openInventory(Settings.myInventory);
+          }
+          else if (args[0].equalsIgnoreCase("help"))
           {
             sender.sendMessage(ChatColor.BLUE + "===---" + ChatColor.GOLD + "Settings Help" + ChatColor.BLUE + "---===");
             sender.sendMessage(ChatColor.RED + "/settings " + ChatColor.AQUA + "Displays info on the plugin.");
@@ -129,6 +140,7 @@ public class SettingsCMD
             } else if (sender.hasPermission("settings.set")) {
               sender.sendMessage(ChatColor.RED + "/settings set <setting> <value> " + ChatColor.AQUA + "Sets a setting for you.");
             }
+            sender.sendMessage(ChatColor.RED + "/settings inv " + ChatColor.AQUA + "Opens the settings GUI.");
           }
           else if (args[0].equalsIgnoreCase("set"))
           {
