@@ -27,7 +27,7 @@ public class Settings
 {
   public static Settings plugin;
   
-  public Config c = new Config(this);
+  Config c = new Config("playerdata", Settings.plugin);
   
   public void onEnable()
   {
@@ -62,16 +62,14 @@ public class Settings
     eplayer.setScoreboard(board);
     onlineplayers();
     /*onlinestaff();*/
-    if (c.getCustomConfig().getString("fly." + Bukkit.getPlayer(player).getUniqueId().toString()) != null)
+    if (c.getConfig().getBoolean("fly." + Bukkit.getPlayer(player).getUniqueId()))
     {
-      if (c.getCustomConfig().getString("fly." + Bukkit.getPlayer(player).getUniqueId().toString()) == "'true'") {
         Bukkit.getPlayer(player).setAllowFlight(true);
-      }
     }
-    else if (c.getCustomConfig().getString("fly." + Bukkit.getPlayer(player).getUniqueId().toString()) == null)
+    else if (c.getConfig().getString("fly." + Bukkit.getPlayer(player).getUniqueId().toString()) == null)
     {
-      c.getCustomConfig().set("fly." + Bukkit.getPlayer(player).getUniqueId().toString(), "'false'");
-      c.saveCustomConfig();
+      c.getConfig().set("fly." + Bukkit.getPlayer(player).getUniqueId().toString(), false);
+      c.save();
     }
   }
 
