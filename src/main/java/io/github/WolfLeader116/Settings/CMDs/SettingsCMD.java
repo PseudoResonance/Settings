@@ -170,19 +170,24 @@ public class SettingsCMD
                   }
                   else if (args[2].equalsIgnoreCase("toggle"))
                   {
-                    if (c.getConfig().getBoolean("fly." + Bukkit.getPlayer(args[3]).getUniqueId()))
+                    if (c.getConfig().getBoolean("fly." + Bukkit.getPlayer(player).getUniqueId()))
                     {
                       c.getConfig().set("fly." + Bukkit.getPlayer(player).getUniqueId().toString(), false);
                       c.save();
                       Bukkit.getPlayer(player).setAllowFlight(false);
                       sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to false");
                     }
-                    else if (!c.getConfig().getBoolean("fly." + Bukkit.getPlayer(args[3]).getUniqueId()))
+                    else if (!c.getConfig().getBoolean("fly." + Bukkit.getPlayer(player).getUniqueId()))
                     {
                       c.getConfig().set("fly." + Bukkit.getPlayer(player).getUniqueId().toString(), true);
                       c.save();
                       Bukkit.getPlayer(player).setAllowFlight(true);
                       sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to true");
+                    } else {
+                        c.getConfig().set("fly." + Bukkit.getPlayer(player).getUniqueId().toString(), true);
+                        c.save();
+                        Bukkit.getPlayer(player).setAllowFlight(true);
+                        sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to true");
                     }
                   }
                   else
@@ -226,7 +231,7 @@ public class SettingsCMD
                   {
                     if (c.getConfig().getBoolean("fly." + Bukkit.getPlayer(args[3]).getUniqueId()))
                     {
-                      c.getConfig().set("fly." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+                      c.getConfig().set("fly." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
                       c.save();
                       Bukkit.getPlayer(args[3]).setAllowFlight(false);
                       sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s fly mode has been set to false");
@@ -234,11 +239,18 @@ public class SettingsCMD
                     }
                     else if (!c.getConfig().getBoolean("fly." + Bukkit.getPlayer(args[3]).getUniqueId()))
                     {
-                      c.getConfig().set("fly." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
+                      c.getConfig().set("fly." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
                       c.save();
                       Bukkit.getPlayer(args[3]).setAllowFlight(true);
                       sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s fly mode has been set to true");
                       player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to true by " + ChatColor.RESET + send);
+                    } else {
+                        c.getConfig().set("fly." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+                        c.save();
+                        Bukkit.getPlayer(args[3]).setAllowFlight(true);
+                        sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s fly mode has been set to true");
+                        player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to true by " + ChatColor.RESET + send);
+                    	
                     }
                   }
                   else

@@ -53,6 +53,20 @@ public class Settings
 	Config c = new Config("playerdata", Settings.plugin);
     String player = e.getPlayer().getName();
     Player eplayer = e.getPlayer();
+    if (c.getConfig().getBoolean("fly." + Bukkit.getPlayer(player).getUniqueId()))
+    {
+        Bukkit.getPlayer(player).setAllowFlight(true);
+    }
+    else if (!c.getConfig().getBoolean("fly." + Bukkit.getPlayer(player).getUniqueId()))
+    {
+      c.getConfig().set("fly." + Bukkit.getPlayer(player).getUniqueId().toString(), false);
+      c.save();
+      Bukkit.getPlayer(player).setAllowFlight(false);
+    } else {
+        c.getConfig().set("fly." + Bukkit.getPlayer(player).getUniqueId().toString(), false);
+        c.save();
+        Bukkit.getPlayer(player).setAllowFlight(false);
+    }
     ScoreboardManager manager = Bukkit.getScoreboardManager();
     Scoreboard board = manager.getNewScoreboard();
     Objective objective = board.registerNewObjective("status", "dummy");
@@ -61,15 +75,6 @@ public class Settings
     eplayer.setScoreboard(board);
     onlineplayers();
     /*onlinestaff();*/
-    if (c.getConfig().getBoolean("fly." + Bukkit.getPlayer(player).getUniqueId()))
-    {
-        Bukkit.getPlayer(player).setAllowFlight(true);
-    }
-    else if (c.getConfig().getString("fly." + Bukkit.getPlayer(player).getUniqueId().toString()) == null)
-    {
-      c.getConfig().set("fly." + Bukkit.getPlayer(player).getUniqueId().toString(), false);
-      c.save();
-    }
   }
 
   public void onlineplayers() {
