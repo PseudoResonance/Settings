@@ -92,7 +92,7 @@ public class SettingsCMD
                     Bukkit.getPlayer(args[3]).setAllowFlight(true);
                     log.info(args[3] + "'s fly mode has been set to true");
                     player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to true by the console");
-                  } else if (c.getConfig().getString("fly." + Bukkit.getPlayer(args[3]).getUniqueId().toString()) == null) {
+                  } else {
                       c.getConfig().set("fly." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
                       c.save();
                       Bukkit.getPlayer(args[3]).setAllowFlight(true);
