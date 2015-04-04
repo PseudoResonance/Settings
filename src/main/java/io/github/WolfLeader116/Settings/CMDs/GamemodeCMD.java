@@ -307,6 +307,8 @@ public class GamemodeCMD implements CommandExecutor {
 									player.setAllowFlight(false);
 								}
 							}
+						} else {
+							sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You do not have permission to do this!"); //Message if permission was denied
 						}
 					} else if (args.length >= 1) {
 						if (sender.hasPermission("settings.gamemode.other")) {
@@ -361,6 +363,8 @@ public class GamemodeCMD implements CommandExecutor {
 									player.setAllowFlight(false);
 								}
 							}
+						} else {
+							sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You do not have permission to do this!"); //Message if permission was denied
 						}
 					}
 				}
