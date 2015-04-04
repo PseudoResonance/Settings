@@ -12,13 +12,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class SettingsCMD
-implements CommandExecutor
-{
+public class SettingsCMD implements CommandExecutor {
 	private static final Logger log = Logger.getLogger("Minecraft");
 
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
-	{
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		Config c = new Config("playerdata", Settings.plugin);
 		String settings = "fly";
 		if (cmd.getName().equalsIgnoreCase("settings")) {

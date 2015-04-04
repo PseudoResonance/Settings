@@ -1,5 +1,6 @@
 package io.github.WolfLeader116.Settings;
 
+import io.github.WolfLeader116.Settings.CMDs.FlyCMD;
 import io.github.WolfLeader116.Settings.CMDs.GamemodeCMD;
 import io.github.WolfLeader116.Settings.CMDs.SettingsCMD;
 import io.github.WolfLeader116.Settings.Tab.SettingsTabCompleter;
@@ -37,6 +38,7 @@ implements Listener
 		getCommand("survival").setExecutor(new GamemodeCMD());
 		getCommand("adventure").setExecutor(new GamemodeCMD());
 		getCommand("spectator").setExecutor(new GamemodeCMD());
+		getCommand("fly").setExecutor(new FlyCMD());
 		getCommand("settings").setTabCompleter(new SettingsTabCompleter());
 		Bukkit.getServer().getPluginManager().registerEvents(this, this);
 		ScoreboardManager manager = Bukkit.getScoreboardManager();

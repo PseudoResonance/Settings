@@ -1,9 +1,12 @@
 name: Settings
 author: WolfLeader116
 main: io.github.WolfLeader116.Settings.Settings
-version: 1.1.6.8
+version: 1.1.7
 description: Settings plugin.
 commands:
+  fly:
+    description: Toggle flight command.
+    aliases: [flight]
   Settings:
     description: Settings help command.
   Gamemode:
