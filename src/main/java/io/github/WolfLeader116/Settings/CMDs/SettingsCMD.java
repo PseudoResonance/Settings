@@ -32,11 +32,21 @@ implements CommandExecutor
 				}
 				else if (args.length >= 1)
 				{
-					if (args[0].equalsIgnoreCase("inv")) {
+					if (args[0].equalsIgnoreCase("thanks")) {
+						log.info("Special thanks to olivervscreeper and SuperOmegaCow for helping out developing this plugin!");
+					}
+					else if (args[0].equalsIgnoreCase("inv")) {
 						log.info("You can't run this command!");
 					}
 					else if (args[0].equalsIgnoreCase("help"))
 					{
+						log.info("/spectator Spectator mode.");
+						log.info("/adventure Adventure mode.");
+						log.info("/creative Creative mode.");
+						log.info("/survival Survival mode.");
+						log.info("/gm Set gamemode.");
+						log.info("/gamemode Set gamemode.");
+						log.info("/settings thanks Thank you!");
 						log.info("/settings inv Opens the settings GUI.");
 						log.info("/settings set <setting> <value> <player> Sets a setting for the specified player.");
 						log.info("/settings help Shows this page.");
@@ -126,7 +136,10 @@ implements CommandExecutor
 				}
 				else if (args.length >= 1)
 				{
-					if (args[0].equalsIgnoreCase("inv")) {
+					if (args[0].equalsIgnoreCase("thanks")) {
+						sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Special thanks to olivervscreeper and SuperOmegaCow for helping out developing this plugin!");
+					}
+					else if (args[0].equalsIgnoreCase("inv")) {
 						Player splayer = (Player) sender;
 						splayer.openInventory(Settings.myInventory);
 					}
@@ -141,6 +154,13 @@ implements CommandExecutor
 							sender.sendMessage(ChatColor.RED + "/settings set <setting> <value> " + ChatColor.AQUA + "Sets a setting for you.");
 						}
 						sender.sendMessage(ChatColor.RED + "/settings inv " + ChatColor.AQUA + "Opens the settings GUI.");
+						sender.sendMessage(ChatColor.RED + "/settings thanks" + ChatColor.AQUA + "Thank you!");
+						sender.sendMessage(ChatColor.RED + "/gamemode " + ChatColor.AQUA + "Set gamemode.");
+						sender.sendMessage(ChatColor.RED + "/gm " + ChatColor.AQUA + "Set gamemode.");
+						sender.sendMessage(ChatColor.RED + "/survival " + ChatColor.AQUA + "Survival mode.");
+						sender.sendMessage(ChatColor.RED + "/creative " + ChatColor.AQUA + "Creative mode.");
+						sender.sendMessage(ChatColor.RED + "/adventure " + ChatColor.AQUA + "Adventure mode.");
+						sender.sendMessage(ChatColor.RED + "/spectator " + ChatColor.AQUA + "Spectator mode.");
 					}
 					else if (args[0].equalsIgnoreCase("set"))
 					{
