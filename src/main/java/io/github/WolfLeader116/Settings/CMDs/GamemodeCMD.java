@@ -206,7 +206,7 @@ public class GamemodeCMD implements CommandExecutor {
 						log.info("Please enter a player.");
 					} else if (args.length >= 1) {
 						Player player = Bukkit.getServer().getPlayer(args[0]);
-						if (Bukkit.getServer().getPlayer(args[1]) == null) {
+						if (Bukkit.getServer().getPlayer(args[0]) == null) {
 							log.info("The specified player is not online!");
 						} else if (cmd.getName().equalsIgnoreCase("survival")) {
 							player.setGameMode(GameMode.SURVIVAL);
