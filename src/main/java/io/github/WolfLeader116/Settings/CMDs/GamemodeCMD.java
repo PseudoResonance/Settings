@@ -136,119 +136,69 @@ public class GamemodeCMD implements CommandExecutor {
 								} else if (!c.getConfig().getBoolean("fly." + player1.getUniqueId())) {
 									player1.setAllowFlight(false);
 								}
-							} else if (args.length >= 2) {
-								if (Bukkit.getServer().getPlayer(args[1]) == null) {
-									sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "The specified player is not online!");
-								} else {
-									Player player2 = Bukkit.getServer().getPlayer(args[1]);
-									Player send = (Player) sender;
-									if (args[0].equalsIgnoreCase("survival") || args[0].equalsIgnoreCase("0") || args[0].equalsIgnoreCase("s")) { //Check if gamemode is survival
-										player2.setGameMode(GameMode.SURVIVAL);
-										player2.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your game mode has been set to survival by " + ChatColor.RESET + send.toString());
-										sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[1] + ChatColor.GREEN + "'s game mode has been set to survival");
-										if (c.getConfig().getBoolean("fly." + player2.getUniqueId())) {
-											player2.setAllowFlight(true);
-											if (!(player2.isOnGround())) { //Turn on flight if player is off ground
-												player2.setFlying(true);
-											}
-										} else if (!c.getConfig().getBoolean("fly." + player2.getUniqueId())) {
-											player2.setAllowFlight(false);
-										}
-									} else if (args[0].equalsIgnoreCase("creative") || args[0].equalsIgnoreCase("1") || args[0].equalsIgnoreCase("c")) { //Check if gamemode is creative
-										player2.setGameMode(GameMode.CREATIVE);
-										player2.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your game mode has been set to creative by " + ChatColor.RESET + send.toString());
-										sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[1] + ChatColor.GREEN + "'s game mode has been set to creative");
-										if (c.getConfig().getBoolean("fly." + player2.getUniqueId())) {
-											player2.setAllowFlight(true);
-											if (!(player2.isOnGround())) { //Turn on flight if player is off ground
-												player2.setFlying(true);
-											}
-										} else if (!c.getConfig().getBoolean("fly." + player2.getUniqueId())) {
-											player2.setAllowFlight(false);
-										}
-									} else if (args[0].equalsIgnoreCase("adventure") || args[0].equalsIgnoreCase("2") || args[0].equalsIgnoreCase("a")) { //Check if gamemode is adventure
-										player2.setGameMode(GameMode.ADVENTURE);
-										player2.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your game mode has been set to adventure by " + ChatColor.RESET + send.toString());
-										sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[1] + ChatColor.GREEN + "'s game mode has been set to adventure");
-										if (c.getConfig().getBoolean("fly." + player2.getUniqueId())) {
-											player2.setAllowFlight(true);
-											if (!(player2.isOnGround())) { //Turn on flight if player is off ground
-												player2.setFlying(true);
-											}
-										} else if (!c.getConfig().getBoolean("fly." + player2.getUniqueId())) {
-											player2.setAllowFlight(false);
-										}
-									} else if (args[0].equalsIgnoreCase("spectator") || args[0].equalsIgnoreCase("3") || args[0].equalsIgnoreCase("r")) { //Check if gamemode is spectator
-										player2.setGameMode(GameMode.SPECTATOR);
-										player2.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your game mode has been set to spectator by " + ChatColor.RESET + send.toString());
-										sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[1] + ChatColor.GREEN + "'s game mode has been set to spectator");
-										if (c.getConfig().getBoolean("fly." + player2.getUniqueId())) {
-											player2.setAllowFlight(true);
-											if (!(player2.isOnGround())) { //Turn on flight if player is off ground
-												player2.setFlying(true);
-											}
-										} else if (!c.getConfig().getBoolean("fly." + player2.getUniqueId())) {
-											player2.setAllowFlight(false);
-										}
-									} else {
-										sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Possible gamemodes are survival/creative/adventure/spectator, 0/1/2/3 or s/c/a/r.");
-									}
-								}
 							}
-							if (args.length == 1) {
-								Player player = (Player) sender;
+						} else if (args.length >= 2) {
+							if (Bukkit.getServer().getPlayer(args[1]) == null) {
+								sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "The specified player is not online!");
+							} else {
+								Player player2 = Bukkit.getServer().getPlayer(args[1]);
+								Player send = (Player) sender;
 								if (args[0].equalsIgnoreCase("survival") || args[0].equalsIgnoreCase("0") || args[0].equalsIgnoreCase("s")) { //Check if gamemode is survival
-									player.setGameMode(GameMode.SURVIVAL);
-									player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your game mode has been set to survival");
-									if (c.getConfig().getBoolean("fly." + player.getUniqueId())) {
-										player.setAllowFlight(true);
-										if (!(player.isOnGround())) { //Turn on flight if player is off ground
-											player.setFlying(true);
+									player2.setGameMode(GameMode.SURVIVAL);
+									player2.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your game mode has been set to survival by " + ChatColor.RESET + send.toString());
+									sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[1] + ChatColor.GREEN + "'s game mode has been set to survival");
+									if (c.getConfig().getBoolean("fly." + player2.getUniqueId())) {
+										player2.setAllowFlight(true);
+										if (!(player2.isOnGround())) { //Turn on flight if player is off ground
+											player2.setFlying(true);
 										}
-									} else if (!c.getConfig().getBoolean("fly." + player.getUniqueId())) {
-										player.setAllowFlight(false);
+									} else if (!c.getConfig().getBoolean("fly." + player2.getUniqueId())) {
+										player2.setAllowFlight(false);
 									}
 								} else if (args[0].equalsIgnoreCase("creative") || args[0].equalsIgnoreCase("1") || args[0].equalsIgnoreCase("c")) { //Check if gamemode is creative
-									player.setGameMode(GameMode.CREATIVE);
-									player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your game mode has been set to creative");
-									if (c.getConfig().getBoolean("fly." + player.getUniqueId())) {
-										player.setAllowFlight(true);
-										if (!(player.isOnGround())) { //Turn on flight if player is off ground
-											player.setFlying(true);
+									player2.setGameMode(GameMode.CREATIVE);
+									player2.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your game mode has been set to creative by " + ChatColor.RESET + send.toString());
+									sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[1] + ChatColor.GREEN + "'s game mode has been set to creative");
+									if (c.getConfig().getBoolean("fly." + player2.getUniqueId())) {
+										player2.setAllowFlight(true);
+										if (!(player2.isOnGround())) { //Turn on flight if player is off ground
+											player2.setFlying(true);
 										}
-									} else if (!c.getConfig().getBoolean("fly." + player.getUniqueId())) {
-										player.setAllowFlight(false);
+									} else if (!c.getConfig().getBoolean("fly." + player2.getUniqueId())) {
+										player2.setAllowFlight(false);
 									}
 								} else if (args[0].equalsIgnoreCase("adventure") || args[0].equalsIgnoreCase("2") || args[0].equalsIgnoreCase("a")) { //Check if gamemode is adventure
-									player.setGameMode(GameMode.ADVENTURE);
-									player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your game mode has been set to adventure");
-									if (c.getConfig().getBoolean("fly." + player.getUniqueId())) {
-										player.setAllowFlight(true);
-										if (!(player.isOnGround())) { //Turn on flight if player is off ground
-											player.setFlying(true);
+									player2.setGameMode(GameMode.ADVENTURE);
+									player2.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your game mode has been set to adventure by " + ChatColor.RESET + send.toString());
+									sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[1] + ChatColor.GREEN + "'s game mode has been set to adventure");
+									if (c.getConfig().getBoolean("fly." + player2.getUniqueId())) {
+										player2.setAllowFlight(true);
+										if (!(player2.isOnGround())) { //Turn on flight if player is off ground
+											player2.setFlying(true);
 										}
-									} else if (!c.getConfig().getBoolean("fly." + player.getUniqueId())) {
-										player.setAllowFlight(false);
+									} else if (!c.getConfig().getBoolean("fly." + player2.getUniqueId())) {
+										player2.setAllowFlight(false);
 									}
 								} else if (args[0].equalsIgnoreCase("spectator") || args[0].equalsIgnoreCase("3") || args[0].equalsIgnoreCase("r")) { //Check if gamemode is spectator
-									player.setGameMode(GameMode.SPECTATOR);
-									player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your game mode has been set to spectator");
-									if (c.getConfig().getBoolean("fly." + player.getUniqueId())) {
-										player.setAllowFlight(true);
-										if (!(player.isOnGround())) { //Turn on flight if player is off ground
-											player.setFlying(true);
+									player2.setGameMode(GameMode.SPECTATOR);
+									player2.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your game mode has been set to spectator by " + ChatColor.RESET + send.toString());
+									sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[1] + ChatColor.GREEN + "'s game mode has been set to spectator");
+									if (c.getConfig().getBoolean("fly." + player2.getUniqueId())) {
+										player2.setAllowFlight(true);
+										if (!(player2.isOnGround())) { //Turn on flight if player is off ground
+											player2.setFlying(true);
 										}
-									} else if (!c.getConfig().getBoolean("fly." + player.getUniqueId())) {
-										player.setAllowFlight(false);
+									} else if (!c.getConfig().getBoolean("fly." + player2.getUniqueId())) {
+										player2.setAllowFlight(false);
 									}
 								} else {
-									player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Possible gamemodes are survival/creative/adventure/spectator, 0/1/2/3 or s/c/a/r.");
+									sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Possible gamemodes are survival/creative/adventure/spectator, 0/1/2/3 or s/c/a/r.");
 								}
 							}
 						}
-					} else {
-						sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You do not have permission to do this!"); //Message if permission was denied
 					}
+				} else {
+					sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You do not have permission to do this!"); //Message if permission was denied
 				}
 			} else if (cmd.getName().equalsIgnoreCase("survival") || cmd.getName().equalsIgnoreCase("creative") || cmd.getName().equalsIgnoreCase("adventure") || cmd.getName().equalsIgnoreCase("spectator")) { //Check for a gamemode specific command.
 				if (!(sender instanceof Player)) {
