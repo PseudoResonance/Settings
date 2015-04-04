@@ -32,6 +32,11 @@ implements Listener
 	{
 		getCommand("settings").setExecutor(new SettingsCMD());
 		getCommand("gamemode").setExecutor(new GamemodeCMD());
+		getCommand("gm").setExecutor(new GamemodeCMD());
+		getCommand("creative").setExecutor(new GamemodeCMD());
+		getCommand("survival").setExecutor(new GamemodeCMD());
+		getCommand("adventure").setExecutor(new GamemodeCMD());
+		getCommand("spectator").setExecutor(new GamemodeCMD());
 		getCommand("settings").setTabCompleter(new SettingsTabCompleter());
 		Bukkit.getServer().getPluginManager().registerEvents(this, this);
 		ScoreboardManager manager = Bukkit.getScoreboardManager();
