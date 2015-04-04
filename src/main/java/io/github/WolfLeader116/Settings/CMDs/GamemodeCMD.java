@@ -361,9 +361,10 @@ public class GamemodeCMD implements CommandExecutor {
 					} else if (args.length >= 1) {
 						if (sender.hasPermission("settings.gamemode.other")) {
 							Player player = Bukkit.getServer().getPlayer(args[0]);
+							Player send = (Player) sender;
 							if (cmd.getName().equalsIgnoreCase("survival")) {
 								player.setGameMode(GameMode.SURVIVAL);
-								player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your game mode has been set to survival by " + ChatColor.RESET + sender);
+								player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your game mode has been set to survival by " + ChatColor.RESET + send.toString());
 								sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[0] + ChatColor.GREEN + "'s game mode has been set to survival");
 								if (c.getConfig().getBoolean("fly." + player.getUniqueId())) {
 									player.setAllowFlight(true);
@@ -375,7 +376,7 @@ public class GamemodeCMD implements CommandExecutor {
 								}
 							} else if (cmd.getName().equalsIgnoreCase("creative")) {
 								player.setGameMode(GameMode.CREATIVE);
-								player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your game mode has been set to creative by " + ChatColor.RESET + sender);
+								player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your game mode has been set to creative by " + ChatColor.RESET + send.toString());
 								sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[0] + ChatColor.GREEN + "'s game mode has been set to creative");
 								if (c.getConfig().getBoolean("fly." + player.getUniqueId())) {
 									player.setAllowFlight(true);
@@ -387,7 +388,7 @@ public class GamemodeCMD implements CommandExecutor {
 								}
 							} else if (cmd.getName().equalsIgnoreCase("adventure")) {
 								player.setGameMode(GameMode.ADVENTURE);
-								player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your game mode has been set to adventure by " + ChatColor.RESET + sender);
+								player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your game mode has been set to adventure by " + ChatColor.RESET + send.toString());
 								sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[0] + ChatColor.GREEN + "'s game mode has been set to adventure");
 								if (c.getConfig().getBoolean("fly." + player.getUniqueId())) {
 									player.setAllowFlight(true);
@@ -399,7 +400,7 @@ public class GamemodeCMD implements CommandExecutor {
 								}
 							} else if (cmd.getName().equalsIgnoreCase("spectator")) {
 								player.setGameMode(GameMode.SPECTATOR);
-								player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your game mode has been set to spectator by " + ChatColor.RESET + sender);
+								player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your game mode has been set to spectator by " + ChatColor.RESET + send.toString());
 								sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[0] + ChatColor.GREEN + "'s game mode has been set to spectator");
 								if (c.getConfig().getBoolean("fly." + player.getUniqueId())) {
 									player.setAllowFlight(true);
