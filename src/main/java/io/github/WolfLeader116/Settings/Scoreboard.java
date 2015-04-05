@@ -27,12 +27,9 @@ public class Scoreboard {
 			String latestnews = Settings.plugin.getConfig().getString("news");
 			latestnews = latestnews.replaceAll("&", "§");
 			makeScore(0, "Online Players:", Integer.toString(Bukkit.getServer().getOnlinePlayers().size()));
-			makeBlank(-2);
-			makeScore(-3, "Online Staff:", Integer.toString(staff));
-			makeBlank(-5);
-			makeScore(-6, "Money:", Double.toString(Settings.economy.getBalance(all)));
-			makeBlank(-8);
-			makeScore(-9, "News:", latestnews);
+			makeScore(-2, "Online Staff:", Integer.toString(staff));
+			makeScore(-4, "Money:", Double.toString(Settings.economy.getBalance(all)));
+			makeScore(-6, "News:", latestnews);
 		}
 	}
 		
