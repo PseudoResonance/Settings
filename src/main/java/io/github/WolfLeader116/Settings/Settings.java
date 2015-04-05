@@ -154,6 +154,7 @@ implements Listener
 			c.save();
 			player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're no longer afk");
 		}
+		scoreboard();
 	}
 
 	@EventHandler
@@ -165,6 +166,7 @@ implements Listener
 			c.save();
 			player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're no longer afk");
 		}
+		scoreboard();
 	}
 
 	public void scoreboard() {
@@ -175,9 +177,8 @@ implements Listener
 			objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 			Score onlineplayers = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Players:");
 			onlineplayers.setScore(10);
-			String playersonline = Integer.toString(Bukkit.getServer().getOnlinePlayers().size());
-			Score onlineplayer = objective.getScore(ChatColor.RED + playersonline);
-			onlineplayer.setScore(9);
+			Score playernumber = objective.getScore(ChatColor.RED + Integer.toString(Bukkit.getServer().getOnlinePlayers().size()));
+			playernumber.setScore(9);
 			Score blank1 = objective.getScore("");
 			blank1.setScore(8);
 			int staff = 0;
@@ -186,10 +187,10 @@ implements Listener
 					staff = staff + 1;
 				}
 			}
-			Score onlinestaffs = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Staff:");
-			onlinestaffs.setScore(7);
-			Score onlinestaff = objective.getScore(ChatColor.RED + Integer.toString(staff));
-			onlinestaff.setScore(6);
+			Score onlinestaff = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Staff:");
+			onlinestaff.setScore(7);
+			Score staffnumber = objective.getScore(ChatColor.RED + Integer.toString(staff));
+			staffnumber.setScore(6);
 			Score blank2 = objective.getScore("");
 			blank2.setScore(5);
 			Score moneys = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Money:");
