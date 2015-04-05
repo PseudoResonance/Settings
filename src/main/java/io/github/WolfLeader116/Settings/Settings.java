@@ -25,10 +25,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class Settings
-extends JavaPlugin
-implements Listener
-{
+public class Settings extends JavaPlugin implements Listener {
 	public static Settings plugin;
 
 	public static Chat chat = null;
@@ -51,8 +48,8 @@ implements Listener
 	}
 
 	@Override
-	public void onEnable()
-	{
+	public void onEnable() {
+		Bukkit.getServer().getPluginManager().registerEvents(this, this);
 		setupChat();
 		setupEconomy();
 		getCommand("settings").setExecutor(new SettingsCMD());
@@ -65,7 +62,6 @@ implements Listener
 		getCommand("fly").setExecutor(new FlyCMD());
 		getCommand("afk").setExecutor(new AfkCMD());
 		getCommand("settings").setTabCompleter(new SettingsTabCompleter());
-		Bukkit.getServer().getPluginManager().registerEvents(this, this);
 		if (this.getConfig().getString("news") == null) {
 			this.saveDefaultConfig();
 		}
@@ -74,28 +70,23 @@ implements Listener
 	}
 
 	@Override
-	public void onDisable()
-	{
+	public void onDisable() {
 		plugin = null;
 	}
 	
 	@SuppressWarnings("deprecation")
 	@EventHandler
-	public void onPlayerJoin(PlayerJoinEvent e)
-	{
+	public void onPlayerJoin(PlayerJoinEvent e) {
 		Config c = new Config("playerdata", Settings.plugin);
 		String player = e.getPlayer().getName();
 		Player eplayer = e.getPlayer();
 		io.github.WolfLeader116.Settings.Scoreboard.scoreboard();
-		if (c.getConfig().getBoolean("fly." + Bukkit.getPlayer(player).getUniqueId()))
-		{
+		if (c.getConfig().getBoolean("fly." + Bukkit.getPlayer(player).getUniqueId())) {
 			Bukkit.getPlayer(player).setAllowFlight(true);
 			if (!(eplayer.isOnGround())) {
 				eplayer.setFlying(true);
 			}
-		}
-		else if (!c.getConfig().getBoolean("fly." + Bukkit.getPlayer(player).getUniqueId()))
-		{
+		} else if (!c.getConfig().getBoolean("fly." + Bukkit.getPlayer(player).getUniqueId())) {
 			c.getConfig().set("fly." + Bukkit.getPlayer(player).getUniqueId().toString(), false);
 			c.save();
 			Bukkit.getPlayer(player).setAllowFlight(false);
@@ -142,9 +133,9 @@ implements Listener
 	}
 
 	@EventHandler
-	public void onPlayerMove(PlayerMoveEvent e) {
+	public void onPlayerMove(PlayerMoveEvent event) {
 		Config c = new Config("playerdata", Settings.plugin);
-		Player player = e.getPlayer();
+		Player player = event.getPlayer();
 		if (c.getConfig().getBoolean("afk." + player.getUniqueId().toString())) {
 			c.getConfig().set("afk." + player.getUniqueId().toString(), false);
 			c.save();
@@ -153,9 +144,9 @@ implements Listener
 	}
 
 	@EventHandler
-	public void onPlayerChat(AsyncPlayerChatEvent e) {
+	public void onPlayerChat(AsyncPlayerChatEvent event) {
 		Config c = new Config("playerdata", Settings.plugin);
-		Player player = e.getPlayer();
+		Player player = event.getPlayer();
 		if (c.getConfig().getBoolean("afk." + player.getUniqueId().toString())) {
 			c.getConfig().set("afk." + player.getUniqueId().toString(), false);
 			c.save();
