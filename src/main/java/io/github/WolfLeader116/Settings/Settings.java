@@ -53,6 +53,10 @@ implements Listener
 		}
 		return (economy != null);
 	}
+	
+	public static Scoreboard scoreboard = Bukkit.getServer().getScoreboardManager().getNewScoreboard();
+	public static Objective objective = scoreboard.registerNewObjective("status", "dummy");
+	
 
 	@Override
 	public void onEnable()
@@ -70,6 +74,7 @@ implements Listener
 		getCommand("afk").setExecutor(new AfkCMD());
 		getCommand("settings").setTabCompleter(new SettingsTabCompleter());
 		Bukkit.getServer().getPluginManager().registerEvents(this, this);
+		objective.setDisplayName(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Marvel " + ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "Craft " + ChatColor.RED + "" + ChatColor.BOLD + "Status");
 		scoreboard();
 		if (this.getConfig().getString("news") == null) {
 			this.saveDefaultConfig();
@@ -107,7 +112,9 @@ implements Listener
 			c.save();
 			Bukkit.getPlayer(player).setAllowFlight(false);
 		}
+		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 		scoreboard();
+		eplayer.setScoreboard(scoreboard);
 	}
 
 	@EventHandler
@@ -171,42 +178,34 @@ implements Listener
 
 	public void scoreboard() {
 		for (Player all : Bukkit.getServer().getOnlinePlayers()) {
-			Scoreboard scoreboard = Bukkit.getServer().getScoreboardManager().getNewScoreboard();
-			Objective objective = scoreboard.registerNewObjective("status", "dummy");
-			objective.setDisplayName(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Marvel " + ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "Craft " + ChatColor.RED + "" + ChatColor.BOLD + "Status");
-			objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-			Score onlineplayers = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Players:");
-			onlineplayers.setScore(10);
-			Score playernumber = objective.getScore(ChatColor.RED + Integer.toString(Bukkit.getServer().getOnlinePlayers().size()));
-			playernumber.setScore(9);
-			Score blank1 = objective.getScore("");
-			blank1.setScore(8);
 			int staff = 0;
 			for (Player players : Bukkit.getServer().getOnlinePlayers()) {
 				if(chat.playerInGroup("world", players, "helper") || chat.playerInGroup("world", players, "moderator") || chat.playerInGroup("world", players, "admin") || chat.playerInGroup("world", players, "headadmin") || chat.playerInGroup("world", players, "coowner") || chat.playerInGroup("world", players, "owner")) {
 					staff = staff + 1;
 				}
 			}
-			Score onlinestaff = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Staff:");
-			onlinestaff.setScore(7);
-			Score staffnumber = objective.getScore(ChatColor.RED + Integer.toString(staff));
-			staffnumber.setScore(6);
-			Score blank2 = objective.getScore("");
-			blank2.setScore(5);
-			Score moneys = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Money:");
-			moneys.setScore(4);
-			Score money = objective.getScore(ChatColor.RED + Double.toString(economy.getBalance(all)));
-			money.setScore(3);
-			Score blank3 = objective.getScore("");
-			blank3.setScore(2);
-			Score newss = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Staff:");
-			newss.setScore(1);
 			String latestnews = this.getConfig().getString("news");
 			latestnews = latestnews.replaceAll("&", "§");
-			Score news = objective.getScore(ChatColor.RED + latestnews);
-			news.setScore(0);
-			all.setScoreboard(scoreboard);
+			makeScore(0, "Online Players:", Integer.toString(Bukkit.getServer().getOnlinePlayers().size()));
+			makeBlank(-2);
+			makeScore(-3, "Online Staff:", Integer.toString(staff));
+			makeBlank(-5);
+			makeScore(-6, "Money:", Double.toString(economy.getBalance(all)));
+			makeBlank(-8);
+			makeScore(-9, "News:", latestnews);
 		}
+	}
+	
+	public void makeBlank(int number) {
+		Score scorename = objective.getScore("");
+		scorename.setScore(number);
+	}
+	
+	public void makeScore(int number, String name, String value) {
+		Score scorename = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + name);
+		scorename.setScore(number);
+		Score scorevalue = objective.getScore(ChatColor.RED + value);
+		scorevalue.setScore(number - 1);
 	}
 
 	public static ItemStack createItem(Material material, int amount, short data, String name) {
