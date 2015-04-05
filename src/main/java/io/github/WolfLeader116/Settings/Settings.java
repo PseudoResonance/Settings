@@ -53,10 +53,6 @@ implements Listener
 		}
 		return (economy != null);
 	}
-	
-	public static Scoreboard scoreboard = Bukkit.getServer().getScoreboardManager().getNewScoreboard();
-	public static Objective objective = scoreboard.registerNewObjective("status", "dummy");
-	
 
 	@Override
 	public void onEnable()
@@ -74,8 +70,7 @@ implements Listener
 		getCommand("afk").setExecutor(new AfkCMD());
 		getCommand("settings").setTabCompleter(new SettingsTabCompleter());
 		Bukkit.getServer().getPluginManager().registerEvents(this, this);
-		objective.setDisplayName(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Marvel " + ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "Craft " + ChatColor.RED + "" + ChatColor.BOLD + "Status");
-		scoreboard();
+		initializeScoreboard();
 		if (this.getConfig().getString("news") == null) {
 			this.saveDefaultConfig();
 		}
@@ -87,7 +82,15 @@ implements Listener
 	{
 		plugin = null;
 	}
+	
+	public static Scoreboard scoreboard = Bukkit.getServer().getScoreboardManager().getNewScoreboard();
+	public static Objective objective = scoreboard.registerNewObjective("status", "dummy");
 
+	public void initializeScoreboard() {
+		objective.setDisplayName(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Marvel " + ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "Craft " + ChatColor.RED + "" + ChatColor.BOLD + "Status");
+		scoreboard();
+	}
+	
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent e)
