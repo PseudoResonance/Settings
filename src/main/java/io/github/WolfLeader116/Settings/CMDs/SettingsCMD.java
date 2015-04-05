@@ -17,7 +17,7 @@ public class SettingsCMD implements CommandExecutor {
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		Config c = new Config("playerdata", Settings.plugin);
-		String settings = "fly";
+		String settings = "fly, afk";
 		if (cmd.getName().equalsIgnoreCase("settings")) {
 			if (!(sender instanceof Player))
 			{
@@ -111,9 +111,49 @@ public class SettingsCMD implements CommandExecutor {
 								{
 									log.info("The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
 								}
-							}
-							else
-							{
+							} else if (args[1].equalsIgnoreCase("afk")) {
+								Player player = Bukkit.getServer().getPlayer(args[3]);
+								if (args[2].equalsIgnoreCase("true"))
+								{
+									c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+									c.save();
+									log.info(args[3] + " is now afk");
+									player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're now afk");
+								}
+								else if (args[2].equalsIgnoreCase("false"))
+								{
+									c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
+									c.save();
+									log.info(args[3] + " is no longer afk");
+									player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're no longer afk");
+								}
+								else if (args[2].equalsIgnoreCase("toggle"))
+								{
+									if (c.getConfig().getBoolean("afk." + Bukkit.getPlayer(args[3]).getUniqueId()))
+									{
+										c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
+										c.save();
+										log.info(args[3] + " is no longer afk");
+										player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're no longer afk");
+									}
+									else if (!c.getConfig().getBoolean("afk." + Bukkit.getPlayer(args[3]).getUniqueId()))
+									{
+										c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+										c.save();
+										log.info(args[3] + " is now afk");
+										player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're now afk");
+									} else {
+										c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+										c.save();
+										log.info(args[3] + " is now afk");
+										player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're now afk");
+									}
+								}
+								else
+								{
+									log.info("The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
+								}
+							} else {
 								log.info("The setting " + args[1] + " does not exist. Possible values are " + settings + ".");
 							}
 						}
@@ -211,9 +251,44 @@ public class SettingsCMD implements CommandExecutor {
 									{
 										sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
 									}
-								}
-								else
-								{
+								} else if (args[1].equalsIgnoreCase("afk")) {
+									String player = ((Player)sender).getName();
+									if (args[2].equalsIgnoreCase("true"))
+									{
+										c.getConfig().set("afk." + Bukkit.getPlayer(player).getUniqueId().toString(), true);
+										c.save();
+										sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your're now afk");
+									}
+									else if (args[2].equalsIgnoreCase("false"))
+									{
+										c.getConfig().set("afk." + Bukkit.getPlayer(player).getUniqueId().toString(), false);
+										c.save();
+										sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're no longer afk");
+									}
+									else if (args[2].equalsIgnoreCase("toggle"))
+									{
+										if (c.getConfig().getBoolean("afk." + Bukkit.getPlayer(player).getUniqueId()))
+										{
+											c.getConfig().set("afk." + Bukkit.getPlayer(player).getUniqueId().toString(), false);
+											c.save();
+											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're no longer afk");
+										}
+										else if (!c.getConfig().getBoolean("afk." + Bukkit.getPlayer(player).getUniqueId()))
+										{
+											c.getConfig().set("afk." + Bukkit.getPlayer(player).getUniqueId().toString(), true);
+											c.save();
+											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your're now afk");
+										} else {
+											c.getConfig().set("afk." + Bukkit.getPlayer(player).getUniqueId().toString(), true);
+											c.save();
+											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your're now afk");
+										}
+									}
+									else
+									{
+										sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
+									}
+								} else {
 									sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "The setting " + args[1] + " does not exist. Possible settings are " + settings + ".");
 								}
 							} else {
@@ -269,9 +344,46 @@ public class SettingsCMD implements CommandExecutor {
 											player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to true by " + ChatColor.RESET + send);
 
 										}
-									}
-									else
-									{
+									} else if (args[1].equalsIgnoreCase("afk")) {
+										Player aplayer = Bukkit.getServer().getPlayer(args[3]);
+										if (args[2].equalsIgnoreCase("true"))
+										{
+											c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+											c.save();
+											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + " is now afk");
+											aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're now afk");
+										}
+										else if (args[2].equalsIgnoreCase("false"))
+										{
+											c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
+											c.save();
+											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + " is no longer afk");
+											aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're no longer afk");
+										}
+										else if (args[2].equalsIgnoreCase("toggle"))
+										{
+											if (c.getConfig().getBoolean("afk." + Bukkit.getPlayer(args[3]).getUniqueId()))
+											{
+												c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
+												c.save();
+												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + " is no longer afk");
+												aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're no longer afk");
+											}
+											else if (!c.getConfig().getBoolean("afk." + Bukkit.getPlayer(args[3]).getUniqueId()))
+											{
+												c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+												c.save();
+												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + " is now afk");
+												aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're now afk");
+											} else {
+												c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+												c.save();
+												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + " is now afk");
+												aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're now afk");
+
+											}
+										}
+									} else {
 										sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
 									}
 								}
