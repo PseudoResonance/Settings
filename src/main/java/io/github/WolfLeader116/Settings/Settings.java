@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.Inventory;
@@ -145,6 +146,17 @@ implements Listener
 	
 	@EventHandler
 	public void onPlayerMove(PlayerMoveEvent e) {
+		Config c = new Config("playerdata", Settings.plugin);
+		Player player = e.getPlayer();
+		if (c.getConfig().getBoolean("afk." + player.getUniqueId().toString())) {
+			c.getConfig().set("afk." + player.getUniqueId().toString(), false);
+			c.save();
+			player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're no longer afk");
+		}
+	}
+	
+	@EventHandler
+	public void onPlayerChat(AsyncPlayerChatEvent e) {
 		Config c = new Config("playerdata", Settings.plugin);
 		Player player = e.getPlayer();
 		if (c.getConfig().getBoolean("afk." + player.getUniqueId().toString())) {
