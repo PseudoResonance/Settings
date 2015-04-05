@@ -19,6 +19,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -176,5 +177,24 @@ implements Listener
 		item.setItemMeta(meta);
 		return item;
 	}
-
+	
+	public static int i = 0;
+	
+	@EventHandler
+	public void onServerPing(final ServerListPingEvent e) {
+		final String[] motds = {"§6§lOmegaBlock §8>>" + "\n" + " §8>> §3-<§5Adventure/Survival§3>-", "§6§lOmegaBlock §8>>" + "\n" + " §8>> §3-<§cFactions§3>-", "§6§lOmegaBlock §8>>" + "\n" + " §8>> §3-<§61.8 Supported§3>-"};
+		e.setMotd(motds[i]);
+		getServer().getScheduler().scheduleSyncDelayedTask(null, new Runnable() {
+			public void run() {
+				i++;
+				e.setMotd(motds[i]);
+				getServer().getScheduler().scheduleSyncDelayedTask(null, new Runnable() {
+					public void run() {
+						i++;
+						e.setMotd(motds[i]);
+					}
+				}, 5000);
+			}
+		}, 5000);
+	}
 }

@@ -1,7 +1,7 @@
 name: Settings
 author: WolfLeader116
 main: io.github.WolfLeader116.Settings.Settings
-version: 1.2.2
+version: 1.2.3
 description: Settings plugin.
 commands:
   fly:
@@ -25,6 +25,8 @@ commands:
   Spectator:
     description: Gamemode command.
 permissions:
+  settings.news:
+    description: Lets the player set the server news.
   settings.reset:
     description: Lets the player reset the config.
   settings.reload:
@@ -40,6 +42,7 @@ permissions:
   settings.*:
     description: Gives the player all settings permissions.
     children:
+      settings.news: true
       settings.reload: true
       settings.reset: true
       settings.set: true

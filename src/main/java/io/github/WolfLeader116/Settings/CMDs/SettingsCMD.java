@@ -27,6 +27,17 @@ public class SettingsCMD implements CommandExecutor {
 				} else if (args.length >= 1) {
 					if (args[0].equalsIgnoreCase("thanks")) {
 						log.info("Special thanks to olivervscreeper and SuperOmegaCow for helping out developing this plugin!");
+					} else if (args[0].equalsIgnoreCase("news")) {
+						String message = "";
+						for(int i = 1; i < args.length; i++) {
+							String arg = args[i] + " ";
+							message = message + arg;
+						}
+						message = message.replaceAll("&", "§");
+						Settings.plugin.getConfig().set("news", message);
+						Settings.plugin.saveConfig();
+						io.github.WolfLeader116.Settings.Scoreboard.scoreboard();
+						log.info("Server news set to " + message);
 					} else if (args[0].equalsIgnoreCase("reset")) {
 						Settings.plugin.saveDefaultConfig();
 						log.info("Reset the config!");
@@ -45,6 +56,7 @@ public class SettingsCMD implements CommandExecutor {
 						log.info("/settings reload Reloads the config.");
 						log.info("/settings reset Resets the config.");
 						log.info("/settings thanks Thank you!");
+						log.info("/settings news <news> Sets the server news.");
 						log.info("/settings set <setting> <value> <player> Sets a setting for the specified player.");
 						log.info("/settings help Shows this page.");
 						log.info("/settings Displays info on the plugin.");
@@ -145,6 +157,21 @@ public class SettingsCMD implements CommandExecutor {
 				} else if (args.length >= 1) {
 					if (args[0].equalsIgnoreCase("thanks")) {
 						sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Special thanks to olivervscreeper and SuperOmegaCow for helping out developing this plugin!");
+					} else if (args[0].equalsIgnoreCase("news")) {
+						if (sender.hasPermission("settings.news")) {
+							String message = "";
+							for(int i = 1; i < args.length; i++) {
+								String arg = args[i] + " ";
+								message = message + arg;
+							}
+							message = message.replaceAll("&", "§");
+							Settings.plugin.getConfig().set("news", message);
+							Settings.plugin.saveConfig();
+							io.github.WolfLeader116.Settings.Scoreboard.scoreboard();
+							sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Server news set to " + message);
+						} else {
+							sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You do not have permission to do this!");
+						}
 					} else if (args[0].equalsIgnoreCase("reset")) {
 						Settings.plugin.saveDefaultConfig();
 						sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Reset the config!");
@@ -166,6 +193,9 @@ public class SettingsCMD implements CommandExecutor {
 						} else if (sender.hasPermission("settings.set")) {
 							sender.sendMessage(ChatColor.RED + "/settings set <setting> <value> " + ChatColor.AQUA + "Sets a setting for you.");
 							sender.sendMessage(ChatColor.RED + "/settings gui " + ChatColor.AQUA + "Opens the settings GUI for you.");
+						}
+						if (sender.hasPermission("settings.news")) {
+							sender.sendMessage(ChatColor.RED + "/settings news" + ChatColor.AQUA + "Sets the server news.");
 						}
 						sender.sendMessage(ChatColor.RED + "/settings thanks" + ChatColor.AQUA + "Thank you!");
 						if (sender.hasPermission("settings.reset")) {
