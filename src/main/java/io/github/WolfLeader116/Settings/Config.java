@@ -59,7 +59,7 @@ public class Config {
 					this.PLUGIN.getLogger().log(
 							Level.WARNING,
 							"Unable to create folder " + this.FOLDER.getName()
-							+ ".");
+									+ ".");
 				}
 			} catch (Exception e) {
 
