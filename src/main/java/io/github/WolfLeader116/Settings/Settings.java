@@ -5,6 +5,7 @@ import io.github.WolfLeader116.Settings.CMDs.FlyCMD;
 import io.github.WolfLeader116.Settings.CMDs.GamemodeCMD;
 import io.github.WolfLeader116.Settings.CMDs.SettingsCMD;
 import io.github.WolfLeader116.Settings.Tab.SettingsTabCompleter;
+import net.milkbowl.vault.chat.Chat;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -16,9 +17,11 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
@@ -30,9 +33,20 @@ extends JavaPlugin
 implements Listener
 {
 	public static Settings plugin;
+	
+	public static Chat chat = null;
+
+    private boolean setupChat() {
+        RegisteredServiceProvider<Chat> chatProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.chat.Chat.class);
+        if (chatProvider != null) {
+            chat = chatProvider.getProvider();
+        }
+        return (chat != null);
+    }
 
 	public void onEnable()
 	{
+		setupChat();
 		getCommand("settings").setExecutor(new SettingsCMD());
 		getCommand("gamemode").setExecutor(new GamemodeCMD());
 		getCommand("gm").setExecutor(new GamemodeCMD());
@@ -51,6 +65,14 @@ implements Listener
 		Score players = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Players:");
 		int playersonline = Bukkit.getServer().getOnlinePlayers().size();
 		players.setScore(playersonline);
+		int staff = 0;
+		for (Player all : Bukkit.getServer().getOnlinePlayers()) {
+			if(chat.playerInGroup("world", all, "helper") || chat.playerInGroup("world", all, "moderator") || chat.playerInGroup("world", all, "admin") || chat.playerInGroup("world", all, "headadmin") || chat.playerInGroup("world", all, "coowner") || chat.playerInGroup("world", all, "owner")) {
+				staff = staff + 1;
+			}
+		}
+		Score staffs = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Staff:");
+		staffs.setScore(staff);
 		for (Player all : Bukkit.getServer().getOnlinePlayers()) {
 			all.setScoreboard(scoreboard);
 		}
@@ -93,6 +115,36 @@ implements Listener
 		Score players = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Players:");
 		int playersonline = Bukkit.getServer().getOnlinePlayers().size();
 		players.setScore(playersonline);
+		int staff = 0;
+		for (Player all : Bukkit.getServer().getOnlinePlayers()) {
+			if(chat.playerInGroup("world", all, "helper") || chat.playerInGroup("world", all, "moderator") || chat.playerInGroup("world", all, "admin") || chat.playerInGroup("world", all, "headadmin") || chat.playerInGroup("world", all, "coowner") || chat.playerInGroup("world", all, "owner")) {
+				staff = staff + 1;
+			}
+		}
+		Score staffs = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Staff:");
+		staffs.setScore(staff);
+		for (Player all : Bukkit.getServer().getOnlinePlayers()) {
+			all.setScoreboard(scoreboard);
+		}
+	}
+	
+	@EventHandler
+	public void onPlayerQuit(PlayerQuitEvent e) {
+		Scoreboard scoreboard = Bukkit.getServer().getScoreboardManager().getNewScoreboard();
+		Objective objective = scoreboard.registerNewObjective("status", "dummy");
+		objective.setDisplayName(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Marvel " + ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "Craft " + ChatColor.RED + "" + ChatColor.BOLD + "Status");
+		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+		Score players = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Players:");
+		int playersonline = Bukkit.getServer().getOnlinePlayers().size();
+		players.setScore(playersonline);
+		int staff = 0;
+		for (Player all : Bukkit.getServer().getOnlinePlayers()) {
+			if(chat.playerInGroup("world", all, "helper") || chat.playerInGroup("world", all, "moderator") || chat.playerInGroup("world", all, "admin") || chat.playerInGroup("world", all, "headadmin") || chat.playerInGroup("world", all, "coowner") || chat.playerInGroup("world", all, "owner")) {
+				staff = staff + 1;
+			}
+		}
+		Score staffs = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Staff:");
+		staffs.setScore(staff);
 		for (Player all : Bukkit.getServer().getOnlinePlayers()) {
 			all.setScoreboard(scoreboard);
 		}
