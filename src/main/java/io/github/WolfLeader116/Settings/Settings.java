@@ -25,9 +25,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Score;
-import org.bukkit.scoreboard.Scoreboard;
 
 public class Settings
 extends JavaPlugin
@@ -70,10 +67,10 @@ implements Listener
 		getCommand("afk").setExecutor(new AfkCMD());
 		getCommand("settings").setTabCompleter(new SettingsTabCompleter());
 		Bukkit.getServer().getPluginManager().registerEvents(this, this);
-		initializeScoreboard();
 		if (this.getConfig().getString("news") == null) {
 			this.saveDefaultConfig();
 		}
+		io.github.WolfLeader116.Settings.Scoreboard.initializeScoreboard();
 		plugin = this;
 	}
 
@@ -81,14 +78,6 @@ implements Listener
 	public void onDisable()
 	{
 		plugin = null;
-	}
-	
-	public static Scoreboard scoreboard = Bukkit.getServer().getScoreboardManager().getNewScoreboard();
-	public static Objective objective = scoreboard.registerNewObjective("status", "dummy");
-
-	public void initializeScoreboard() {
-		objective.setDisplayName(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Marvel " + ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "Craft " + ChatColor.RED + "" + ChatColor.BOLD + "Status");
-		scoreboard();
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -115,14 +104,14 @@ implements Listener
 			c.save();
 			Bukkit.getPlayer(player).setAllowFlight(false);
 		}
-		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-		scoreboard();
-		eplayer.setScoreboard(scoreboard);
+		io.github.WolfLeader116.Settings.Scoreboard.objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+		io.github.WolfLeader116.Settings.Scoreboard.scoreboard();
+		eplayer.setScoreboard(io.github.WolfLeader116.Settings.Scoreboard.scoreboard);
 	}
 
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent e) {
-		scoreboard();
+		io.github.WolfLeader116.Settings.Scoreboard.scoreboard();
 	}
 
 	public static Inventory createInventory(short slots, String name) {
@@ -164,7 +153,7 @@ implements Listener
 			c.save();
 			player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're no longer afk");
 		}
-		scoreboard();
+		io.github.WolfLeader116.Settings.Scoreboard.scoreboard();
 	}
 
 	@EventHandler
@@ -176,40 +165,9 @@ implements Listener
 			c.save();
 			player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're no longer afk");
 		}
-		scoreboard();
+		io.github.WolfLeader116.Settings.Scoreboard.scoreboard();
 	}
 
-	public void scoreboard() {
-		for (Player all : Bukkit.getServer().getOnlinePlayers()) {
-			int staff = 0;
-			for (Player players : Bukkit.getServer().getOnlinePlayers()) {
-				if(chat.playerInGroup("world", players, "helper") || chat.playerInGroup("world", players, "moderator") || chat.playerInGroup("world", players, "admin") || chat.playerInGroup("world", players, "headadmin") || chat.playerInGroup("world", players, "coowner") || chat.playerInGroup("world", players, "owner")) {
-					staff = staff + 1;
-				}
-			}
-			String latestnews = this.getConfig().getString("news");
-			latestnews = latestnews.replaceAll("&", "§");
-			makeScore(0, "Online Players:", Integer.toString(Bukkit.getServer().getOnlinePlayers().size()));
-			makeBlank(-2);
-			makeScore(-3, "Online Staff:", Integer.toString(staff));
-			makeBlank(-5);
-			makeScore(-6, "Money:", Double.toString(economy.getBalance(all)));
-			makeBlank(-8);
-			makeScore(-9, "News:", latestnews);
-		}
-	}
-	
-	public void makeBlank(int number) {
-		Score scorename = objective.getScore("");
-		scorename.setScore(number);
-	}
-	
-	public void makeScore(int number, String name, String value) {
-		Score scorename = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + name);
-		scorename.setScore(number);
-		Score scorevalue = objective.getScore(ChatColor.RED + value);
-		scorevalue.setScore(number - 1);
-	}
 
 	public static ItemStack createItem(Material material, int amount, short data, String name) {
 		ItemStack item = new ItemStack(material, amount, data);
