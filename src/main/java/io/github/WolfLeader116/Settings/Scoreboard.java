@@ -13,20 +13,20 @@ public class Scoreboard {
 	public static Objective objective = scoreboard.registerNewObjective("status", "dummy");
 
 	public static void scoreboard() {
-		for (Player all : Bukkit.getServer().getOnlinePlayers()) {
-			objective.setDisplayName(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Marvel " + ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "Craft " + ChatColor.RED + "" + ChatColor.BOLD + "Status");
-			io.github.WolfLeader116.Settings.Scoreboard.objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-			int staff = 0;
-			for (Player players : Bukkit.getServer().getOnlinePlayers()) {
-				if(Settings.chat.playerInGroup("world", players, "helper") || Settings.chat.playerInGroup("world", players, "moderator") || Settings.chat.playerInGroup("world", players, "admin") || Settings.chat.playerInGroup("world", players, "headadmin") || Settings.chat.playerInGroup("world", players, "coowner") || Settings.chat.playerInGroup("world", players, "owner")) {
-					staff = staff + 1;
-				}
+		objective.setDisplayName(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Marvel " + ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "Craft " + ChatColor.RED + "" + ChatColor.BOLD + "Status");
+		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+		int staff = 0;
+		for (Player players : Bukkit.getServer().getOnlinePlayers()) {
+			if(Settings.chat.playerInGroup("world", players, "helper") || Settings.chat.playerInGroup("world", players, "moderator") || Settings.chat.playerInGroup("world", players, "admin") || Settings.chat.playerInGroup("world", players, "headadmin") || Settings.chat.playerInGroup("world", players, "coowner") || Settings.chat.playerInGroup("world", players, "owner")) {
+				staff = staff + 1;
 			}
-			String latestnews = Settings.plugin.getConfig().getString("news");
-			latestnews = latestnews.replaceAll("&", "§");
-			makeScore(0, "Online Players:", Integer.toString(Bukkit.getServer().getOnlinePlayers().size()));
-			makeScore(-2, "Online Staff:", Integer.toString(staff));
-			makeScore(-4, "News:", latestnews);
+		}
+		String latestnews = Settings.plugin.getConfig().getString("news");
+		latestnews = latestnews.replaceAll("&", "§");
+		makeScore(0, "Online Players:", Integer.toString(Bukkit.getServer().getOnlinePlayers().size()));
+		makeScore(-2, "Online Staff:", Integer.toString(staff));
+		makeScore(-4, "News:", latestnews);
+		for (Player all : Bukkit.getServer().getOnlinePlayers()) {
 			all.setScoreboard(scoreboard);
 		}
 	}

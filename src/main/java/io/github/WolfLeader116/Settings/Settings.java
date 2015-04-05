@@ -86,6 +86,7 @@ implements Listener
 		Config c = new Config("playerdata", Settings.plugin);
 		String player = e.getPlayer().getName();
 		Player eplayer = e.getPlayer();
+		io.github.WolfLeader116.Settings.Scoreboard.scoreboard();
 		if (c.getConfig().getBoolean("fly." + Bukkit.getPlayer(player).getUniqueId()))
 		{
 			Bukkit.getPlayer(player).setAllowFlight(true);
@@ -103,7 +104,6 @@ implements Listener
 			c.save();
 			Bukkit.getPlayer(player).setAllowFlight(false);
 		}
-		io.github.WolfLeader116.Settings.Scoreboard.scoreboard();
 	}
 
 	@EventHandler
