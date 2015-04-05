@@ -6,6 +6,7 @@ import io.github.WolfLeader116.Settings.CMDs.GamemodeCMD;
 import io.github.WolfLeader116.Settings.CMDs.SettingsCMD;
 import io.github.WolfLeader116.Settings.Tab.SettingsTabCompleter;
 import net.milkbowl.vault.chat.Chat;
+import net.milkbowl.vault.economy.Economy;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -33,20 +34,31 @@ extends JavaPlugin
 implements Listener
 {
 	public static Settings plugin;
-	
+
 	public static Chat chat = null;
+	public static Economy economy = null;
 
-    private boolean setupChat() {
-        RegisteredServiceProvider<Chat> chatProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.chat.Chat.class);
-        if (chatProvider != null) {
-            chat = chatProvider.getProvider();
-        }
-        return (chat != null);
-    }
+	private boolean setupChat() {
+		RegisteredServiceProvider<Chat> chatProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.chat.Chat.class);
+		if (chatProvider != null) {
+			chat = chatProvider.getProvider();
+		}
+		return (chat != null);
+	}
+	
+	private boolean setupEconomy() {
+		RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
+		if (economyProvider != null) {
+			economy = economyProvider.getProvider();
+		}
+		return (economy != null);
+	}
 
+	@Override
 	public void onEnable()
 	{
 		setupChat();
+		setupEconomy();
 		getCommand("settings").setExecutor(new SettingsCMD());
 		getCommand("gamemode").setExecutor(new GamemodeCMD());
 		getCommand("gm").setExecutor(new GamemodeCMD());
@@ -58,27 +70,14 @@ implements Listener
 		getCommand("afk").setExecutor(new AfkCMD());
 		getCommand("settings").setTabCompleter(new SettingsTabCompleter());
 		Bukkit.getServer().getPluginManager().registerEvents(this, this);
-		Scoreboard scoreboard = Bukkit.getServer().getScoreboardManager().getNewScoreboard();
-		Objective objective = scoreboard.registerNewObjective("status", "dummy");
-		objective.setDisplayName(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Marvel " + ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "Craft " + ChatColor.RED + "" + ChatColor.BOLD + "Status");
-		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-		Score players = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Players:");
-		int playersonline = Bukkit.getServer().getOnlinePlayers().size();
-		players.setScore(playersonline);
-		int staff = 0;
-		for (Player all : Bukkit.getServer().getOnlinePlayers()) {
-			if(chat.playerInGroup("world", all, "helper") || chat.playerInGroup("world", all, "moderator") || chat.playerInGroup("world", all, "admin") || chat.playerInGroup("world", all, "headadmin") || chat.playerInGroup("world", all, "coowner") || chat.playerInGroup("world", all, "owner")) {
-				staff = staff + 1;
-			}
-		}
-		Score staffs = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Staff:");
-		staffs.setScore(staff);
-		for (Player all : Bukkit.getServer().getOnlinePlayers()) {
-			all.setScoreboard(scoreboard);
+		scoreboard();
+		if (this.getConfig().getString("news") == null) {
+			this.saveDefaultConfig();
 		}
 		plugin = this;
 	}
 
+	@Override
 	public void onDisable()
 	{
 		plugin = null;
@@ -108,78 +107,44 @@ implements Listener
 			c.save();
 			Bukkit.getPlayer(player).setAllowFlight(false);
 		}
-		Scoreboard scoreboard = Bukkit.getServer().getScoreboardManager().getNewScoreboard();
-		Objective objective = scoreboard.registerNewObjective("status", "dummy");
-		objective.setDisplayName(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Marvel " + ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "Craft " + ChatColor.RED + "" + ChatColor.BOLD + "Status");
-		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-		Score players = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Players:");
-		int playersonline = Bukkit.getServer().getOnlinePlayers().size();
-		players.setScore(playersonline);
-		int staff = 0;
-		for (Player all : Bukkit.getServer().getOnlinePlayers()) {
-			if(chat.playerInGroup("world", all, "helper") || chat.playerInGroup("world", all, "moderator") || chat.playerInGroup("world", all, "admin") || chat.playerInGroup("world", all, "headadmin") || chat.playerInGroup("world", all, "coowner") || chat.playerInGroup("world", all, "owner")) {
-				staff = staff + 1;
-			}
-		}
-		Score staffs = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Staff:");
-		staffs.setScore(staff);
-		for (Player all : Bukkit.getServer().getOnlinePlayers()) {
-			all.setScoreboard(scoreboard);
-		}
+		scoreboard();
 	}
-	
+
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent e) {
-		Scoreboard scoreboard = Bukkit.getServer().getScoreboardManager().getNewScoreboard();
-		Objective objective = scoreboard.registerNewObjective("status", "dummy");
-		objective.setDisplayName(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Marvel " + ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "Craft " + ChatColor.RED + "" + ChatColor.BOLD + "Status");
-		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-		Score players = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Players:");
-		int playersonline = Bukkit.getServer().getOnlinePlayers().size();
-		players.setScore(playersonline);
-		int staff = 0;
-		for (Player all : Bukkit.getServer().getOnlinePlayers()) {
-			if(chat.playerInGroup("world", all, "helper") || chat.playerInGroup("world", all, "moderator") || chat.playerInGroup("world", all, "admin") || chat.playerInGroup("world", all, "headadmin") || chat.playerInGroup("world", all, "coowner") || chat.playerInGroup("world", all, "owner")) {
-				staff = staff + 1;
-			}
-		}
-		Score staffs = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Staff:");
-		staffs.setScore(staff);
-		for (Player all : Bukkit.getServer().getOnlinePlayers()) {
-			all.setScoreboard(scoreboard);
-		}
+		scoreboard();
 	}
 
-	public static Inventory myInventory = Bukkit.createInventory(null, 9, ChatColor.DARK_BLUE + "Player Settings");
+	public static Inventory createInventory(short slots, String name) {
+		Inventory invent = Bukkit.createInventory(null, slots, name);
+		return invent;
+	}
+	
+	public static Inventory myInventory = createInventory((short) 9, ChatColor.DARK_BLUE + "Player Settings");
 
 	static {
-		ItemStack feather = new ItemStack(Material.FEATHER);
-		ItemMeta meta = feather.getItemMeta();
-		meta.setDisplayName(ChatColor.BLUE + "Toggle Flight Mode");
-		feather.setItemMeta(meta);
-		myInventory.setItem(4, feather);
+		myInventory.setItem(3, createItem(Material.FEATHER, 1, (short) 0, ChatColor.BLUE + "Toggle Flight Mode"));
+		myInventory.setItem(5, createItem(Material.BARRIER, 1, (short) 0, ChatColor.BLUE + "Toggle AFK Mode"));
 	}
 
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent e) {
-		ItemStack feather = new ItemStack(Material.FEATHER);
-		ItemMeta meta = feather.getItemMeta();
-		meta.setDisplayName(ChatColor.BLUE + "Toggle Flight Mode");
-		feather.setItemMeta(meta);
 		Player player = (Player) e.getWhoClicked();
+		myInventory.setItem(3, createItem(Material.FEATHER, 1, (short) 0, ChatColor.BLUE + "Toggle Flight Mode"));
+		myInventory.setItem(5, createItem(Material.BARRIER, 1, (short) 0, ChatColor.BLUE + "Toggle AFK Mode"));
 		ItemStack clicked = e.getCurrentItem();
 		Inventory inventory = e.getInventory();
 		if (inventory.getName().equals(myInventory.getName())) {
 			if (clicked.getType() == Material.FEATHER) {
 				player.chat("/settings set fly toggle");
 				player.closeInventory();
+			} else if (clicked.getType() == Material.BARRIER) {
+				player.chat("/settings set afk toggle");
+				player.closeInventory();
 			}
 		}
 	}
 
-	public void feather() {
-	}
-	
 	@EventHandler
 	public void onPlayerMove(PlayerMoveEvent e) {
 		Config c = new Config("playerdata", Settings.plugin);
@@ -190,7 +155,7 @@ implements Listener
 			player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're no longer afk");
 		}
 	}
-	
+
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent e) {
 		Config c = new Config("playerdata", Settings.plugin);
@@ -201,4 +166,54 @@ implements Listener
 			player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're no longer afk");
 		}
 	}
+
+	public void scoreboard() {
+		for (Player all : Bukkit.getServer().getOnlinePlayers()) {
+			Scoreboard scoreboard = Bukkit.getServer().getScoreboardManager().getNewScoreboard();
+			Objective objective = scoreboard.registerNewObjective("status", "dummy");
+			objective.setDisplayName(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Marvel " + ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "Craft " + ChatColor.RED + "" + ChatColor.BOLD + "Status");
+			objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+			Score onlineplayers = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Players:");
+			onlineplayers.setScore(10);
+			String playersonline = Integer.toString(Bukkit.getServer().getOnlinePlayers().size());
+			Score onlineplayer = objective.getScore(ChatColor.RED + playersonline);
+			onlineplayer.setScore(9);
+			Score blank1 = objective.getScore("");
+			blank1.setScore(8);
+			int staff = 0;
+			for (Player players : Bukkit.getServer().getOnlinePlayers()) {
+				if(chat.playerInGroup("world", players, "helper") || chat.playerInGroup("world", players, "moderator") || chat.playerInGroup("world", players, "admin") || chat.playerInGroup("world", players, "headadmin") || chat.playerInGroup("world", players, "coowner") || chat.playerInGroup("world", players, "owner")) {
+					staff = staff + 1;
+				}
+			}
+			Score onlinestaffs = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Staff:");
+			onlinestaffs.setScore(7);
+			Score onlinestaff = objective.getScore(ChatColor.RED + Integer.toString(staff));
+			onlinestaff.setScore(6);
+			Score blank2 = objective.getScore("");
+			blank2.setScore(5);
+			Score moneys = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Money:");
+			moneys.setScore(4);
+			Score money = objective.getScore(ChatColor.RED + Double.toString(economy.getBalance(all)));
+			money.setScore(3);
+			Score blank3 = objective.getScore("");
+			blank3.setScore(2);
+			Score newss = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Staff:");
+			newss.setScore(1);
+			String latestnews = this.getConfig().getString("news");
+			latestnews = latestnews.replaceAll("&", "§");
+			Score news = objective.getScore(ChatColor.RED + latestnews);
+			news.setScore(0);
+			all.setScoreboard(scoreboard);
+		}
+	}
+
+	public static ItemStack createItem(Material material, int amount, short data, String name) {
+		ItemStack item = new ItemStack(material, amount, data);
+		ItemMeta meta = item.getItemMeta();
+		meta.setDisplayName(name);
+		item.setItemMeta(meta);
+		return item;
+	}
+
 }
