@@ -36,7 +36,7 @@ public class SettingsCMD implements CommandExecutor {
 						message = message.replaceAll("&", "§");
 						Settings.plugin.getConfig().set("news", message);
 						Settings.plugin.saveConfig();
-						io.github.WolfLeader116.Settings.Scoreboard.scoreboard();
+						Settings.scoreboard();
 						log.info("Server news set to " + message);
 					} else if (args[0].equalsIgnoreCase("reset")) {
 						Settings.plugin.saveDefaultConfig();
@@ -167,7 +167,7 @@ public class SettingsCMD implements CommandExecutor {
 							message = message.replaceAll("&", "§");
 							Settings.plugin.getConfig().set("news", message);
 							Settings.plugin.saveConfig();
-							io.github.WolfLeader116.Settings.Scoreboard.scoreboard();
+							Settings.scoreboard();
 							sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Server news set to " + message);
 						} else {
 							sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You do not have permission to do this!");
