@@ -45,13 +45,16 @@ implements Listener
 		getCommand("afk").setExecutor(new AfkCMD());
 		getCommand("settings").setTabCompleter(new SettingsTabCompleter());
 		Bukkit.getServer().getPluginManager().registerEvents(this, this);
-		ScoreboardManager manager = Bukkit.getScoreboardManager();
-		Scoreboard board = manager.getNewScoreboard();
-		Objective objective = board.registerNewObjective("status", "dummy");
-		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+		Scoreboard scoreboard = Bukkit.getServer().getScoreboardManager().getNewScoreboard();
+		Objective objective = scoreboard.registerNewObjective("status", "dummy");
 		objective.setDisplayName(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Marvel " + ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "Craft " + ChatColor.RED + "" + ChatColor.BOLD + "Status");
-		onlineplayers();
-		/*onlinestaff();*/
+		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+		Score players = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Players:");
+		int playersonline = Bukkit.getServer().getOnlinePlayers().size();
+		players.setScore(playersonline);
+		for (Player all : Bukkit.getServer().getOnlinePlayers()) {
+			all.setScoreboard(scoreboard);
+		}
 		plugin = this;
 	}
 
@@ -84,35 +87,17 @@ implements Listener
 			c.save();
 			Bukkit.getPlayer(player).setAllowFlight(false);
 		}
-		ScoreboardManager manager = Bukkit.getScoreboardManager();
-		Scoreboard board = manager.getNewScoreboard();
-		Objective objective = board.registerNewObjective("status", "dummy");
-		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+		Scoreboard scoreboard = Bukkit.getServer().getScoreboardManager().getNewScoreboard();
+		Objective objective = scoreboard.registerNewObjective("status", "dummy");
 		objective.setDisplayName(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Marvel " + ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "Craft " + ChatColor.RED + "" + ChatColor.BOLD + "Status");
-		eplayer.setScoreboard(board);
-		onlineplayers();
-		/*onlinestaff();*/
-	}
-
-	public void onlineplayers() {
-		ScoreboardManager manager = Bukkit.getScoreboardManager();
-		Scoreboard board = manager.getNewScoreboard();
-		Objective objective = board.registerNewObjective("status", "dummy");
 		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-		objective.setDisplayName(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Marvel " + ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "Craft " + ChatColor.RED + "" + ChatColor.BOLD + "Status");
 		Score players = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Players:");
-		players.setScore(Bukkit.getServer().getOnlinePlayers().size());
+		int playersonline = Bukkit.getServer().getOnlinePlayers().size();
+		players.setScore(playersonline);
+		for (Player all : Bukkit.getServer().getOnlinePlayers()) {
+			all.setScoreboard(scoreboard);
+		}
 	}
-
-	/*public void onlinestaff() {
-	ScoreboardManager manager = Bukkit.getScoreboardManager();
-	Scoreboard board = manager.getNewScoreboard();
-	Objective objective = board.registerNewObjective("status", "dummy");
-	objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-	objective.setDisplayName(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Marvel " + ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "Craft " + ChatColor.RED + "" + ChatColor.BOLD + "Status");
-	Score staff = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Staff:");
-	staff.setScore(Bukkit.getServer().getOnlinePlayers().size());
-  }*/
 
 	public static Inventory myInventory = Bukkit.createInventory(null, 9, ChatColor.DARK_BLUE + "Player Settings");
 
