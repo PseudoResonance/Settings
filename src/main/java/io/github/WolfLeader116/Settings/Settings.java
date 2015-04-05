@@ -19,13 +19,11 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scoreboard.DisplaySlot;
 
 public class Settings
 extends JavaPlugin
@@ -71,7 +69,7 @@ implements Listener
 		if (this.getConfig().getString("news") == null) {
 			this.saveDefaultConfig();
 		}
-		io.github.WolfLeader116.Settings.Scoreboard.initializeScoreboard();
+		io.github.WolfLeader116.Settings.Scoreboard.scoreboard();
 		plugin = this;
 	}
 
@@ -105,8 +103,6 @@ implements Listener
 			c.save();
 			Bukkit.getPlayer(player).setAllowFlight(false);
 		}
-		io.github.WolfLeader116.Settings.Scoreboard.objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-		io.github.WolfLeader116.Settings.Scoreboard.scoreboard();
 		eplayer.setScoreboard(io.github.WolfLeader116.Settings.Scoreboard.scoreboard);
 	}
 
@@ -154,7 +150,6 @@ implements Listener
 			c.save();
 			player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're no longer afk");
 		}
-		io.github.WolfLeader116.Settings.Scoreboard.scoreboard();
 	}
 
 	@EventHandler
@@ -166,7 +161,6 @@ implements Listener
 			c.save();
 			player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're no longer afk");
 		}
-		io.github.WolfLeader116.Settings.Scoreboard.scoreboard();
 	}
 
 
@@ -176,25 +170,5 @@ implements Listener
 		meta.setDisplayName(name);
 		item.setItemMeta(meta);
 		return item;
-	}
-	
-	public static int i = 0;
-	
-	@EventHandler
-	public void onServerPing(final ServerListPingEvent e) {
-		final String[] motds = {"§6§lOmegaBlock §8>>" + "\n" + " §8>> §3-<§5Adventure/Survival§3>-", "§6§lOmegaBlock §8>>" + "\n" + " §8>> §3-<§cFactions§3>-", "§6§lOmegaBlock §8>>" + "\n" + " §8>> §3-<§61.8 Supported§3>-"};
-		e.setMotd(motds[i]);
-		getServer().getScheduler().scheduleSyncDelayedTask(null, new Runnable() {
-			public void run() {
-				i++;
-				e.setMotd(motds[i]);
-				getServer().getScheduler().scheduleSyncDelayedTask(null, new Runnable() {
-					public void run() {
-						i++;
-						e.setMotd(motds[i]);
-					}
-				}, 5000);
-			}
-		}, 5000);
 	}
 }
