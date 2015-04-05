@@ -103,7 +103,7 @@ implements Listener
 			c.save();
 			Bukkit.getPlayer(player).setAllowFlight(false);
 		}
-		eplayer.setScoreboard(io.github.WolfLeader116.Settings.Scoreboard.scoreboard);
+		io.github.WolfLeader116.Settings.Scoreboard.scoreboard();
 	}
 
 	@EventHandler
