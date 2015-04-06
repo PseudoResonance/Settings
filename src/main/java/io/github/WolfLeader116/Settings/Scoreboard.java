@@ -24,7 +24,7 @@ public class Scoreboard {
 		latestnews = latestnews.replaceAll("&", "§");
 		Score playersname = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Players:");
 		playersname.setScore(0);
-		Score playersvalue = objective.getScore(ChatColor.RED + Integer.toString(Bukkit.getServer().getOnlinePlayers().size()));
+		Score playersvalue = objective.getScore(ChatColor.RED + "" + ChatColor.GRAY + "" + ChatColor.RED + Integer.toString(Bukkit.getServer().getOnlinePlayers().size()));
 		playersvalue.setScore(-1);
 		Score staffname = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Staff:");
 		staffname.setScore(-2);
