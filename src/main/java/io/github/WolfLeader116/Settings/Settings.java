@@ -85,7 +85,11 @@ public class Settings extends JavaPlugin implements Listener {
 
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent e) {
-		Scoreboard.scoreboard();
+		this.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+			public void run() {
+				Scoreboard.scoreboard();
+			}
+		}, 20);
 	}
 
 	@EventHandler

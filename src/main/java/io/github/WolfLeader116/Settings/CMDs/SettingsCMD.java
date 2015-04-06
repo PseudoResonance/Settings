@@ -223,66 +223,74 @@ public class SettingsCMD implements CommandExecutor {
 						} else if (args.length == 3) {
 							if (sender.hasPermission("settings.set")) {
 								if (args[1].equalsIgnoreCase("fly")) {
-									String player = ((Player)sender).getName();
-									if (args[2].equalsIgnoreCase("true")) {
-										c.getConfig().set("fly." + Bukkit.getPlayer(player).getUniqueId().toString(), true);
-										c.save();
-										Bukkit.getPlayer(player).setAllowFlight(true);
-										sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to true");
-									} else if (args[2].equalsIgnoreCase("false")) {
-										c.getConfig().set("fly." + Bukkit.getPlayer(player).getUniqueId().toString(), false);
-										c.save();
-										Bukkit.getPlayer(player).setAllowFlight(false);
-										sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to false");
-									} else if (args[2].equalsIgnoreCase("toggle")) {
-										if (c.getConfig().getBoolean("fly." + Bukkit.getPlayer(player).getUniqueId())) {
+									if (sender.hasPermission("settings.set.fly")) {
+										String player = ((Player)sender).getName();
+										if (args[2].equalsIgnoreCase("true")) {
+											c.getConfig().set("fly." + Bukkit.getPlayer(player).getUniqueId().toString(), true);
+											c.save();
+											Bukkit.getPlayer(player).setAllowFlight(true);
+											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to true");
+										} else if (args[2].equalsIgnoreCase("false")) {
 											c.getConfig().set("fly." + Bukkit.getPlayer(player).getUniqueId().toString(), false);
 											c.save();
 											Bukkit.getPlayer(player).setAllowFlight(false);
 											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to false");
-										} else if (!c.getConfig().getBoolean("fly." + Bukkit.getPlayer(player).getUniqueId())) {
-											c.getConfig().set("fly." + Bukkit.getPlayer(player).getUniqueId().toString(), true);
-											c.save();
-											Bukkit.getPlayer(player).setAllowFlight(true);
-											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to true");
+										} else if (args[2].equalsIgnoreCase("toggle")) {
+											if (c.getConfig().getBoolean("fly." + Bukkit.getPlayer(player).getUniqueId())) {
+												c.getConfig().set("fly." + Bukkit.getPlayer(player).getUniqueId().toString(), false);
+												c.save();
+												Bukkit.getPlayer(player).setAllowFlight(false);
+												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to false");
+											} else if (!c.getConfig().getBoolean("fly." + Bukkit.getPlayer(player).getUniqueId())) {
+												c.getConfig().set("fly." + Bukkit.getPlayer(player).getUniqueId().toString(), true);
+												c.save();
+												Bukkit.getPlayer(player).setAllowFlight(true);
+												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to true");
+											} else {
+												c.getConfig().set("fly." + Bukkit.getPlayer(player).getUniqueId().toString(), true);
+												c.save();
+												Bukkit.getPlayer(player).setAllowFlight(true);
+												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to true");
+											}
 										} else {
-											c.getConfig().set("fly." + Bukkit.getPlayer(player).getUniqueId().toString(), true);
-											c.save();
-											Bukkit.getPlayer(player).setAllowFlight(true);
-											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to true");
+											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
 										}
 									} else {
-										sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
+										sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You do not have permission to do this!");
 									}
 								} else if (args[1].equalsIgnoreCase("afk")) {
-									String player = ((Player)sender).getName();
-									if (args[2].equalsIgnoreCase("true")) {
-										c.getConfig().set("afk." + Bukkit.getPlayer(player).getUniqueId().toString(), true);
-										c.save();
-										sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your're now afk");
-									} else if (args[2].equalsIgnoreCase("false")) {
-										c.getConfig().set("afk." + Bukkit.getPlayer(player).getUniqueId().toString(), false);
-										c.save();
-										sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're no longer afk");
-									} else if (args[2].equalsIgnoreCase("toggle")) {
-										if (c.getConfig().getBoolean("afk." + Bukkit.getPlayer(player).getUniqueId())) {
+									if (sender.hasPermission("settings.set.afk")) {
+										String player = ((Player)sender).getName();
+										if (args[2].equalsIgnoreCase("true")) {
+											c.getConfig().set("afk." + Bukkit.getPlayer(player).getUniqueId().toString(), true);
+											c.save();
+											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your're now afk");
+										} else if (args[2].equalsIgnoreCase("false")) {
 											c.getConfig().set("afk." + Bukkit.getPlayer(player).getUniqueId().toString(), false);
 											c.save();
 											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're no longer afk");
-										} else if (!c.getConfig().getBoolean("afk." + Bukkit.getPlayer(player).getUniqueId())) {
-											c.getConfig().set("afk." + Bukkit.getPlayer(player).getUniqueId().toString(), true);
-											c.save();
-											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your're now afk");
+										} else if (args[2].equalsIgnoreCase("toggle")) {
+											if (c.getConfig().getBoolean("afk." + Bukkit.getPlayer(player).getUniqueId())) {
+												c.getConfig().set("afk." + Bukkit.getPlayer(player).getUniqueId().toString(), false);
+												c.save();
+												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're no longer afk");
+											} else if (!c.getConfig().getBoolean("afk." + Bukkit.getPlayer(player).getUniqueId())) {
+												c.getConfig().set("afk." + Bukkit.getPlayer(player).getUniqueId().toString(), true);
+												c.save();
+												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your're now afk");
+											} else {
+												c.getConfig().set("afk." + Bukkit.getPlayer(player).getUniqueId().toString(), true);
+												c.save();
+												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your're now afk");
+											}
 										} else {
-											c.getConfig().set("afk." + Bukkit.getPlayer(player).getUniqueId().toString(), true);
-											c.save();
-											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your're now afk");
+											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
 										}
 									} else {
-										sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
+										sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "The setting " + args[1] + " does not exist. Possible settings are " + settings + ".");
 									}
 								} else {
-									sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "The setting " + args[1] + " does not exist. Possible settings are " + settings + ".");
+									sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You do not have permission to do this!");
 								}
 							} else {
 								sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You do not have permission to do this!");
@@ -293,77 +301,85 @@ public class SettingsCMD implements CommandExecutor {
 								if (Bukkit.getServer().getPlayer(args[3]) == null) {
 									sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "The specified player is not online!");
 								} else if (args[1].equalsIgnoreCase("fly")) {
-									Player player = Bukkit.getServer().getPlayer(args[3]);
-									String send = sender.getName();
-									if (args[2].equalsIgnoreCase("true")) {
-										c.getConfig().set("fly." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
-										c.save();
-										Bukkit.getPlayer(args[3]).setAllowFlight(true);
-										sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s fly mode has been set to true");
-										player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to true by " + ChatColor.RESET + send);
-									} else if (args[2].equalsIgnoreCase("false")) {
-										c.getConfig().set("fly." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
-										c.save();
-										Bukkit.getPlayer(args[3]).setAllowFlight(false);
-										sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s fly mode has been set to false");
-										player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to false by " + ChatColor.RESET + send);
-									} else if (args[2].equalsIgnoreCase("toggle")) {
-										if (c.getConfig().getBoolean("fly." + Bukkit.getPlayer(args[3]).getUniqueId())) {
+									if (sender.hasPermission("settings.set.other.fly")) {
+										Player player = Bukkit.getServer().getPlayer(args[3]);
+										String send = sender.getName();
+										if (args[2].equalsIgnoreCase("true")) {
+											c.getConfig().set("fly." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+											c.save();
+											Bukkit.getPlayer(args[3]).setAllowFlight(true);
+											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s fly mode has been set to true");
+											player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to true by " + ChatColor.RESET + send);
+										} else if (args[2].equalsIgnoreCase("false")) {
 											c.getConfig().set("fly." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
 											c.save();
 											Bukkit.getPlayer(args[3]).setAllowFlight(false);
 											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s fly mode has been set to false");
 											player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to false by " + ChatColor.RESET + send);
-										} else if (!c.getConfig().getBoolean("fly." + Bukkit.getPlayer(args[3]).getUniqueId())) {
-											c.getConfig().set("fly." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
-											c.save();
-											Bukkit.getPlayer(args[3]).setAllowFlight(true);
-											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s fly mode has been set to true");
-											player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to true by " + ChatColor.RESET + send);
-										} else {
-											c.getConfig().set("fly." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
-											c.save();
-											Bukkit.getPlayer(args[3]).setAllowFlight(true);
-											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s fly mode has been set to true");
-											player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to true by " + ChatColor.RESET + send);
+										} else if (args[2].equalsIgnoreCase("toggle")) {
+											if (c.getConfig().getBoolean("fly." + Bukkit.getPlayer(args[3]).getUniqueId())) {
+												c.getConfig().set("fly." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
+												c.save();
+												Bukkit.getPlayer(args[3]).setAllowFlight(false);
+												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s fly mode has been set to false");
+												player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to false by " + ChatColor.RESET + send);
+											} else if (!c.getConfig().getBoolean("fly." + Bukkit.getPlayer(args[3]).getUniqueId())) {
+												c.getConfig().set("fly." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+												c.save();
+												Bukkit.getPlayer(args[3]).setAllowFlight(true);
+												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s fly mode has been set to true");
+												player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to true by " + ChatColor.RESET + send);
+											} else {
+												c.getConfig().set("fly." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+												c.save();
+												Bukkit.getPlayer(args[3]).setAllowFlight(true);
+												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s fly mode has been set to true");
+												player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to true by " + ChatColor.RESET + send);
 
+											}
 										}
+									} else {
+										sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You do not have permission to do this!");
 									}
 								} else if (args[1].equalsIgnoreCase("afk")) {
-									Player aplayer = Bukkit.getServer().getPlayer(args[3]);
-									if (args[2].equalsIgnoreCase("true")) {
-										c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
-										c.save();
-										sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + " is now afk");
-										aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're now afk");
-									} else if (args[2].equalsIgnoreCase("false")) {
-										c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
-										c.save();
-										sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + " is no longer afk");
-										aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're no longer afk");
-									} else if (args[2].equalsIgnoreCase("toggle")) {
-										if (c.getConfig().getBoolean("afk." + Bukkit.getPlayer(args[3]).getUniqueId())) {
+									if (sender.hasPermission("settings.set.other.afk")) {
+										Player aplayer = Bukkit.getServer().getPlayer(args[3]);
+										if (args[2].equalsIgnoreCase("true")) {
+											c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+											c.save();
+											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + " is now afk");
+											aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're now afk");
+										} else if (args[2].equalsIgnoreCase("false")) {
 											c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
 											c.save();
 											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + " is no longer afk");
 											aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're no longer afk");
-										} else if (!c.getConfig().getBoolean("afk." + Bukkit.getPlayer(args[3]).getUniqueId())) {
-											c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
-											c.save();
-											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + " is now afk");
-											aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're now afk");
-										} else {
-											c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
-											c.save();
-											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + " is now afk");
-											aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're now afk");
+										} else if (args[2].equalsIgnoreCase("toggle")) {
+											if (c.getConfig().getBoolean("afk." + Bukkit.getPlayer(args[3]).getUniqueId())) {
+												c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
+												c.save();
+												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + " is no longer afk");
+												aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're no longer afk");
+											} else if (!c.getConfig().getBoolean("afk." + Bukkit.getPlayer(args[3]).getUniqueId())) {
+												c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+												c.save();
+												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + " is now afk");
+												aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're now afk");
+											} else {
+												c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+												c.save();
+												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + " is now afk");
+												aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're now afk");
 
+											}
+										} else {
+											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
 										}
 									} else {
-										sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
+										sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "The setting " + args[1] + " does not exist. Possible settings are " + settings + ".");
 									}
 								} else {
-									sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "The setting " + args[1] + " does not exist. Possible settings are " + settings + ".");
+									sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You do not have permission to do this!");
 								}
 							} else {
 								sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You do not have permission to do this!");

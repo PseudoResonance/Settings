@@ -27,6 +27,14 @@ commands:
 permissions:
   settings.news:
     description: Lets the player set the server news.
+  settings.set.fly:
+    description: Lets the player set their fly setting.
+  settings.set.afk:
+    description: Lets the player set their afk setting.
+  settings.set.other.fly:
+    description: Lets the player set another player's fly setting.
+  settings.set.other.afk:
+    description: Lets the player set another player's afk setting.
   settings.reset:
     description: Lets the player reset the config.
   settings.reload:
