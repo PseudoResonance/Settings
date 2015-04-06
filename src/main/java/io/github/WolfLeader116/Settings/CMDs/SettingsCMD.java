@@ -4,6 +4,7 @@ import io.github.WolfLeader116.Settings.Config;
 import io.github.WolfLeader116.Settings.Scoreboard;
 import io.github.WolfLeader116.Settings.Settings;
 
+import java.io.File;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
@@ -17,6 +18,7 @@ public class SettingsCMD implements CommandExecutor {
 	private static final Logger log = Logger.getLogger("Minecraft");
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+		File configFile = new File(Settings.plugin.getDataFolder(), "config.yml");
 		Config c = new Config("playerdata", Settings.plugin);
 		String settings = "fly, afk";
 		if (cmd.getName().equalsIgnoreCase("settings")) {
@@ -40,6 +42,7 @@ public class SettingsCMD implements CommandExecutor {
 						Scoreboard.scoreboard();
 						log.info("Server news set to " + message);
 					} else if (args[0].equalsIgnoreCase("reset")) {
+						configFile.delete();
 						Settings.plugin.saveDefaultConfig();
 						log.info("Reset the config!");
 					} else if (args[0].equalsIgnoreCase("reload")) {
@@ -174,6 +177,7 @@ public class SettingsCMD implements CommandExecutor {
 							sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You do not have permission to do this!");
 						}
 					} else if (args[0].equalsIgnoreCase("reset")) {
+						configFile.delete();
 						Settings.plugin.saveDefaultConfig();
 						sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Reset the config!");
 					} else if (args[0].equalsIgnoreCase("reload")) {

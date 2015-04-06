@@ -38,6 +38,8 @@ public class Settings extends JavaPlugin implements Listener {
 
 	@Override
 	public void onEnable() {
+		plugin = this;
+		this.saveDefaultConfig();
 		Bukkit.getServer().getPluginManager().registerEvents(this, this);
 		setupChat();
 		getCommand("settings").setExecutor(new SettingsCMD());
@@ -51,10 +53,6 @@ public class Settings extends JavaPlugin implements Listener {
 		getCommand("afk").setExecutor(new AfkCMD());
 		getCommand("settings").setTabCompleter(new SettingsTabCompleter());
 		Scoreboard.scoreboard();
-		if (this.getConfig().getString("news") == null) {
-			this.saveDefaultConfig();
-		}
-		plugin = this;
 	}
 
 	@Override
