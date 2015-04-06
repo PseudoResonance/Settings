@@ -35,22 +35,11 @@ public class Settings extends JavaPlugin implements Listener {
 		}
 		return (chat != null);
 	}
-	
-	public static Scoreboard scores = null;
-
-	private boolean setupScores() {
-		RegisteredServiceProvider<Scoreboard> scoresProvider = getServer().getServicesManager().getRegistration(io.github.WolfLeader116.Settings.Scoreboard.class);
-		if (scoresProvider != null) {
-			scores = scoresProvider.getProvider();
-		}
-		return (scores != null);
-	}
 
 	@Override
 	public void onEnable() {
 		Bukkit.getServer().getPluginManager().registerEvents(this, this);
 		setupChat();
-		setupScores();
 		getCommand("settings").setExecutor(new SettingsCMD());
 		getCommand("gamemode").setExecutor(new GamemodeCMD());
 		getCommand("gm").setExecutor(new GamemodeCMD());
