@@ -1,6 +1,7 @@
 package io.github.WolfLeader116.Settings.CMDs;
 
 import io.github.WolfLeader116.Settings.Config;
+import io.github.WolfLeader116.Settings.Scoreboard;
 import io.github.WolfLeader116.Settings.Settings;
 
 import java.util.logging.Logger;
@@ -36,7 +37,7 @@ public class SettingsCMD implements CommandExecutor {
 						message = message.replaceAll("&", "§");
 						Settings.plugin.getConfig().set("news", message);
 						Settings.plugin.saveConfig();
-						Settings.scoreboard();
+						Scoreboard.scoreboard();
 						log.info("Server news set to " + message);
 					} else if (args[0].equalsIgnoreCase("reset")) {
 						Settings.plugin.saveDefaultConfig();
@@ -167,7 +168,7 @@ public class SettingsCMD implements CommandExecutor {
 							message = message.replaceAll("&", "§");
 							Settings.plugin.getConfig().set("news", message);
 							Settings.plugin.saveConfig();
-							Settings.scoreboard();
+							Scoreboard.scoreboard();
 							sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Server news set to " + message);
 						} else {
 							sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You do not have permission to do this!");
