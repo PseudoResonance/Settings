@@ -200,14 +200,14 @@ public class SettingsCMD implements CommandExecutor {
 							sender.sendMessage(ChatColor.RED + "/settings gui " + ChatColor.AQUA + "Opens the settings GUI for you.");
 						}
 						if (sender.hasPermission("settings.news")) {
-							sender.sendMessage(ChatColor.RED + "/settings news" + ChatColor.AQUA + "Sets the server news.");
+							sender.sendMessage(ChatColor.RED + "/settings news " + ChatColor.AQUA + "Sets the server news.");
 						}
-						sender.sendMessage(ChatColor.RED + "/settings thanks" + ChatColor.AQUA + "Thank you!");
+						sender.sendMessage(ChatColor.RED + "/settings thanks " + ChatColor.AQUA + "Thank you!");
 						if (sender.hasPermission("settings.reset")) {
-							sender.sendMessage(ChatColor.RED + "/settings reset" + ChatColor.AQUA + "Resets the config!");
+							sender.sendMessage(ChatColor.RED + "/settings reset " + ChatColor.AQUA + "Resets the config!");
 						}
 						if (sender.hasPermission("settings.reload")) {
-							sender.sendMessage(ChatColor.RED + "/settings reload" + ChatColor.AQUA + "Reloads the config!");
+							sender.sendMessage(ChatColor.RED + "/settings reload " + ChatColor.AQUA + "Reloads the config!");
 						}
 						sender.sendMessage(ChatColor.RED + "/gamemode " + ChatColor.AQUA + "Set gamemode.");
 						sender.sendMessage(ChatColor.RED + "/gm " + ChatColor.AQUA + "Set gamemode.");
