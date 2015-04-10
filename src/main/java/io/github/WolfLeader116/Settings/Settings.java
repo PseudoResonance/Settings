@@ -46,6 +46,7 @@ public class Settings extends JavaPlugin implements Listener {
 			File conf = new File(this.getDataFolder(), "config.yml");
 			conf.delete();
 			this.saveDefaultConfig();
+			this.saveConfig();
 			this.reloadConfig();
 		}
 		Bukkit.getServer().getPluginManager().registerEvents(this, this);
