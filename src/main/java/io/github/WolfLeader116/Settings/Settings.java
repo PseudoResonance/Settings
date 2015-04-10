@@ -1,5 +1,7 @@
 package io.github.WolfLeader116.Settings;
 
+import java.io.File;
+
 import io.github.WolfLeader116.Settings.CMDs.AfkCMD;
 import io.github.WolfLeader116.Settings.CMDs.FlyCMD;
 import io.github.WolfLeader116.Settings.CMDs.GamemodeCMD;
@@ -40,6 +42,12 @@ public class Settings extends JavaPlugin implements Listener {
 	public void onEnable() {
 		plugin = this;
 		this.saveDefaultConfig();
+		if (this.getConfig().getInt("Version") != 1) {
+			File conf = new File(this.getDataFolder(), "config.yml");
+			conf.delete();
+			this.saveDefaultConfig();
+			this.reloadConfig();
+		}
 		Bukkit.getServer().getPluginManager().registerEvents(this, this);
 		setupChat();
 		getCommand("settings").setExecutor(new SettingsCMD());

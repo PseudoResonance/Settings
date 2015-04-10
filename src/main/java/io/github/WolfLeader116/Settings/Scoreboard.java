@@ -12,7 +12,7 @@ public class Scoreboard {
 	public static void scoreboard() {
 		org.bukkit.scoreboard.Scoreboard scoreboard = Bukkit.getServer().getScoreboardManager().getNewScoreboard();
 		Objective objective = scoreboard.registerNewObjective("status", "dummy");
-		objective.setDisplayName(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Marvel " + ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "Craft " + ChatColor.RED + "" + ChatColor.BOLD + "Status");
+		objective.setDisplayName(Settings.plugin.getConfig().getString("Scoreboard"));
 		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 		int staff = 0;
 		for (Player players : Bukkit.getServer().getOnlinePlayers()) {
@@ -20,7 +20,7 @@ public class Scoreboard {
 				staff = staff + 1;
 			}
 		}
-		String latestnews = Settings.plugin.getConfig().getString("news");
+		String latestnews = Settings.plugin.getConfig().getString("News");
 		latestnews = latestnews.replaceAll("&", "§");
 		Score playersname = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Online Players:");
 		playersname.setScore(0);

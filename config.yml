@@ -2,5 +2,11 @@
 #Settings Config#
 #################
 
+#DO NOT CHANGE THIS LINE! YOUR CONFIG WILL BE RESET UPON LOADING IF THIS LINE IS EDITED!
+Version: 1
+
 #Latest Server News
-news: &bPlease Configure This Plugin!
+News: "&bPlease Configure This Plugin!"
+
+#Scoreboard Name
+Scoreboard: "&c&lServer Status"

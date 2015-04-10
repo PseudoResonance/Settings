@@ -37,13 +37,14 @@ public class SettingsCMD implements CommandExecutor {
 							message = message + arg;
 						}
 						message = message.replaceAll("&", "§");
-						Settings.plugin.getConfig().set("news", message);
+						Settings.plugin.getConfig().set("News", message);
 						Settings.plugin.saveConfig();
 						Scoreboard.scoreboard();
 						log.info("Server news set to " + message);
 					} else if (args[0].equalsIgnoreCase("reset")) {
 						configFile.delete();
 						Settings.plugin.saveDefaultConfig();
+						Settings.plugin.reloadConfig();
 						log.info("Reset the config!");
 					} else if (args[0].equalsIgnoreCase("reload")) {
 						Settings.plugin.reloadConfig();
@@ -169,7 +170,7 @@ public class SettingsCMD implements CommandExecutor {
 								message = message + arg;
 							}
 							message = message.replaceAll("&", "§");
-							Settings.plugin.getConfig().set("news", message);
+							Settings.plugin.getConfig().set("News", message);
 							Settings.plugin.saveConfig();
 							Scoreboard.scoreboard();
 							sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Server news set to " + message);
@@ -179,6 +180,7 @@ public class SettingsCMD implements CommandExecutor {
 					} else if (args[0].equalsIgnoreCase("reset")) {
 						configFile.delete();
 						Settings.plugin.saveDefaultConfig();
+						Settings.plugin.reloadConfig();
 						sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Reset the config!");
 					} else if (args[0].equalsIgnoreCase("reload")) {
 						Settings.plugin.reloadConfig();
