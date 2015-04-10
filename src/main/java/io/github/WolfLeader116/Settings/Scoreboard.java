@@ -12,7 +12,9 @@ public class Scoreboard {
 	public static void scoreboard() {
 		org.bukkit.scoreboard.Scoreboard scoreboard = Bukkit.getServer().getScoreboardManager().getNewScoreboard();
 		Objective objective = scoreboard.registerNewObjective("status", "dummy");
-		objective.setDisplayName(Settings.plugin.getConfig().getString("Scoreboard"));
+		String scoreboardname = Settings.plugin.getConfig().getString("Scoreboard");
+		scoreboardname = scoreboardname.replaceAll("&", "§");
+		objective.setDisplayName(scoreboardname);
 		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 		int staff = 0;
 		for (Player players : Bukkit.getServer().getOnlinePlayers()) {
