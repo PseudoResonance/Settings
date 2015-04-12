@@ -131,15 +131,17 @@ public class Settings extends JavaPlugin implements Listener {
 	public static Inventory myInventory = createInventory((short) 9, ChatColor.DARK_BLUE + "Player Settings");
 
 	static {
-		myInventory.setItem(3, createItem(Material.FEATHER, 1, (short) 0, ChatColor.BLUE + "Toggle Flight Mode"));
-		myInventory.setItem(5, createItem(Material.BARRIER, 1, (short) 0, ChatColor.BLUE + "Toggle AFK Mode"));
+		myInventory.setItem(2, createItem(Material.FEATHER, 1, (short) 0, ChatColor.BLUE + "Toggle Flight Mode"));
+		myInventory.setItem(4, createItem(Material.BARRIER, 1, (short) 0, ChatColor.BLUE + "Toggle AFK Mode"));
+		myInventory.setItem(6, createItem(Material.RECORD_12, 1, (short) 0, ChatColor.BLUE + "Toggle Music Mode"));
 	}
 
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent e) {
 		Player player = (Player) e.getWhoClicked();
-		myInventory.setItem(3, createItem(Material.FEATHER, 1, (short) 0, ChatColor.BLUE + "Toggle Flight Mode"));
-		myInventory.setItem(5, createItem(Material.BARRIER, 1, (short) 0, ChatColor.BLUE + "Toggle AFK Mode"));
+		myInventory.setItem(2, createItem(Material.FEATHER, 1, (short) 0, ChatColor.BLUE + "Toggle Flight Mode"));
+		myInventory.setItem(4, createItem(Material.BARRIER, 1, (short) 0, ChatColor.BLUE + "Toggle AFK Mode"));
+		myInventory.setItem(6, createItem(Material.RECORD_12, 1, (short) 0, ChatColor.BLUE + "Toggle Music Mode"));
 		ItemStack clicked = e.getCurrentItem();
 		Inventory inventory = e.getInventory();
 		if (inventory.getName().equals(myInventory.getName())) {
@@ -148,6 +150,9 @@ public class Settings extends JavaPlugin implements Listener {
 				player.closeInventory();
 			} else if (clicked.getType() == Material.BARRIER) {
 				player.chat("/settings set afk toggle");
+				player.closeInventory();
+			} else if (clicked.getType() == Material.RECORD_12) {
+				player.chat("/settings set music toggle");
 				player.closeInventory();
 			}
 		}
