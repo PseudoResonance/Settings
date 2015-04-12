@@ -5,6 +5,7 @@ import java.io.File;
 import io.github.WolfLeader116.Settings.CMDs.AfkCMD;
 import io.github.WolfLeader116.Settings.CMDs.FlyCMD;
 import io.github.WolfLeader116.Settings.CMDs.GamemodeCMD;
+import io.github.WolfLeader116.Settings.CMDs.MusicCMD;
 import io.github.WolfLeader116.Settings.CMDs.SettingsCMD;
 import io.github.WolfLeader116.Settings.Tab.SettingsTabCompleter;
 import net.milkbowl.vault.chat.Chat;
@@ -60,6 +61,7 @@ public class Settings extends JavaPlugin implements Listener {
 		getCommand("spectator").setExecutor(new GamemodeCMD());
 		getCommand("fly").setExecutor(new FlyCMD());
 		getCommand("afk").setExecutor(new AfkCMD());
+		getCommand("music").setExecutor(new MusicCMD());
 		getCommand("settings").setTabCompleter(new SettingsTabCompleter());
 		Scoreboard.scoreboard();
 	}
