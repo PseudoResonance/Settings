@@ -7,6 +7,8 @@ commands:
   fly:
     description: Toggle flight command.
     aliases: [flight]
+  music:
+    description: Toggle music command.
   afk:
     description: Toggle afk command.
     aliases: [awayfromkeyboard, away]
@@ -31,10 +33,14 @@ permissions:
     description: Lets the player set their fly setting.
   settings.set.afk:
     description: Lets the player set their afk setting.
+  settings.set.music:
+    description: Lets the player set their music setting.
   settings.set.other.fly:
     description: Lets the player set another player's fly setting.
   settings.set.other.afk:
     description: Lets the player set another player's afk setting.
+  settings.set.other.music:
+    description: Lets the player set another player's music setting.
   settings.reset:
     description: Lets the player reset the config.
   settings.reload:
@@ -57,3 +63,9 @@ permissions:
       settings.set.other: true
       settings.gamemode: true
       settings.gamemode.other: true
+      settings.set.fly: true
+      settings.set.afk: true
+      settings.set.music: true
+      settings.set.other.fly: true
+      settings.set.other.afk: true
+      settings.set.other.music: true

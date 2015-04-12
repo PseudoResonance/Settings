@@ -16,11 +16,15 @@ import org.bukkit.entity.Player;
 
 public class SettingsCMD implements CommandExecutor {
 	private static final Logger log = Logger.getLogger("Minecraft");
+	
+	public String settings = "fly, afk";
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		File configFile = new File(Settings.plugin.getDataFolder(), "config.yml");
 		Config c = new Config("playerdata", Settings.plugin);
-		String settings = "fly, afk";
+		if (Bukkit.getPluginManager().getPlugin("Music") != null) {
+			settings = "fly, afk, music";
+		}
 		if (cmd.getName().equalsIgnoreCase("settings")) {
 			if (!(sender instanceof Player)) {
 				if (args.length == 0) {
@@ -144,6 +148,42 @@ public class SettingsCMD implements CommandExecutor {
 									}
 								} else {
 									log.info("The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
+								}
+							} else if (args[1].equalsIgnoreCase("music")) {
+								if (Bukkit.getPluginManager().getPlugin("Music") != null) {
+									Player player = Bukkit.getServer().getPlayer(args[3]);
+									if (args[2].equalsIgnoreCase("true")) {
+										c.getConfig().set("music." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+										c.save();
+										log.info(args[3] + "'s music mode has been set to true");
+										player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your music mode has been set to true by the console");
+									} else if (args[2].equalsIgnoreCase("false")) {
+										c.getConfig().set("music." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
+										c.save();
+										log.info(args[3] + "'s music mode has been set to false");
+										player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your music mode has been set to false by the console");
+									} else if (args[2].equalsIgnoreCase("toggle")) {
+										if (c.getConfig().getBoolean("music." + Bukkit.getPlayer(args[3]).getUniqueId())) {
+											c.getConfig().set("music." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
+											c.save();
+											log.info(args[3] + "'s music mode has been set to false");
+											player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your music mode has been set to false by the console");
+										} else if (!c.getConfig().getBoolean("music." + Bukkit.getPlayer(args[3]).getUniqueId())) {
+											c.getConfig().set("music." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+											c.save();
+											log.info(args[3] + "'s music mode has been set to true");
+											player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your music mode has been set to true by the console");
+										} else {
+											c.getConfig().set("music." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+											c.save();
+											log.info(args[3] + "'s music mode has been set to true");
+											player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your music mode has been set to true by the console");
+										}
+									} else {
+										log.info("The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
+									}
+								} else {
+									log.info("Because the music plugin is not installed, the setting " + args[1] + " does not exist. Possible settings are " + settings + ".");
 								}
 							} else {
 								log.info("The setting " + args[1] + " does not exist. Possible values are " + settings + ".");
@@ -288,6 +328,39 @@ public class SettingsCMD implements CommandExecutor {
 										} else {
 											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
 										}
+									} else if (args[1].equalsIgnoreCase("music")) {
+										if (Bukkit.getPluginManager().getPlugin("Music") != null) {
+											if (sender.hasPermission("settings.set.music")) {
+												String player = ((Player)sender).getName();
+												if (args[2].equalsIgnoreCase("true")) {
+													c.getConfig().set("music." + Bukkit.getPlayer(player).getUniqueId().toString(), true);
+													c.save();
+													sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your music mode has been set to true");
+												} else if (args[2].equalsIgnoreCase("false")) {
+													c.getConfig().set("music." + Bukkit.getPlayer(player).getUniqueId().toString(), false);
+													c.save();
+													sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your music mode has been set to false");
+												} else if (args[2].equalsIgnoreCase("toggle")) {
+													if (c.getConfig().getBoolean("music." + Bukkit.getPlayer(player).getUniqueId())) {
+														c.getConfig().set("music." + Bukkit.getPlayer(player).getUniqueId().toString(), false);
+														c.save();
+														sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your music mode has been set to false");
+													} else if (!c.getConfig().getBoolean("music." + Bukkit.getPlayer(player).getUniqueId())) {
+														c.getConfig().set("music." + Bukkit.getPlayer(player).getUniqueId().toString(), true);
+														c.save();
+														sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your music mode has been set to true");
+													} else {
+														c.getConfig().set("music." + Bukkit.getPlayer(player).getUniqueId().toString(), true);
+														c.save();
+														sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your music mode has been set to true");
+													}
+												} else {
+													sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
+												}
+											}
+										} else {
+											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Because the music plugin is not installed, the setting " + args[1] + " does not exist. Possible settings are " + settings + ".");
+										}
 									} else {
 										sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "The setting " + args[1] + " does not exist. Possible settings are " + settings + ".");
 									}
@@ -376,6 +449,46 @@ public class SettingsCMD implements CommandExecutor {
 											}
 										} else {
 											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
+										}
+									} else if (args[1].equalsIgnoreCase("music")) {
+										if (Bukkit.getPluginManager().getPlugin("Music") != null) {
+											if (sender.hasPermission("settings.set.other.music")) {
+												Player senda = (Player) sender;
+												String send = senda.getName();
+												Player aplayer = Bukkit.getServer().getPlayer(args[3]);
+												if (args[2].equalsIgnoreCase("true")) {
+													c.getConfig().set("music." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+													c.save();
+													sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s music mode has been set to true");
+													aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your music mode has been set to true by " + ChatColor.RESET + send);
+												} else if (args[2].equalsIgnoreCase("false")) {
+													c.getConfig().set("music." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
+													c.save();
+													sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s music mode has been set to false");
+													aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your music mode has been set to false by " + ChatColor.RESET + send);
+												} else if (args[2].equalsIgnoreCase("toggle")) {
+													if (c.getConfig().getBoolean("music." + Bukkit.getPlayer(args[3]).getUniqueId())) {
+														c.getConfig().set("music." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
+														c.save();
+														sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s music mode has been set to false");
+														aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your music mode has been set to false by " + ChatColor.RESET + send);
+													} else if (!c.getConfig().getBoolean("music." + Bukkit.getPlayer(args[3]).getUniqueId())) {
+														c.getConfig().set("music." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+														c.save();
+														sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s music mode has been set to true");
+														aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your music mode has been set to true by " + ChatColor.RESET + send);
+													} else {
+														c.getConfig().set("music." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+														c.save();
+														sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s music mode has been set to true");
+														aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your music mode has been set to true by " + ChatColor.RESET + send);
+													}
+												} else {
+													sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
+												}
+											}
+										} else {
+											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Because the music plugin is not installed, the setting " + args[1] + " does not exist. Possible settings are " + settings + ".");
 										}
 									} else {
 										sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "The setting " + args[1] + " does not exist. Possible settings are " + settings + ".");
