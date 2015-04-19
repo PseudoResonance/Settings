@@ -36,9 +36,9 @@ public class Scoreboard {
 			Score staffvalue = objective.getScore(ChatColor.RED + Integer.toString(staff));
 			staffvalue.setScore(-3);
 			Score moneyname = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Money:");
-			playersname.setScore(-4);
+			moneyname.setScore(-4);
 			Score moneyvalue = objective.getScore(ChatColor.RED + "" + ChatColor.GRAY + "" + ChatColor.RED + Economy.getMoney(online.getName()));
-			playersvalue.setScore(-5);
+			moneyvalue.setScore(-5);
 			Score newsname = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "News:");
 			newsname.setScore(-6);
 			Score newsvalue = objective.getScore(ChatColor.RED + latestnews);
@@ -71,9 +71,9 @@ public class Scoreboard {
 			Score staffvalue = objective.getScore(ChatColor.RED + Integer.toString(staff));
 			staffvalue.setScore(-3);
 			Score moneyname = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Money:");
-			playersname.setScore(-4);
+			moneyname.setScore(-4);
 			Score moneyvalue = objective.getScore(ChatColor.RED + "" + ChatColor.GRAY + "" + ChatColor.RED + Economy.getMoney(Bukkit.getServer().getPlayer(playername).getName()));
-			playersvalue.setScore(-5);
+			moneyvalue.setScore(-5);
 			Score newsname = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "News:");
 			newsname.setScore(-6);
 			Score newsvalue = objective.getScore(ChatColor.RED + latestnews);
