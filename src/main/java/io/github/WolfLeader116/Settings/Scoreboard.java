@@ -1,6 +1,6 @@
 package io.github.WolfLeader116.Settings;
 
-import io.github.wolfleader116.economy.Economy;
+import io.github.wolfleader116.economy.Econ;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -37,7 +37,7 @@ public class Scoreboard {
 			staffvalue.setScore(-3);
 			Score moneyname = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Money:");
 			moneyname.setScore(-4);
-			Score moneyvalue = objective.getScore(ChatColor.RED + "" + ChatColor.GRAY + "" + ChatColor.RED + Economy.getMoney(online.getName()));
+			Score moneyvalue = objective.getScore(ChatColor.RED + "" + ChatColor.GRAY + "" + ChatColor.RED + Econ.getMoney(online.getName()));
 			moneyvalue.setScore(-5);
 			Score newsname = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "News:");
 			newsname.setScore(-6);
@@ -72,7 +72,7 @@ public class Scoreboard {
 			staffvalue.setScore(-3);
 			Score moneyname = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Money:");
 			moneyname.setScore(-4);
-			Score moneyvalue = objective.getScore(ChatColor.RED + "" + ChatColor.GRAY + "" + ChatColor.RED + Economy.getMoney(Bukkit.getServer().getPlayer(playername).getName()));
+			Score moneyvalue = objective.getScore(ChatColor.RED + "" + ChatColor.GRAY + "" + ChatColor.RED + Econ.getMoney(Bukkit.getServer().getPlayer(playername).getName()));
 			moneyvalue.setScore(-5);
 			Score newsname = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "News:");
 			newsname.setScore(-6);
