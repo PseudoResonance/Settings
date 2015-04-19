@@ -34,5 +34,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="A:/Documents/The Nexus/Nexus-Main/BuildTools/spigot-1.8.3.jar"/>
 	<classpathentry kind="lib" path="A:/Documents/The Nexus/Nexus-Main/Vault.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Josh/AppData/Roaming/.minecraft/The Nexus-Files/Nexus-MC/Modding-Coding/Bukkit_Plugins/Economy.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
