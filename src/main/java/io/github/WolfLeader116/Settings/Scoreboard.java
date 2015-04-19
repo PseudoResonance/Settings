@@ -1,6 +1,7 @@
 package io.github.WolfLeader116.Settings;
 
 import io.github.wolfleader116.economy.Econ;
+import io.github.wolfleader116.music.Music;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -43,6 +44,12 @@ public class Scoreboard {
 			newsname.setScore(-6);
 			Score newsvalue = objective.getScore(ChatColor.RED + latestnews);
 			newsvalue.setScore(-7);
+			if (Bukkit.getServer().getPluginManager().getPlugin("Music") != null) {
+				Score songname = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Current Song:");
+				songname.setScore(-8);
+				Score songvalue = objective.getScore(ChatColor.RED + Music.name());
+				songvalue.setScore(-9);
+			}
 			online.setScoreboard(scoreboard);
 		}
 	}
@@ -78,6 +85,12 @@ public class Scoreboard {
 			newsname.setScore(-6);
 			Score newsvalue = objective.getScore(ChatColor.RED + latestnews);
 			newsvalue.setScore(-7);
+			if (Bukkit.getServer().getPluginManager().getPlugin("Music") != null) {
+				Score songname = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Current Song:");
+				songname.setScore(-8);
+				Score songvalue = objective.getScore(ChatColor.RED + Music.name());
+				songvalue.setScore(-9);
+			}
 			Bukkit.getServer().getPlayer(playername).setScoreboard(scoreboard);
 	}
 }
