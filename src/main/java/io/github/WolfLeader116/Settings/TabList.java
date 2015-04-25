@@ -19,15 +19,15 @@ public class TabList {
 		}
 		for (Player p : Bukkit.getServer().getOnlinePlayers()) {
 			TabAPI.setPriority(Settings.plugin, p, 0);
-			TabAPI.setTabString(Settings.plugin, p, 0, 0, "§2----------", 0);
-			TabAPI.setTabString(Settings.plugin, p, 0, 1, "§2----------", 0);
-			TabAPI.setTabString(Settings.plugin, p, 0, 2, "§2----------", 0);
-			TabAPI.setTabString(Settings.plugin, p, 1, 0, "§6Online", 5);
-			TabAPI.setTabString(Settings.plugin, p, 1, 1, Settings.plugin.getConfig().getString("ServerName"), 5);
-			TabAPI.setTabString(Settings.plugin, p, 1, 2, "§6Party", 5);
-			TabAPI.setTabString(Settings.plugin, p, 2, 0, "§2----------", 0);
-			TabAPI.setTabString(Settings.plugin, p, 2, 1, "§2----------", 0);
-			TabAPI.setTabString(Settings.plugin, p, 2, 2, "§2----------", 0);
+			TabAPI.setTabString(Settings.plugin, p, 0, 0, "§2----------" + TabAPI.nextNull(), 0);
+			TabAPI.setTabString(Settings.plugin, p, 0, 1, "§2---------- + TabAPI.nextNull()", 0);
+			TabAPI.setTabString(Settings.plugin, p, 0, 2, "§2---------- + TabAPI.nextNull()", 0);
+			TabAPI.setTabString(Settings.plugin, p, 1, 0, "§6Online" + TabAPI.nextNull(), 5);
+			TabAPI.setTabString(Settings.plugin, p, 1, 1, Settings.plugin.getConfig().getString("ServerName") + TabAPI.nextNull(), 5);
+			TabAPI.setTabString(Settings.plugin, p, 1, 2, "§6Party" + TabAPI.nextNull(), 5);
+			TabAPI.setTabString(Settings.plugin, p, 2, 0, "§2----------" + TabAPI.nextNull(), 0);
+			TabAPI.setTabString(Settings.plugin, p, 2, 1, "§2----------" + TabAPI.nextNull(), 0);
+			TabAPI.setTabString(Settings.plugin, p, 2, 2, "§2----------" + TabAPI.nextNull(), 0);
 			int down = 3;
 			int across = 0;
 			for (String name : players) {
@@ -36,7 +36,7 @@ public class TabList {
 					down++;
 				}
 				if (down != 20) {
-					TabAPI.setTabString(Settings.plugin, p, down, across, ChatPlugin.getNick(Bukkit.getServer().getPlayer(name)), 3);
+					TabAPI.setTabString(Settings.plugin, p, down, across, ChatPlugin.getNick(Bukkit.getServer().getPlayer(name)) + TabAPI.nextNull(), 3);
 					across++;
 				}
 			}
