@@ -19,7 +19,7 @@ public class GamemodeCMD implements CommandExecutor {
 	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		Config c = new Config("playerdata", Settings.plugin);
-		if (cmd.getName().equalsIgnoreCase("gamemode") || cmd.getName().equalsIgnoreCase("gm")) { //Check if player used a non specific gamemode command
+		if (cmd.getName().equalsIgnoreCase("gamemode")) { //Check if console used a non specific gamemode command
 			if (!(sender instanceof Player)) {
 				if (args.length == 0) {
 					log.info("Please enter a gamemode and player.");

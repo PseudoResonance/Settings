@@ -12,19 +12,18 @@ commands:
   afk:
     description: Toggle afk command.
     aliases: [awayfromkeyboard, away]
-  Settings:
+  settings:
     description: Settings help command.
-  Gamemode:
+  gamemode:
     description: Gamemode command.
-  gm:
+    aliases: [gm]
+  survival:
     description: Gamemode command.
-  Survival:
+  creative:
     description: Gamemode command.
-  Creative:
+  adventure:
     description: Gamemode command.
-  Adventure:
-    description: Gamemode command.
-  Spectator:
+  spectator:
     description: Gamemode command.
 permissions:
   settings.news:
