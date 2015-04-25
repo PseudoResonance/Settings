@@ -85,7 +85,7 @@ public class Settings extends JavaPlugin implements Listener {
 			public void run() {
 				TabList.tablist();
 			}
-		}, 3);
+		}, 20);
 		Config c = new Config("playerdata", Settings.plugin);
 		String player = e.getPlayer().getName();
 		Player eplayer = e.getPlayer();
@@ -113,7 +113,7 @@ public class Settings extends JavaPlugin implements Listener {
 				Scoreboard.scoreboard();
 				TabList.tablist();
 			}
-		}, 3);
+		}, 20);
 	}
 
 	@EventHandler
