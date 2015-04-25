@@ -106,17 +106,19 @@ public class SettingsTabCompleter implements TabCompleter {
 			} else if (args.length == 4) {
 				if (args[0].equalsIgnoreCase("set")) {
 					if (args[1].equalsIgnoreCase("fly") || args[1].equalsIgnoreCase("afk") || args[1].equalsIgnoreCase("music")) {
-						if (!(args[2].equals(""))) {
-							for (Player p : Bukkit.getServer().getOnlinePlayers()) {
-								String sub = p.getName();
-								if (sub.toLowerCase().startsWith(args[2])) {
+						if (args[2].equalsIgnoreCase("true") || args[2].equalsIgnoreCase("false") || args[2].equalsIgnoreCase("toggle")) {
+							if (!(args[3].equals(""))) {
+								for (Player p : Bukkit.getServer().getOnlinePlayers()) {
+									String sub = p.getName();
+									if (sub.toLowerCase().startsWith(args[3])) {
+										possible.add(sub);
+									}
+								}
+							} else {
+								for (Player p : Bukkit.getServer().getOnlinePlayers()) {
+									String sub = p.getName();
 									possible.add(sub);
 								}
-							}
-						} else {
-							for (Player p : Bukkit.getServer().getOnlinePlayers()) {
-								String sub = p.getName();
-								possible.add(sub);
 							}
 						}
 					}
