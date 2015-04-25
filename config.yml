@@ -3,10 +3,13 @@
 #################
 
 #DO NOT CHANGE THIS LINE! YOUR CONFIG WILL BE RESET UPON LOADING IF THIS LINE IS EDITED!
-Version: 1
+Version: 2
 
 #Latest Server News
 News: "&bPlease Configure This Plugin!"
 
 #Scoreboard Name
 Scoreboard: "&c&lServer Status"
+
+#Server Name
+ServerName: "&c&lServer"

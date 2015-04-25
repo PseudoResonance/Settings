@@ -14,6 +14,7 @@ import net.milkbowl.vault.chat.Chat;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.libs.jline.internal.Log;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -44,12 +45,16 @@ public class Settings extends JavaPlugin implements Listener {
 	public void onEnable() {
 		plugin = this;
 		this.saveDefaultConfig();
-		if (this.getConfig().getInt("Version") != 1) {
+		if (this.getConfig().getInt("Version") != 2) {
 			File conf = new File(this.getDataFolder(), "config.yml");
 			conf.delete();
 			this.saveDefaultConfig();
 			this.saveConfig();
 			this.reloadConfig();
+		}
+		if (Bukkit.getServer().getPluginManager().getPlugin("TabAPI") == null) {
+			Log.error("TabAPI not found on the server! Disabling Settings!");
+			Bukkit.getServer().getPluginManager().disablePlugin(this);
 		}
 		Bukkit.getServer().getPluginManager().registerEvents(this, this);
 		setupChat();
@@ -65,6 +70,7 @@ public class Settings extends JavaPlugin implements Listener {
 		getCommand("settings").setTabCompleter(new SettingsTabCompleter());
 		getCommand("gamemode").setTabCompleter(new GamemodeTabCompleter());
 		Scoreboard.scoreboard();
+		TabList.tablist();
 	}
 
 	@Override
@@ -75,6 +81,11 @@ public class Settings extends JavaPlugin implements Listener {
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent e) {
+		Bukkit.getScheduler().scheduleSyncDelayedTask(plugin,  new Runnable() {
+			public void run() {
+				TabList.tablist();
+			}
+		}, 3);
 		Config c = new Config("playerdata", Settings.plugin);
 		String player = e.getPlayer().getName();
 		Player eplayer = e.getPlayer();
@@ -100,8 +111,9 @@ public class Settings extends JavaPlugin implements Listener {
 		this.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 			public void run() {
 				Scoreboard.scoreboard();
+				TabList.tablist();
 			}
-		}, 20);
+		}, 3);
 	}
 
 	@EventHandler

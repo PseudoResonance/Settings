@@ -36,5 +36,7 @@
 	<classpathentry kind="lib" path="A:/Documents/The Nexus/Nexus-Main/Vault.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Josh/AppData/Roaming/.minecraft/The Nexus-Files/Nexus-MC/Modding-Coding/Bukkit_Plugins/Economy.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Josh/AppData/Roaming/.minecraft/The Nexus-Files/Nexus-MC/Modding-Coding/Bukkit_Plugins/Music.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Josh/AppData/Roaming/.minecraft/The Nexus-Files/Nexus-MC/Modding-Coding/Bukkit_Plugins/Chat.jar"/>
+	<classpathentry kind="lib" path="A:/Documents/The Nexus/Nexus-Main/TabAPI.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
