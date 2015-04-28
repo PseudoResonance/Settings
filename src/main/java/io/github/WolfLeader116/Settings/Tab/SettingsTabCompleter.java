@@ -39,6 +39,7 @@ public class SettingsTabCompleter implements TabCompleter {
 					subs.add("fly");
 					subs.add("afk");
 					subs.add("music");
+					subs.add("scoreboard");
 					if (!(args[1].equals(""))) {
 						for (String sub : subs) {
 							if (sub.toLowerCase().startsWith(args[1])) {
@@ -53,39 +54,7 @@ public class SettingsTabCompleter implements TabCompleter {
 				}
 			} else if (args.length == 3) {
 				if (args[0].equalsIgnoreCase("set")) {
-					if (args[1].equalsIgnoreCase("fly")) {
-						ArrayList<String> subs = new ArrayList<String>();
-						subs.add("true");
-						subs.add("false");
-						subs.add("toggle");
-						if (!(args[2].equals(""))) {
-							for (String sub : subs) {
-								if (sub.toLowerCase().startsWith(args[2])) {
-									possible.add(sub);
-								}
-							}
-						} else {
-							for (String sub : subs) {
-								possible.add(sub);
-							}
-						}
-					} else if (args[1].equalsIgnoreCase("afk")) {
-						ArrayList<String> subs = new ArrayList<String>();
-						subs.add("true");
-						subs.add("false");
-						subs.add("toggle");
-						if (!(args[2].equals(""))) {
-							for (String sub : subs) {
-								if (sub.toLowerCase().startsWith(args[2])) {
-									possible.add(sub);
-								}
-							}
-						} else {
-							for (String sub : subs) {
-								possible.add(sub);
-							}
-						}
-					} else if (args[1].equalsIgnoreCase("music")) {
+					if (args[1].equalsIgnoreCase("fly") || args[1].equalsIgnoreCase("afk") || args[1].equalsIgnoreCase("music") || args[1].equalsIgnoreCase("scoreboard")) {
 						ArrayList<String> subs = new ArrayList<String>();
 						subs.add("true");
 						subs.add("false");
@@ -105,7 +74,7 @@ public class SettingsTabCompleter implements TabCompleter {
 				}
 			} else if (args.length == 4) {
 				if (args[0].equalsIgnoreCase("set")) {
-					if (args[1].equalsIgnoreCase("fly") || args[1].equalsIgnoreCase("afk") || args[1].equalsIgnoreCase("music")) {
+					if (args[1].equalsIgnoreCase("fly") || args[1].equalsIgnoreCase("afk") || args[1].equalsIgnoreCase("music") || args[1].equalsIgnoreCase("scoreboard")) {
 						if (args[2].equalsIgnoreCase("true") || args[2].equalsIgnoreCase("false") || args[2].equalsIgnoreCase("toggle")) {
 							if (!(args[3].equals(""))) {
 								for (Player p : Bukkit.getServer().getOnlinePlayers()) {

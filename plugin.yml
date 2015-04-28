@@ -1,7 +1,7 @@
 name: Settings
 author: WolfLeader116
 main: io.github.WolfLeader116.Settings.Settings
-version: 1.2.3
+version: 1.2.4
 description: Settings plugin.
 depend: [TabAPI]
 commands:
@@ -13,6 +13,8 @@ commands:
   afk:
     description: Toggle afk command.
     aliases: [awayfromkeyboard, away]
+  scoreboard:
+    description: Toggle scoreboard visibility command.
   settings:
     description: Settings help command.
   gamemode:

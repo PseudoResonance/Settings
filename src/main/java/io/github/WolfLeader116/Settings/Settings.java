@@ -6,6 +6,7 @@ import io.github.WolfLeader116.Settings.CMDs.AfkCMD;
 import io.github.WolfLeader116.Settings.CMDs.FlyCMD;
 import io.github.WolfLeader116.Settings.CMDs.GamemodeCMD;
 import io.github.WolfLeader116.Settings.CMDs.MusicCMD;
+import io.github.WolfLeader116.Settings.CMDs.ScoreboardCMD;
 import io.github.WolfLeader116.Settings.CMDs.SettingsCMD;
 import io.github.WolfLeader116.Settings.Tab.GamemodeTabCompleter;
 import io.github.WolfLeader116.Settings.Tab.SettingsTabCompleter;
@@ -18,6 +19,7 @@ import org.bukkit.craftbukkit.libs.jline.internal.Log;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -67,6 +69,7 @@ public class Settings extends JavaPlugin implements Listener {
 		getCommand("fly").setExecutor(new FlyCMD());
 		getCommand("afk").setExecutor(new AfkCMD());
 		getCommand("music").setExecutor(new MusicCMD());
+		getCommand("scoreboard").setExecutor(new ScoreboardCMD());
 		getCommand("settings").setTabCompleter(new SettingsTabCompleter());
 		getCommand("gamemode").setTabCompleter(new GamemodeTabCompleter());
 		Scoreboard.scoreboard();
@@ -103,6 +106,14 @@ public class Settings extends JavaPlugin implements Listener {
 			c.getConfig().set("fly." + Bukkit.getPlayer(player).getUniqueId().toString(), false);
 			c.save();
 			Bukkit.getPlayer(player).setAllowFlight(false);
+		}
+	}
+	
+	@EventHandler
+	public void onPlayerTakeDamage(EntityDamageEvent e) {
+		if (e.getEntity() instanceof Player) {
+			String name = ((Player) e.getEntity()).getName();
+			Scoreboard.health(name);
 		}
 	}
 
