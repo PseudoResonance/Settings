@@ -55,7 +55,7 @@ public class Scoreboard {
 			online.setScoreboard(scoreboard);
 			Bukkit.getScheduler().scheduleSyncDelayedTask(Settings.plugin, new Runnable() {
 				public void run() {
-					if (c.getConfig().getBoolean("scoreboard." + online.getUniqueId()) != true) {
+					if (c.getConfig().getBoolean("scoreboard." + online.getUniqueId()) == false) {
 						online.getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
 					}
 				}
