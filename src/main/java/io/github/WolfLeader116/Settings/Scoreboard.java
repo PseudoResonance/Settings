@@ -55,8 +55,8 @@ public class Scoreboard {
 			online.setScoreboard(scoreboard);
 			Bukkit.getScheduler().scheduleSyncDelayedTask(Settings.plugin, new Runnable() {
 				public void run() {
-					if (c.getConfig().getBoolean("scoreboard." + online.getUniqueId().toString()) != true) {
-						online.setScoreboard(null);
+					if (c.getConfig().getBoolean("scoreboard." + online.getUniqueId()) != true) {
+						online.getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
 					}
 				}
 			}, 600);
@@ -103,8 +103,8 @@ public class Scoreboard {
 		Bukkit.getServer().getPlayer(playername).setScoreboard(scoreboard);
 		Bukkit.getScheduler().scheduleSyncDelayedTask(Settings.plugin, new Runnable() {
 			public void run() {
-				if (c.getConfig().getBoolean("scoreboard." + Bukkit.getServer().getPlayer(playername).getUniqueId().toString()) != true) {
-					Bukkit.getServer().getPlayer(playername).setScoreboard(null);
+				if (c.getConfig().getBoolean("scoreboard." + Bukkit.getServer().getPlayer(playername).getUniqueId()) != true) {
+					Bukkit.getServer().getPlayer(playername).getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
 				}
 			}
 		}, 600);
