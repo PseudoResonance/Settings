@@ -103,7 +103,7 @@ public class Scoreboard {
 		Bukkit.getServer().getPlayer(playername).setScoreboard(scoreboard);
 		Bukkit.getScheduler().scheduleSyncDelayedTask(Settings.plugin, new Runnable() {
 			public void run() {
-				if (c.getConfig().getBoolean("scoreboard." + Bukkit.getServer().getPlayer(playername).getUniqueId()) != true) {
+				if (c.getConfig().getBoolean("scoreboard." + Bukkit.getServer().getPlayer(playername).getUniqueId()) == false) {
 					Bukkit.getServer().getPlayer(playername).getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
 				}
 			}
