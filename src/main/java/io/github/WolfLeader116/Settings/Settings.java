@@ -14,14 +14,21 @@ import net.milkbowl.vault.chat.Chat;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.Sign;
 import org.bukkit.craftbukkit.libs.jline.internal.Log;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -47,12 +54,18 @@ public class Settings extends JavaPlugin implements Listener {
 	public void onEnable() {
 		plugin = this;
 		this.saveDefaultConfig();
-		if (this.getConfig().getInt("Version") != 2) {
+		if (this.getConfig().getInt("Version") != 3) {
 			File conf = new File(this.getDataFolder(), "config.yml");
+			final String news = this.getConfig().getString("News");
+			final String scoreboard = this.getConfig().getString("Scoreboard");
+			final String servername = this.getConfig().getString("ServerName");
 			conf.delete();
 			this.saveDefaultConfig();
 			this.saveConfig();
 			this.reloadConfig();
+			this.getConfig().set("News", news);
+			this.getConfig().set("Scoreboard", scoreboard);
+			this.getConfig().set("ServerName", servername);
 		}
 		if (Bukkit.getServer().getPluginManager().getPlugin("TabAPI") == null) {
 			Log.error("TabAPI not found on the server! Disabling Settings!");
@@ -79,6 +92,63 @@ public class Settings extends JavaPlugin implements Listener {
 	@Override
 	public void onDisable() {
 		plugin = null;
+	}
+
+	@EventHandler(priority = EventPriority.HIGHEST)
+	public void onSignChange(SignChangeEvent e) {
+		Player p = e.getPlayer();
+		if (e.getLine(0).toLowerCase().contains("[nexus]")) {
+			if (p.hasPermission("settings.nexus.create")) {
+				e.setLine(0, "§3[§aNexus§3]");
+				e.setLine(1, "§bClick Sign");
+				e.setLine(2, "§bto tp to");
+				e.setLine(3, "§bthe §5Nexus§b!");
+			} else {
+				p.sendMessage(ChatColor.BLUE + "Shops> " + ChatColor.GREEN + "You do not have permission to create a Nexus sign.");
+				e.setCancelled(true);
+			}
+		}
+	}
+
+	@EventHandler
+	public void onPlayerInteract(PlayerInteractEvent e) {
+		Player p = e.getPlayer();
+		if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+			Block b = e.getClickedBlock();
+			if ((b.getType() == Material.SIGN_POST) || (b.getType() == Material.WALL_SIGN)) {
+				Sign s = (Sign)b.getState();
+				if (s.getLine(0).equals("§3[§aNexus§3]")) {
+					if (s.getLine(1).equals("§bClick Sign")) {
+						if (s.getLine(2).equals("§bto tp to")) {
+							if (s.getLine(3).equals("§bthe §5Nexus§b!")) {
+								if (p.hasPermission("settings.nexus")) {
+									try {
+										double x = this.getConfig().getInt("NexusX");
+										double y = this.getConfig().getInt("NexusY");
+										double z = this.getConfig().getInt("NexusZ");
+										float yaw = this.getConfig().getInt("NexusYaw");
+										float pitch = this.getConfig().getInt("NexusPitch");
+										String world = this.getConfig().getString("NexusWorld");
+										Location tp = p.getLocation();
+										tp.setX(x);
+										tp.setY(y);
+										tp.setZ(z);
+										tp.setWorld(Bukkit.getWorld(world));
+										tp.setYaw(yaw);
+										tp.setPitch(pitch);
+										p.teleport(tp);
+									} catch (NullPointerException ex) {
+										p.sendMessage(ChatColor.BLUE + "Shops> " + ChatColor.GREEN + "The nexus location is invalid! Please contact an admin!");
+									}
+								}
+							}
+						}
+					} else {
+						p.sendMessage(ChatColor.BLUE + "Shops> " + ChatColor.GREEN + "You do not have permission to use a Shop sign.");
+					}
+				}
+			}
+		}
 	}
 	
 	@SuppressWarnings("deprecation")
