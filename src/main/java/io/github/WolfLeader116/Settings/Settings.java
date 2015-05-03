@@ -130,9 +130,21 @@ public class Settings extends JavaPlugin implements Listener {
 										float pitch = this.getConfig().getInt("NexusPitch");
 										String world = this.getConfig().getString("NexusWorld");
 										Location tp = p.getLocation();
-										tp.setX(x);
-										tp.setY(y);
-										tp.setZ(z);
+										if (Integer.valueOf(String.valueOf(x)) == x) {
+											tp.setX(x + 0.5);
+										} else {
+											tp.setX(x);
+										}
+										if (Integer.valueOf(String.valueOf(y)) == y) {
+											tp.setX(y + 0.5);
+										} else {
+											tp.setX(y);
+										}
+										if (Integer.valueOf(String.valueOf(z)) == z) {
+											tp.setX(z + 0.5);
+										} else {
+											tp.setX(z);
+										}
 										tp.setWorld(Bukkit.getWorld(world));
 										tp.setYaw(yaw);
 										tp.setPitch(pitch);
