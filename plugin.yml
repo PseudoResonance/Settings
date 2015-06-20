@@ -1,0 +1,72 @@
+name: Settings
+author: WolfLeader116
+main: io.github.wolfleader116.settings.Settings
+version: 2.0
+description: Settings plugin.
+commands:
+  fly:
+    description: Toggle flight command.
+    aliases: [flight]
+  music:
+    description: Toggle music command.
+  afk:
+    description: Toggle afk command.
+    aliases: [awayfromkeyboard, away]
+  scoreboard:
+    description: Toggle scoreboard visibility command.
+  settings:
+    description: Settings help command.
+  gamemode:
+    description: Gamemode command.
+    aliases: [gm]
+  survival:
+    description: Gamemode command.
+  creative:
+    description: Gamemode command.
+  adventure:
+    description: Gamemode command.
+  spectator:
+    description: Gamemode command.
+permissions:
+  settings.news:
+    description: Lets the player set the server news.
+  settings.set.fly:
+    description: Lets the player set their fly setting.
+  settings.set.afk:
+    description: Lets the player set their afk setting.
+  settings.set.music:
+    description: Lets the player set their music setting.
+  settings.set.other.fly:
+    description: Lets the player set another player's fly setting.
+  settings.set.other.afk:
+    description: Lets the player set another player's afk setting.
+  settings.set.other.music:
+    description: Lets the player set another player's music setting.
+  settings.reset:
+    description: Lets the player reset the config.
+  settings.reload:
+    description: Lets the player reload the config.
+  settings.set:
+    description: Lets the player set their settings.
+  settings.set.other:
+    description: Lets the player set other players settings.
+  settings.gamemode:
+    description: Lets the player set their gamemode.
+  settings.gamemode.other:
+    description: Lets the player set another player's gamemode.
+  settings.*:
+    description: Gives the player all settings permissions.
+    children:
+      settings.news: true
+      settings.reload: true
+      settings.reset: true
+      settings.set: true
+      settings.set.other: true
+      settings.gamemode: true
+      settings.gamemode.other: true
+      settings.set.fly: true
+      settings.set.afk: true
+      settings.set.music: true
+      settings.set.other.fly: true
+      settings.set.other.afk: true
+      settings.set.other.music: true
