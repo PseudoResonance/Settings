@@ -104,7 +104,7 @@ public class Settings extends JavaPlugin implements Listener {
 	
 	public static String songName = "None";
 	
-	public void setCurrentSong(String name) {
+	public static void setCurrentSong(String name) {
 		songName = name;
 	}
 	
