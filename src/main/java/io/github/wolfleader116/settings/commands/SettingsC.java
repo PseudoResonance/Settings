@@ -42,7 +42,7 @@ public class SettingsC implements CommandExecutor {
 							String arg = args[i] + " ";
 							message = message + arg;
 						}
-						message = message.replaceAll("&", "ง");
+						message = message.replaceAll("&", "ยง");
 						Settings.plugin.getConfig().set("News", message);
 						Settings.plugin.saveConfig();
 						Scoreboard.scoreboard();
@@ -244,7 +244,7 @@ public class SettingsC implements CommandExecutor {
 								String arg = args[i] + " ";
 								message = message + arg;
 							}
-							message = message.replaceAll("&", "ง");
+							message = message.replaceAll("&", "ยง");
 							Settings.plugin.getConfig().set("News", message);
 							Settings.plugin.saveConfig();
 							Scoreboard.scoreboard();
