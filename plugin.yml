@@ -1,7 +1,7 @@
 name: Settings
 author: WolfLeader116
 main: io.github.wolfleader116.settings.Settings
-version: 2.3
+version: 2.3.1
 description: Settings plugin.
 commands:
   fly:
