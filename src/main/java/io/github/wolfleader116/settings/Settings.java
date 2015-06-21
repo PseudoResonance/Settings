@@ -170,19 +170,19 @@ public class Settings extends JavaPlugin implements Listener {
 	public static Inventory myInventory = createInventory((short) 9, ChatColor.DARK_BLUE + "Player Settings");
 
 	static {
-		myInventory.setItem(2, createItem(Material.FEATHER, 1, (short) 0, ChatColor.BLUE + "Toggle Flight Mode"));
-		myInventory.setItem(4, createItem(Material.BARRIER, 1, (short) 0, ChatColor.BLUE + "Toggle AFK Mode"));
-		myInventory.setItem(6, createItem(Material.RECORD_12, 1, (short) 0, ChatColor.BLUE + "Toggle Music Mode"));
-		myInventory.setItem(8, createItem(Material.SIGN, 1, (short) 0, ChatColor.BLUE + "Toggle Scoreboard Visibility"));
+		myInventory.setItem(1, createItem(Material.FEATHER, 1, (short) 0, ChatColor.BLUE + "Toggle Flight Mode"));
+		myInventory.setItem(3, createItem(Material.BARRIER, 1, (short) 0, ChatColor.BLUE + "Toggle AFK Mode"));
+		myInventory.setItem(5, createItem(Material.RECORD_12, 1, (short) 0, ChatColor.BLUE + "Toggle Music Mode"));
+		myInventory.setItem(7, createItem(Material.SIGN, 1, (short) 0, ChatColor.BLUE + "Toggle Scoreboard Visibility"));
 	}
 
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent e) {
 		Player player = (Player) e.getWhoClicked();
-		myInventory.setItem(2, createItem(Material.FEATHER, 1, (short) 0, ChatColor.BLUE + "Toggle Flight Mode"));
-		myInventory.setItem(4, createItem(Material.BARRIER, 1, (short) 0, ChatColor.BLUE + "Toggle AFK Mode"));
-		myInventory.setItem(6, createItem(Material.RECORD_12, 1, (short) 0, ChatColor.BLUE + "Toggle Music Mode"));
-		myInventory.setItem(8, createItem(Material.SIGN, 1, (short) 0, ChatColor.BLUE + "Toggle Scoreboard Visibility"));
+		myInventory.setItem(1, createItem(Material.FEATHER, 1, (short) 0, ChatColor.BLUE + "Toggle Flight Mode"));
+		myInventory.setItem(3, createItem(Material.BARRIER, 1, (short) 0, ChatColor.BLUE + "Toggle AFK Mode"));
+		myInventory.setItem(5, createItem(Material.RECORD_12, 1, (short) 0, ChatColor.BLUE + "Toggle Music Mode"));
+		myInventory.setItem(7, createItem(Material.SIGN, 1, (short) 0, ChatColor.BLUE + "Toggle Scoreboard Visibility"));
 		ItemStack clicked = e.getCurrentItem();
 		Inventory inventory = e.getInventory();
 		if (inventory.getName().equals(myInventory.getName())) {

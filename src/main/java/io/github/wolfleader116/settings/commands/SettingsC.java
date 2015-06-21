@@ -194,27 +194,32 @@ public class SettingsC implements CommandExecutor {
 									c.save();
 									log.info(args[3] + "'s scoreboard visibility mode has been set to true");
 									player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your scoreboard visibility mode has been set to true by the console");
+									Scoreboard.scoreboard(player.getName().toString());
 								} else if (args[2].equalsIgnoreCase("false")) {
 									c.getConfig().set("scoreboard." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
 									c.save();
 									log.info(args[3] + "'s scoreboard visibility mode has been set to false");
 									player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your scoreboard visibility mode has been set to false by the console");
+									Scoreboard.scoreboard(player.getName().toString());
 								} else if (args[2].equalsIgnoreCase("toggle")) {
 									if (c.getConfig().getBoolean("scoreboard." + Bukkit.getPlayer(args[3]).getUniqueId())) {
 										c.getConfig().set("scoreboard." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
 										c.save();
 										log.info(args[3] + "'s scoreboard visibility mode has been set to false");
 										player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your scoreboard visibility mode has been set to false by the console");
+										Scoreboard.scoreboard(player.getName().toString());
 									} else if (!c.getConfig().getBoolean("scoreboard." + Bukkit.getPlayer(args[3]).getUniqueId())) {
 										c.getConfig().set("scoreboard." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
 										c.save();
 										log.info(args[3] + "'s scoreboard visibility mode has been set to true");
 										player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your scoreboard visibility mode has been set to true by the console");
+										Scoreboard.scoreboard(player.getName().toString());
 									} else {
 										c.getConfig().set("scoreboard." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
 										c.save();
 										log.info(args[3] + "'s scoreboard visibility mode has been set to true");
 										player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your scoreboard visibility mode has been set to true by the console");
+										Scoreboard.scoreboard(player.getName().toString());
 									}
 								} else {
 									log.info("The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
@@ -572,27 +577,32 @@ public class SettingsC implements CommandExecutor {
 											c.save();
 											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s scoreboard visibility mode has been set to true");
 											aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your scoreboard visibility mode has been set to true by " + ChatColor.RESET + sende);
+											Scoreboard.scoreboard(aplayer.getName().toString());
 										} else if (args[2].equalsIgnoreCase("false")) {
 											c.getConfig().set("scoreboard." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
 											c.save();
 											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s scoreboard visibility mode has been set to false");
 											aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your scoreboard visibility mode has been set to false by " + ChatColor.RESET + sende);
+											Scoreboard.scoreboard(aplayer.getName().toString());
 										} else if (args[2].equalsIgnoreCase("toggle")) {
 											if (c.getConfig().getBoolean("scoreboard." + Bukkit.getPlayer(args[3]).getUniqueId())) {
 												c.getConfig().set("scoreboard." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
 												c.save();
 												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s scoreboard visibility mode has been set to false");
 												aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your scoreboard visibility mode has been set to false by " + ChatColor.RESET + sende);
+												Scoreboard.scoreboard(aplayer.getName().toString());
 											} else if (!c.getConfig().getBoolean("scoreboard." + Bukkit.getPlayer(args[3]).getUniqueId())) {
 												c.getConfig().set("scoreboard." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
 												c.save();
 												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s scoreboard visibility mode has been set to true");
 												aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your scoreboard visibility mode has been set to true by " + ChatColor.RESET + sende);
+												Scoreboard.scoreboard(aplayer.getName().toString());
 											} else {
 												c.getConfig().set("scoreboard." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
 												c.save();
 												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s scoreboard visibility mode has been set to true");
 												aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your scoreboard visibility mode has been set to true by " + ChatColor.RESET + sende);
+												Scoreboard.scoreboard(aplayer.getName().toString());
 											}
 										} else {
 											WolfAPI.message("The value " + args[2] + " is not possible. Possible values are true/false/toggle.", Bukkit.getServer().getPlayer(send), "Settings");
