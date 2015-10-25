@@ -91,7 +91,7 @@ public class GamemodeC implements CommandExecutor {
 				Player p = (Player) sender;
 				if (sender.hasPermission("settings.gamemode")) {
 					if (args.length == 0) {
-						WolfAPI.message("Please enter a gamemode!", p, "Settings");
+						Errors.sendError(Errors.CUSTOM, p, "Settings", "Please enter a gamemode!");
 					} else if (args.length >= 1) {
 						if (args.length == 1) {
 							Player player1 = (Player) sender;
@@ -195,7 +195,7 @@ public class GamemodeC implements CommandExecutor {
 										player2.setAllowFlight(false);
 									}
 								} else {
-									WolfAPI.message("Possible gamemodes are survival/creative/adventure/spectator, 0/1/2/3 or s/c/a/r.", p, "Settings");
+									Errors.sendError(Errors.CUSTOM, p, "Settings", "Possible gamemodes are survival/creative/adventure/spectator, 0/1/2/3 or s/c/a/r.");
 								}
 							}
 						}

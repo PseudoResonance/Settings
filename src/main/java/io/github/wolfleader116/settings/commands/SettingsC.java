@@ -89,32 +89,32 @@ public class SettingsC implements CommandExecutor {
 									c.save();
 									Bukkit.getPlayer(args[3]).setAllowFlight(true);
 									log.info(args[3] + "'s fly mode has been set to true");
-									player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to true by the console");
+									WolfAPI.message("Your fly mode has been set to true by the console", player, "Settings");
 								} else if (args[2].equalsIgnoreCase("false")) {
 									c.getConfig().set("fly." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
 									c.save();
 									Bukkit.getPlayer(args[3]).setAllowFlight(false);
 									log.info(args[3] + "'s fly mode has been set to false");
-									player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to false by the console");
+									WolfAPI.message("Your fly mode has been set to false by the console", player, "Settings");
 								} else if (args[2].equalsIgnoreCase("toggle")) {
 									if (c.getConfig().getBoolean("fly." + Bukkit.getPlayer(args[3]).getUniqueId())) {
 										c.getConfig().set("fly." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
 										c.save();
 										Bukkit.getPlayer(args[3]).setAllowFlight(false);
 										log.info(args[3] + "'s fly mode has been set to false");
-										player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to false by the console");
+										WolfAPI.message("Your fly mode has been set to false by the console", player, "Settings");
 									} else if (!c.getConfig().getBoolean("fly." + Bukkit.getPlayer(args[3]).getUniqueId())) {
 										c.getConfig().set("fly." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
 										c.save();
 										Bukkit.getPlayer(args[3]).setAllowFlight(true);
 										log.info(args[3] + "'s fly mode has been set to true");
-										player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to true by the console");
+										WolfAPI.message("Your fly mode has been set to true by the console", player, "Settings");
 									} else {
 										c.getConfig().set("fly." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
 										c.save();
 										Bukkit.getPlayer(args[3]).setAllowFlight(true);
 										log.info(args[3] + "'s fly mode has been set to true");
-										player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to true by the console");
+										WolfAPI.message("Your fly mode has been set to true by the console", player, "Settings");
 									}
 								} else {
 									log.info("The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
@@ -125,28 +125,28 @@ public class SettingsC implements CommandExecutor {
 									c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
 									c.save();
 									log.info(args[3] + " is now afk");
-									player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're now afk");
+									WolfAPI.message("You've been set as afk by the console", player, "Settings");
 								} else if (args[2].equalsIgnoreCase("false")) {
 									c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
 									c.save();
 									log.info(args[3] + " is no longer afk");
-									player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're no longer afk");
+									WolfAPI.message("You've been set as not afk by the console", player, "Settings");
 								} else if (args[2].equalsIgnoreCase("toggle")) {
 									if (c.getConfig().getBoolean("afk." + Bukkit.getPlayer(args[3]).getUniqueId())) {
 										c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
 										c.save();
 										log.info(args[3] + " is no longer afk");
-										player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're no longer afk");
+										WolfAPI.message("You've been set as not afk by the console", player, "Settings");
 									} else if (!c.getConfig().getBoolean("afk." + Bukkit.getPlayer(args[3]).getUniqueId())) {
 										c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
 										c.save();
 										log.info(args[3] + " is now afk");
-										player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're now afk");
+										WolfAPI.message("You've been set as afk by the console", player, "Settings");
 									} else {
 										c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
 										c.save();
 										log.info(args[3] + " is now afk");
-										player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're now afk");
+										WolfAPI.message("You've been set as afk by the console", player, "Settings");
 									}
 								} else {
 									log.info("The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
@@ -158,28 +158,28 @@ public class SettingsC implements CommandExecutor {
 										c.getConfig().set("music." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
 										c.save();
 										log.info(args[3] + "'s music mode has been set to true");
-										player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your music mode has been set to true by the console");
+										WolfAPI.message("Your music mode has been set to true by the console", player, "Settings");
 									} else if (args[2].equalsIgnoreCase("false")) {
 										c.getConfig().set("music." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
 										c.save();
 										log.info(args[3] + "'s music mode has been set to false");
-										player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your music mode has been set to false by the console");
+										WolfAPI.message("Your music mode has been set to false by the console", player, "Settings");
 									} else if (args[2].equalsIgnoreCase("toggle")) {
 										if (c.getConfig().getBoolean("music." + Bukkit.getPlayer(args[3]).getUniqueId())) {
 											c.getConfig().set("music." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
 											c.save();
 											log.info(args[3] + "'s music mode has been set to false");
-											player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your music mode has been set to false by the console");
+											WolfAPI.message("Your music mode has been set to false by the console", player, "Settings");
 										} else if (!c.getConfig().getBoolean("music." + Bukkit.getPlayer(args[3]).getUniqueId())) {
 											c.getConfig().set("music." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
 											c.save();
 											log.info(args[3] + "'s music mode has been set to true");
-											player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your music mode has been set to true by the console");
+											WolfAPI.message("Your music mode has been set to true by the console", player, "Settings");
 										} else {
 											c.getConfig().set("music." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
 											c.save();
 											log.info(args[3] + "'s music mode has been set to true");
-											player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your music mode has been set to true by the console");
+											WolfAPI.message("Your music mode has been set to true by the console", player, "Settings");
 										}
 									} else {
 										log.info("The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
@@ -193,32 +193,32 @@ public class SettingsC implements CommandExecutor {
 									c.getConfig().set("scoreboard." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
 									c.save();
 									log.info(args[3] + "'s scoreboard visibility mode has been set to true");
-									player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your scoreboard visibility mode has been set to true by the console");
+									WolfAPI.message("Your scoreboard visibility mode has been set to true by the console", player, "Settings");
 									Scoreboard.scoreboard(player.getName().toString());
 								} else if (args[2].equalsIgnoreCase("false")) {
 									c.getConfig().set("scoreboard." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
 									c.save();
 									log.info(args[3] + "'s scoreboard visibility mode has been set to false");
-									player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your scoreboard visibility mode has been set to false by the console");
+									WolfAPI.message("Your scoreboard visibility mode has been set to false by the console", player, "Settings");
 									Scoreboard.scoreboard(player.getName().toString());
 								} else if (args[2].equalsIgnoreCase("toggle")) {
 									if (c.getConfig().getBoolean("scoreboard." + Bukkit.getPlayer(args[3]).getUniqueId())) {
 										c.getConfig().set("scoreboard." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
 										c.save();
 										log.info(args[3] + "'s scoreboard visibility mode has been set to false");
-										player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your scoreboard visibility mode has been set to false by the console");
+										WolfAPI.message("Your scoreboard visibility mode has been set to false by the console", player, "Settings");
 										Scoreboard.scoreboard(player.getName().toString());
 									} else if (!c.getConfig().getBoolean("scoreboard." + Bukkit.getPlayer(args[3]).getUniqueId())) {
 										c.getConfig().set("scoreboard." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
 										c.save();
 										log.info(args[3] + "'s scoreboard visibility mode has been set to true");
-										player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your scoreboard visibility mode has been set to true by the console");
+										WolfAPI.message("Your scoreboard visibility mode has been set to true by the console", player, "Settings");
 										Scoreboard.scoreboard(player.getName().toString());
 									} else {
 										c.getConfig().set("scoreboard." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
 										c.save();
 										log.info(args[3] + "'s scoreboard visibility mode has been set to true");
-										player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your scoreboard visibility mode has been set to true by the console");
+										WolfAPI.message("Your scoreboard visibility mode has been set to true by the console", player, "Settings");
 										Scoreboard.scoreboard(player.getName().toString());
 									}
 								} else {
@@ -241,7 +241,7 @@ public class SettingsC implements CommandExecutor {
 					sender.sendMessage(ChatColor.AQUA + "Use " + ChatColor.RED + "/settings help " + ChatColor.AQUA + "for more help.");
 				} else if (args.length >= 1) {
 					if (args[0].equalsIgnoreCase("thanks")) {
-						sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Special thanks to olivervscreeper and SuperOmegaCow for helping out developing this plugin!");
+						WolfAPI.message("Special thanks to olivervscreeper and SuperOmegaCow for helping out developing this plugin!", p, "Settings");
 					} else if (args[0].equalsIgnoreCase("news")) {
 						if (sender.hasPermission("settings.news")) {
 							String message = "";
@@ -253,18 +253,18 @@ public class SettingsC implements CommandExecutor {
 							Settings.plugin.getConfig().set("News", message);
 							Settings.plugin.saveConfig();
 							Scoreboard.scoreboard();
-							sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Server news set to " + message);
+							WolfAPI.message("Server news set to " + message, p, "Settings");
 						} else {
-							sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You do not have permission to do this!");
+							Errors.sendError(Errors.NO_PERMISSION, p, "Settings");
 						}
 					} else if (args[0].equalsIgnoreCase("reset")) {
 						configFile.delete();
 						Settings.plugin.saveDefaultConfig();
 						Settings.plugin.reloadConfig();
-						sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Reset the config!");
+						WolfAPI.message("Reset the config!", p, "Settings");
 					} else if (args[0].equalsIgnoreCase("reload")) {
 						Settings.plugin.reloadConfig();
-						sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Reloaded the config!");
+						WolfAPI.message("Reloaded the config!", p, "Settings");
 					} else if (args[0].equalsIgnoreCase("gui")) {
 						if (args.length == 1) {
 							Player splayer = (Player) sender;
@@ -298,12 +298,12 @@ public class SettingsC implements CommandExecutor {
 						sender.sendMessage(ChatColor.RED + "/adventure " + ChatColor.AQUA + "Adventure mode.");
 						sender.sendMessage(ChatColor.RED + "/spectator " + ChatColor.AQUA + "Spectator mode.");
 					} else if (args[0].equalsIgnoreCase("set")) {
+						String player = ((Player)sender).getName();
 						if (args.length == 1) {
-							sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You must enter a setting, value and player!");
+							Errors.sendError(Errors.CUSTOM, p, "Settings", "You must enter a setting, value and player!");
 						} else if (args.length == 2) {
-							sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You must enter a value and player!");
+							Errors.sendError(Errors.CUSTOM, p, "Settings", "You must enter a value and player!");
 						} else if (args.length == 3) {
-							String player = ((Player)sender).getName();
 							if (sender.hasPermission("settings.set")) {
 								if (args[1].equalsIgnoreCase("fly")) {
 									if (sender.hasPermission("settings.set.fly")) {
@@ -335,10 +335,10 @@ public class SettingsC implements CommandExecutor {
 												WolfAPI.message("Your fly mode has been set to true", Bukkit.getServer().getPlayer(player), "Settings");
 											}
 										} else {
-											WolfAPI.message("The value " + args[2] + " is not possible. Possible values are true/false/toggle.", Bukkit.getServer().getPlayer(player), "Settings");
+											Errors.sendError(Errors.CUSTOM, p, "Settings", "The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
 										}
 									} else {
-										Errors.sendError(Errors.NO_PERMISSION, Bukkit.getServer().getPlayer(player), "Settings");
+										Errors.sendError(Errors.NO_PERMISSION, p, "Settings");
 									}
 								} else if (args[1].equalsIgnoreCase("afk")) {
 									if (sender.hasPermission("settings.set.afk")) {
@@ -365,10 +365,10 @@ public class SettingsC implements CommandExecutor {
 												WolfAPI.message("You're now afk", Bukkit.getServer().getPlayer(player), "Settings");
 											}
 										} else {
-											WolfAPI.message("The value " + args[2] + " is not possible. Possible values are true/false/toggle.", Bukkit.getServer().getPlayer(player), "Settings");
+											Errors.sendError(Errors.CUSTOM, p, "Settings", "The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
 										}
 									} else {
-										Errors.sendError(Errors.NO_PERMISSION, Bukkit.getServer().getPlayer(player), "Settings");
+										Errors.sendError(Errors.NO_PERMISSION, p, "Settings");
 									}
 								} else if (args[1].equalsIgnoreCase("music")) {
 									if (Bukkit.getPluginManager().getPlugin("Music") != null) {
@@ -396,13 +396,13 @@ public class SettingsC implements CommandExecutor {
 													WolfAPI.message("Your music mode has been set to true", Bukkit.getServer().getPlayer(player), "Settings");
 												}
 											} else {
-												WolfAPI.message("The value " + args[2] + " is not possible. Possible values are true/false/toggle.", Bukkit.getServer().getPlayer(player), "Settings");
+												Errors.sendError(Errors.CUSTOM, p, "Settings", "The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
 											}
 										} else {
 											Errors.sendError(Errors.NO_PERMISSION, Bukkit.getServer().getPlayer(player), "Settings");
 										}
 									} else {
-										WolfAPI.message("Because the music plugin is not installed, the setting " + args[1] + " does not exist. Possible settings are " + settings + ".", Bukkit.getServer().getPlayer(player), "Settings");
+										Errors.sendError(Errors.CUSTOM, p, "Settings", "Because the music plugin is not installed, the setting " + args[1] + " does not exist. Possible settings are " + settings + ".");
 									}
 								} else if (args[1].equalsIgnoreCase("scoreboard")) {
 									if (sender.hasPermission("settings.set.scoreboard")) {
@@ -434,13 +434,13 @@ public class SettingsC implements CommandExecutor {
 												Scoreboard.scoreboard(player);
 											}
 										} else {
-											WolfAPI.message("The value " + args[2] + " is not possible. Possible values are true/false/toggle.", Bukkit.getServer().getPlayer(player), "Settings");
+											Errors.sendError(Errors.CUSTOM, p, "Settings", "The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
 										}
 									} else {
 										Errors.sendError(Errors.NO_PERMISSION, Bukkit.getServer().getPlayer(player), "Settings");
 									}
 								} else {
-									WolfAPI.message("The setting " + args[1] + " does not exist. Possible settings are " + settings + ".", Bukkit.getServer().getPlayer(player), "Settings");
+									Errors.sendError(Errors.CUSTOM, p, "Settings", "The setting " + args[1] + " does not exist. Possible settings are " + settings + ".");
 								}
 							} else {
 								Errors.sendError(Errors.NO_PERMISSION, Bukkit.getServer().getPlayer(player), "Settings");
@@ -449,176 +449,172 @@ public class SettingsC implements CommandExecutor {
 							String send = sender.getName();
 							if (sender.hasPermission("settings.set.other")) {
 								if (Bukkit.getServer().getPlayer(args[3]) == null) {
-									Errors.sendError(Errors.NOT_ONLINE, Bukkit.getServer().getPlayer(send), "Settings");
+									Errors.sendError(Errors.NOT_ONLINE, p, "Settings");
 								} else if (args[1].equalsIgnoreCase("fly")) {
+									Player target = Bukkit.getServer().getPlayer(args[3]);
 									if (sender.hasPermission("settings.set.other.fly")) {
-										Player player = Bukkit.getServer().getPlayer(args[3]);
 										if (args[2].equalsIgnoreCase("true")) {
-											c.getConfig().set("fly." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+											c.getConfig().set("fly." + target.getUniqueId().toString(), true);
 											c.save();
 											Bukkit.getPlayer(args[3]).setAllowFlight(true);
-											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s fly mode has been set to true");
-											player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to true by " + ChatColor.RESET + send);
+											WolfAPI.message(ChatColor.RESET + args[3] + ChatColor.GREEN + "'s fly mode has been set to true", p, "Settings");
+											WolfAPI.message("Your fly mode has been set to true by " + ChatColor.RESET + send, target, "Settings");
 										} else if (args[2].equalsIgnoreCase("false")) {
-											c.getConfig().set("fly." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
+											c.getConfig().set("fly." + target.getUniqueId().toString(), false);
 											c.save();
 											Bukkit.getPlayer(args[3]).setAllowFlight(false);
-											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s fly mode has been set to false");
-											player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to false by " + ChatColor.RESET + send);
+											WolfAPI.message(ChatColor.RESET + args[3] + ChatColor.GREEN + "'s fly mode has been set to false", p, "Settings");
+											WolfAPI.message("Your fly mode has been set to false by " + ChatColor.RESET + send, target, "Settings");
 										} else if (args[2].equalsIgnoreCase("toggle")) {
 											if (c.getConfig().getBoolean("fly." + Bukkit.getPlayer(args[3]).getUniqueId())) {
-												c.getConfig().set("fly." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
+												c.getConfig().set("fly." + target.getUniqueId().toString(), false);
 												c.save();
 												Bukkit.getPlayer(args[3]).setAllowFlight(false);
-												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s fly mode has been set to false");
-												player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to false by " + ChatColor.RESET + send);
+												WolfAPI.message(ChatColor.RESET + args[3] + ChatColor.GREEN + "'s fly mode has been set to false", p, "Settings");
+												WolfAPI.message("Your fly mode has been set to false by " + ChatColor.RESET + send, target, "Settings");
 											} else if (!c.getConfig().getBoolean("fly." + Bukkit.getPlayer(args[3]).getUniqueId())) {
-												c.getConfig().set("fly." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+												c.getConfig().set("fly." + target.getUniqueId().toString(), true);
 												c.save();
 												Bukkit.getPlayer(args[3]).setAllowFlight(true);
-												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s fly mode has been set to true");
-												player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to true by " + ChatColor.RESET + send);
+												WolfAPI.message(ChatColor.RESET + args[3] + ChatColor.GREEN + "'s fly mode has been set to true", p, "Settings");
+												WolfAPI.message("Your fly mode has been set to true by " + ChatColor.RESET + send, target, "Settings");
 											} else {
-												c.getConfig().set("fly." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+												c.getConfig().set("fly." + target.getUniqueId().toString(), true);
 												c.save();
 												Bukkit.getPlayer(args[3]).setAllowFlight(true);
-												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s fly mode has been set to true");
-												player.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your fly mode has been set to true by " + ChatColor.RESET + send);
+												WolfAPI.message(ChatColor.RESET + args[3] + ChatColor.GREEN + "'s fly mode has been set to true", p, "Settings");
+												WolfAPI.message("Your fly mode has been set to true by " + ChatColor.RESET + send, target, "Settings");
 											}
 										}
 									} else {
 										Errors.sendError(Errors.NO_PERMISSION, Bukkit.getServer().getPlayer(send), "Settings");
 									}
 								} else if (args[1].equalsIgnoreCase("afk")) {
+									Player target = Bukkit.getServer().getPlayer(args[3]);
 									if (sender.hasPermission("settings.set.other.afk")) {
-										Player aplayer = Bukkit.getServer().getPlayer(args[3]);
 										if (args[2].equalsIgnoreCase("true")) {
 											c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
 											c.save();
-											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + " is now afk");
-											aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're now afk");
+											WolfAPI.message(ChatColor.RESET + args[3] + ChatColor.GREEN + "has been set as afk", p, "Settings");
+											WolfAPI.message("You have been set as afk by " + ChatColor.RESET + send, target, "Settings");
 										} else if (args[2].equalsIgnoreCase("false")) {
 											c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
 											c.save();
-											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + " is no longer afk");
-											aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're no longer afk");
+											WolfAPI.message(ChatColor.RESET + args[3] + ChatColor.GREEN + "has been set as not afk", p, "Settings");
+											WolfAPI.message("You have been set as not afk by " + ChatColor.RESET + send, target, "Settings");
 										} else if (args[2].equalsIgnoreCase("toggle")) {
 											if (c.getConfig().getBoolean("afk." + Bukkit.getPlayer(args[3]).getUniqueId())) {
 												c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
 												c.save();
-												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + " is no longer afk");
-												aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're no longer afk");
+												WolfAPI.message(ChatColor.RESET + args[3] + ChatColor.GREEN + "has been set as not afk", p, "Settings");
+												WolfAPI.message("You have been set as not afk by " + ChatColor.RESET + send, target, "Settings");
 											} else if (!c.getConfig().getBoolean("afk." + Bukkit.getPlayer(args[3]).getUniqueId())) {
 												c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
 												c.save();
-												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + " is now afk");
-												aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're now afk");
+												WolfAPI.message(ChatColor.RESET + args[3] + ChatColor.GREEN + "has been set as afk", p, "Settings");
+												WolfAPI.message("You have been set as afk by " + ChatColor.RESET + send, target, "Settings");
 											} else {
 												c.getConfig().set("afk." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
 												c.save();
-												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + " is now afk");
-												aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "You're now afk");
+												WolfAPI.message(ChatColor.RESET + args[3] + ChatColor.GREEN + "has been set as afk", p, "Settings");
+												WolfAPI.message("You have been set as afk by " + ChatColor.RESET + send, target, "Settings");
 											}
 										} else {
-											WolfAPI.message("The value " + args[2] + " is not possible. Possible values are true/false/toggle.", Bukkit.getServer().getPlayer(send), "Settings");
+											Errors.sendError(Errors.CUSTOM, p, "Settings", "The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
 										}
 									} else {
 										Errors.sendError(Errors.NO_PERMISSION, Bukkit.getServer().getPlayer(send), "Settings");
 									}
 								} else if (args[1].equalsIgnoreCase("music")) {
+									Player target = Bukkit.getServer().getPlayer(args[3]);
 									if (Bukkit.getPluginManager().getPlugin("Music") != null) {
 										if (sender.hasPermission("settings.set.other.music")) {
-											Player senda = (Player) sender;
-											String sende = senda.getName();
-											Player aplayer = Bukkit.getServer().getPlayer(args[3]);
 											if (args[2].equalsIgnoreCase("true")) {
 												c.getConfig().set("music." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
 												c.save();
-												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s music mode has been set to true");
-												aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your music mode has been set to true by " + ChatColor.RESET + sende);
+												WolfAPI.message(ChatColor.RESET + args[3] + ChatColor.GREEN + "'s music mode has been set to true", p, "Settings");
+												WolfAPI.message("Your music mode has been set to true by " + ChatColor.RESET + send, target, "Settings");
 											} else if (args[2].equalsIgnoreCase("false")) {
 												c.getConfig().set("music." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
 												c.save();
-												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s music mode has been set to false");
-												aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your music mode has been set to false by " + ChatColor.RESET + sende);
+												WolfAPI.message(ChatColor.RESET + args[3] + ChatColor.GREEN + "'s music mode has been set to false", p, "Settings");
+												WolfAPI.message("Your music mode has been set to false by " + ChatColor.RESET + send, target, "Settings");
 											} else if (args[2].equalsIgnoreCase("toggle")) {
 												if (c.getConfig().getBoolean("music." + Bukkit.getPlayer(args[3]).getUniqueId())) {
 													c.getConfig().set("music." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
 													c.save();
-													sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s music mode has been set to false");
-													aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your music mode has been set to false by " + ChatColor.RESET + sende);
+													WolfAPI.message(ChatColor.RESET + args[3] + ChatColor.GREEN + "'s music mode has been set to false", p, "Settings");
+													WolfAPI.message("Your music mode has been set to false by " + ChatColor.RESET + send, target, "Settings");
 												} else if (!c.getConfig().getBoolean("music." + Bukkit.getPlayer(args[3]).getUniqueId())) {
 													c.getConfig().set("music." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
 													c.save();
-													sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s music mode has been set to true");
-													aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your music mode has been set to true by " + ChatColor.RESET + sende);
+													WolfAPI.message(ChatColor.RESET + args[3] + ChatColor.GREEN + "'s music mode has been set to true", p, "Settings");
+													WolfAPI.message("Your music mode has been set to true by " + ChatColor.RESET + send, target, "Settings");
 												} else {
 													c.getConfig().set("music." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
 													c.save();
-													sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s music mode has been set to true");
-													aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your music mode has been set to true by " + ChatColor.RESET + sende);
+													WolfAPI.message(ChatColor.RESET + args[3] + ChatColor.GREEN + "'s music mode has been set to true", p, "Settings");
+													WolfAPI.message("Your music mode has been set to true by " + ChatColor.RESET + send, target, "Settings");
 												}
 											} else {
-												WolfAPI.message("The value " + args[2] + " is not possible. Possible values are true/false/toggle.", Bukkit.getServer().getPlayer(send), "Settings");
+												Errors.sendError(Errors.CUSTOM, p, "Settings", "The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
 											}
 										} else {
 											Errors.sendError(Errors.NO_PERMISSION, Bukkit.getServer().getPlayer(send), "Settings");
 										}
 									} else {
-										WolfAPI.message("Because the music plugin is not installed, the setting " + args[1] + " does not exist. Possible settings are " + settings + ".", Bukkit.getServer().getPlayer(send), "Settings");
+										Errors.sendError(Errors.CUSTOM, p, "Settings", "Because the music plugin is not installed, the setting " + args[1] + " does not exist. Possible settings are " + settings + ".");
 									}
 								} else if (args[1].equalsIgnoreCase("scoreboard")) {
+									Player target = Bukkit.getServer().getPlayer(args[3]);
 									if (sender.hasPermission("settings.set.other.scoreboard")) {
-										Player senda = (Player) sender;
-										String sende = senda.getName();
-										Player aplayer = Bukkit.getServer().getPlayer(args[3]);
 										if (args[2].equalsIgnoreCase("true")) {
 											c.getConfig().set("scoreboard." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
 											c.save();
-											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s scoreboard visibility mode has been set to true");
-											aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your scoreboard visibility mode has been set to true by " + ChatColor.RESET + sende);
-											Scoreboard.scoreboard(aplayer.getName().toString());
+											WolfAPI.message(ChatColor.RESET + args[3] + ChatColor.GREEN + "'s scoreboard visibility has been set to true", p, "Settings");
+											WolfAPI.message("Your scoreboard visibility has been set to true by " + ChatColor.RESET + send, target, "Settings");
+											Scoreboard.scoreboard(target.getName().toString());
 										} else if (args[2].equalsIgnoreCase("false")) {
 											c.getConfig().set("scoreboard." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
 											c.save();
-											sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s scoreboard visibility mode has been set to false");
-											aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your scoreboard visibility mode has been set to false by " + ChatColor.RESET + sende);
-											Scoreboard.scoreboard(aplayer.getName().toString());
+											WolfAPI.message(ChatColor.RESET + args[3] + ChatColor.GREEN + "'s scoreboard visibility has been set to false", p, "Settings");
+											WolfAPI.message("Your scoreboard visibility has been set to false by " + ChatColor.RESET + send, target, "Settings");
+											Scoreboard.scoreboard(target.getName().toString());
 										} else if (args[2].equalsIgnoreCase("toggle")) {
 											if (c.getConfig().getBoolean("scoreboard." + Bukkit.getPlayer(args[3]).getUniqueId())) {
 												c.getConfig().set("scoreboard." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
 												c.save();
-												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s scoreboard visibility mode has been set to false");
-												aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your scoreboard visibility mode has been set to false by " + ChatColor.RESET + sende);
-												Scoreboard.scoreboard(aplayer.getName().toString());
+												WolfAPI.message(ChatColor.RESET + args[3] + ChatColor.GREEN + "'s scoreboard visibility has been set to false", p, "Settings");
+												WolfAPI.message("Your scoreboard visibility has been set to false by " + ChatColor.RESET + send, target, "Settings");
+												Scoreboard.scoreboard(target.getName().toString());
 											} else if (!c.getConfig().getBoolean("scoreboard." + Bukkit.getPlayer(args[3]).getUniqueId())) {
 												c.getConfig().set("scoreboard." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
 												c.save();
-												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s scoreboard visibility mode has been set to true");
-												aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your scoreboard visibility mode has been set to true by " + ChatColor.RESET + sende);
-												Scoreboard.scoreboard(aplayer.getName().toString());
+												WolfAPI.message(ChatColor.RESET + args[3] + ChatColor.GREEN + "'s scoreboard visibility has been set to true", p, "Settings");
+												WolfAPI.message("Your scoreboard visibility has been set to true by " + ChatColor.RESET + send, target, "Settings");
+												Scoreboard.scoreboard(target.getName().toString());
 											} else {
 												c.getConfig().set("scoreboard." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
 												c.save();
-												sender.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.RESET + args[3] + ChatColor.GREEN + "'s scoreboard visibility mode has been set to true");
-												aplayer.sendMessage(ChatColor.BLUE + "Hub> " + ChatColor.GREEN + "Your scoreboard visibility mode has been set to true by " + ChatColor.RESET + sende);
-												Scoreboard.scoreboard(aplayer.getName().toString());
+												WolfAPI.message(ChatColor.RESET + args[3] + ChatColor.GREEN + "'s scoreboard visibility has been set to true", p, "Settings");
+												WolfAPI.message("Your scoreboard visibility has been set to true by " + ChatColor.RESET + send, target, "Settings");
+												Scoreboard.scoreboard(target.getName().toString());
 											}
 										} else {
-											WolfAPI.message("The value " + args[2] + " is not possible. Possible values are true/false/toggle.", Bukkit.getServer().getPlayer(send), "Settings");
+											Errors.sendError(Errors.CUSTOM, p, "Settings", "The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
 										}
 									} else {
 										Errors.sendError(Errors.NO_PERMISSION, Bukkit.getServer().getPlayer(send), "Settings");
 									}
 								} else {
-									WolfAPI.message("The setting " + args[1] + " does not exist. Possible settings are " + settings + ".", Bukkit.getServer().getPlayer(send), "Settings");
+									Errors.sendError(Errors.CUSTOM, p, "Settings", "The setting " + args[1] + " does not exist. Possible settings are " + settings + ".");
 								}
 							} else {
 								Errors.sendError(Errors.NO_PERMISSION, Bukkit.getServer().getPlayer(send), "Settings");
 							}
 						}
 					} else {
-						WolfAPI.message("Unknown sub command! Use /settings help for commands!", p, "Settings");
+						Errors.sendError(Errors.CUSTOM, p, "Settings", "Unknown sub command! Use /settings help for commands!");
 					}
 				}
 			}

@@ -52,7 +52,7 @@ public class Scoreboard {
 			online.setScoreboard(scoreboard);
 			Bukkit.getScheduler().scheduleSyncDelayedTask(Settings.plugin, new Runnable() {
 				public void run() {
-					if (!(c.getConfig().getBoolean("scoreboard." + online.getUniqueId().toString()))) {
+					if (c.getConfig().getBoolean("scoreboard." + online.getUniqueId().toString()) != true) {
 						online.getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
 					}
 				}
@@ -61,6 +61,7 @@ public class Scoreboard {
 	}
 
 	public static void scoreboard(final String playername) {
+		final Player player = Bukkit.getServer().getPlayer(playername);
 		org.bukkit.scoreboard.Scoreboard scoreboard = Bukkit.getServer().getScoreboardManager().getNewScoreboard();
 		Objective objective = scoreboard.registerNewObjective("status", "dummy");
 		String scoreboardname = Settings.plugin.getConfig().getString("Scoreboard");
@@ -85,7 +86,7 @@ public class Scoreboard {
 		staffvalue.setScore(-3);
 		Score moneyname = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Money:");
 		moneyname.setScore(-4);
-		Score moneyvalue = objective.getScore(ChatColor.RED + "" + ChatColor.GRAY + "" + ChatColor.RED + Settings.economy.getBalance(Bukkit.getServer().getPlayer(playername)));
+		Score moneyvalue = objective.getScore(ChatColor.RED + "" + ChatColor.GRAY + "" + ChatColor.RED + Settings.economy.getBalance(player));
 		moneyvalue.setScore(-5);
 		Score newsname = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "News:");
 		newsname.setScore(-6);
@@ -97,11 +98,11 @@ public class Scoreboard {
 			Score songvalue = objective.getScore(ChatColor.RED + Settings.songName);
 			songvalue.setScore(-9);
 		}
-		Bukkit.getServer().getPlayer(playername).setScoreboard(scoreboard);
+		player.setScoreboard(scoreboard);
 		Bukkit.getScheduler().scheduleSyncDelayedTask(Settings.plugin, new Runnable() {
 			public void run() {
-				if (!(c.getConfig().getBoolean("scoreboard." + Bukkit.getServer().getPlayer(playername).getUniqueId().toString()))) {
-					Bukkit.getServer().getPlayer(playername).getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
+				if (c.getConfig().getBoolean("scoreboard." + player.getUniqueId().toString()) != true) {
+					player.getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
 				}
 			}
 		}, 600);
