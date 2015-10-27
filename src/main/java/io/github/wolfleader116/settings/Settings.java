@@ -106,6 +106,7 @@ public class Settings extends JavaPlugin implements Listener {
 	
 	public static void setCurrentSong(String name) {
 		songName = name;
+		Scoreboard.scoreboard();
 	}
 	
 	@SuppressWarnings("deprecation")
