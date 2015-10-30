@@ -2,7 +2,7 @@
   	<modelVersion>4.0.0</modelVersion>
   	<groupId>com.github.WolfLeader116</groupId>
   	<artifactId>Settings</artifactId>
-  	<version>3.0.1-SNAPSHOT</version>
+  	<version>3.0.2-SNAPSHOT</version>
   	<properties>
   		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   	</properties>
@@ -60,6 +60,11 @@
 			<groupId>com.github.WolfLeader116</groupId>
 			<artifactId>WolfAPI</artifactId>
 			<version>Pre-3.0-13</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.WolfLeader116</groupId>
+			<artifactId>Utils</artifactId>
+			<version>1.2.8</version>
 		</dependency>
 	</dependencies>
 </project>

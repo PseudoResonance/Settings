@@ -7,6 +7,8 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
 
+import io.github.wolfleader116.utils.Utils;
+
 public class Scoreboard {
 
 	private static Config c = new Config("playerdata", Settings.plugin);
@@ -43,7 +45,7 @@ public class Scoreboard {
 			newsname.setScore(-6);
 			Score newsvalue = objective.getScore(ChatColor.RED + latestnews);
 			newsvalue.setScore(-7);
-			if (Bukkit.getServer().getPluginManager().getPlugin("Music") != null) {
+			if (Utils.isMusic()) {
 				Score songname = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Current Song:");
 				songname.setScore(-8);
 				Score songvalue = objective.getScore(ChatColor.RED + Settings.songName);
@@ -92,7 +94,7 @@ public class Scoreboard {
 		newsname.setScore(-6);
 		Score newsvalue = objective.getScore(ChatColor.RED + latestnews);
 		newsvalue.setScore(-7);
-		if (Bukkit.getServer().getPluginManager().getPlugin("Music") != null) {
+		if (Utils.isMusic()) {
 			Score songname = objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Current Song:");
 			songname.setScore(-8);
 			Score songvalue = objective.getScore(ChatColor.RED + Settings.songName);
