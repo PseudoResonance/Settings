@@ -1,6 +1,7 @@
 package io.github.wolfleader116.settings;
 
 import io.github.wolfleader116.settings.commands.AfkC;
+import io.github.wolfleader116.settings.commands.EffectsC;
 import io.github.wolfleader116.settings.commands.FlyC;
 import io.github.wolfleader116.settings.commands.GamemodeC;
 import io.github.wolfleader116.settings.commands.MusicC;
@@ -94,6 +95,7 @@ public class Settings extends JavaPlugin implements Listener {
 		getCommand("fly").setExecutor(new FlyC());
 		getCommand("afk").setExecutor(new AfkC());
 		getCommand("music").setExecutor(new MusicC());
+		getCommand("effects").setExecutor(new EffectsC());
 		getCommand("scoreboard").setExecutor(new ScoreboardC());
 	}
 
@@ -171,10 +173,21 @@ public class Settings extends JavaPlugin implements Listener {
 	public static Inventory myInventory = createInventory((short) 9, ChatColor.DARK_BLUE + "Player Settings");
 
 	static {
-		if (Bukkit.getPluginManager().getPlugin("Music") != null) {
+		if ((Bukkit.getPluginManager().getPlugin("Utils") != null) && (Bukkit.getPluginManager().getPlugin("PlayerEffects") != null)) {
+			myInventory.setItem(0, createItem(Material.FEATHER, 1, (short) 0, ChatColor.BLUE + "Toggle Flight Mode"));
+			myInventory.setItem(2, createItem(Material.BARRIER, 1, (short) 0, ChatColor.BLUE + "Toggle AFK Mode"));
+			myInventory.setItem(4, createItem(Material.RECORD_12, 1, (short) 0, ChatColor.BLUE + "Toggle Music Mode"));
+			myInventory.setItem(6, createItem(Material.NETHER_STAR, 1, (short) 0, ChatColor.BLUE + "Toggle Effects Mode"));
+			myInventory.setItem(8, createItem(Material.SIGN, 1, (short) 0, ChatColor.BLUE + "Toggle Scoreboard Visibility"));
+		} else if (Bukkit.getPluginManager().getPlugin("Utils") != null) {
 			myInventory.setItem(1, createItem(Material.FEATHER, 1, (short) 0, ChatColor.BLUE + "Toggle Flight Mode"));
 			myInventory.setItem(3, createItem(Material.BARRIER, 1, (short) 0, ChatColor.BLUE + "Toggle AFK Mode"));
 			myInventory.setItem(5, createItem(Material.RECORD_12, 1, (short) 0, ChatColor.BLUE + "Toggle Music Mode"));
+			myInventory.setItem(7, createItem(Material.SIGN, 1, (short) 0, ChatColor.BLUE + "Toggle Scoreboard Visibility"));
+		} else if (Bukkit.getPluginManager().getPlugin("PlayerEffects") != null) {
+			myInventory.setItem(1, createItem(Material.FEATHER, 1, (short) 0, ChatColor.BLUE + "Toggle Flight Mode"));
+			myInventory.setItem(3, createItem(Material.BARRIER, 1, (short) 0, ChatColor.BLUE + "Toggle AFK Mode"));
+			myInventory.setItem(5, createItem(Material.NETHER_STAR, 1, (short) 0, ChatColor.BLUE + "Toggle Effects Mode"));
 			myInventory.setItem(7, createItem(Material.SIGN, 1, (short) 0, ChatColor.BLUE + "Toggle Scoreboard Visibility"));
 		} else {
 			myInventory.setItem(2, createItem(Material.FEATHER, 1, (short) 0, ChatColor.BLUE + "Toggle Flight Mode"));
@@ -186,10 +199,21 @@ public class Settings extends JavaPlugin implements Listener {
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent e) {
 		Player player = (Player) e.getWhoClicked();
-		if (Bukkit.getPluginManager().getPlugin("Music") != null) {
+		if ((Bukkit.getPluginManager().getPlugin("Utils") != null) && (Bukkit.getPluginManager().getPlugin("PlayerEffects") != null)) {
+			myInventory.setItem(0, createItem(Material.FEATHER, 1, (short) 0, ChatColor.BLUE + "Toggle Flight Mode"));
+			myInventory.setItem(2, createItem(Material.BARRIER, 1, (short) 0, ChatColor.BLUE + "Toggle AFK Mode"));
+			myInventory.setItem(4, createItem(Material.RECORD_12, 1, (short) 0, ChatColor.BLUE + "Toggle Music Mode"));
+			myInventory.setItem(6, createItem(Material.NETHER_STAR, 1, (short) 0, ChatColor.BLUE + "Toggle Effects Mode"));
+			myInventory.setItem(8, createItem(Material.SIGN, 1, (short) 0, ChatColor.BLUE + "Toggle Scoreboard Visibility"));
+		} else if (Bukkit.getPluginManager().getPlugin("Utils") != null) {
 			myInventory.setItem(1, createItem(Material.FEATHER, 1, (short) 0, ChatColor.BLUE + "Toggle Flight Mode"));
 			myInventory.setItem(3, createItem(Material.BARRIER, 1, (short) 0, ChatColor.BLUE + "Toggle AFK Mode"));
 			myInventory.setItem(5, createItem(Material.RECORD_12, 1, (short) 0, ChatColor.BLUE + "Toggle Music Mode"));
+			myInventory.setItem(7, createItem(Material.SIGN, 1, (short) 0, ChatColor.BLUE + "Toggle Scoreboard Visibility"));
+		} else if (Bukkit.getPluginManager().getPlugin("PlayerEffects") != null) {
+			myInventory.setItem(1, createItem(Material.FEATHER, 1, (short) 0, ChatColor.BLUE + "Toggle Flight Mode"));
+			myInventory.setItem(3, createItem(Material.BARRIER, 1, (short) 0, ChatColor.BLUE + "Toggle AFK Mode"));
+			myInventory.setItem(5, createItem(Material.NETHER_STAR, 1, (short) 0, ChatColor.BLUE + "Toggle Effects Mode"));
 			myInventory.setItem(7, createItem(Material.SIGN, 1, (short) 0, ChatColor.BLUE + "Toggle Scoreboard Visibility"));
 		} else {
 			myInventory.setItem(2, createItem(Material.FEATHER, 1, (short) 0, ChatColor.BLUE + "Toggle Flight Mode"));
@@ -207,6 +231,9 @@ public class Settings extends JavaPlugin implements Listener {
 				player.closeInventory();
 			} else if (clicked.getType() == Material.RECORD_12) {
 				player.chat("/settings set music toggle");
+				player.closeInventory();
+			} else if (clicked.getType() == Material.NETHER_STAR) {
+				player.chat("/settings set effects toggle");
 				player.closeInventory();
 			} else if (clicked.getType() == Material.SIGN) {
 				player.chat("/settings set scoreboard toggle");

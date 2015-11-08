@@ -24,7 +24,7 @@ public class SettingsC implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		File configFile = new File(Settings.plugin.getDataFolder(), "config.yml");
 		Config c = new Config("playerdata", Settings.plugin);
-		if (Bukkit.getPluginManager().getPlugin("Music") != null) {
+		if (Bukkit.getPluginManager().getPlugin("Utils") != null) {
 			settings = "fly, afk, music, scoreboard";
 		}
 		if (cmd.getName().equalsIgnoreCase("settings")) {
@@ -152,7 +152,7 @@ public class SettingsC implements CommandExecutor {
 									log.info("The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
 								}
 							} else if (args[1].equalsIgnoreCase("music")) {
-								if (Bukkit.getPluginManager().getPlugin("Music") != null) {
+								if (Bukkit.getPluginManager().getPlugin("Utils") != null) {
 									Player player = Bukkit.getServer().getPlayer(args[3]);
 									if (args[2].equalsIgnoreCase("true")) {
 										c.getConfig().set("music." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
@@ -185,7 +185,43 @@ public class SettingsC implements CommandExecutor {
 										log.info("The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
 									}
 								} else {
-									log.info("Because the music plugin is not installed, the setting " + args[1] + " does not exist. Possible settings are " + settings + ".");
+									log.info("Because the utils plugin is not installed, the setting " + args[1] + " does not exist. Possible settings are " + settings + ".");
+								}
+							} else if (args[1].equalsIgnoreCase("effects")) {
+								if (Bukkit.getPluginManager().getPlugin("PlayerEffects") != null) {
+									Player player = Bukkit.getServer().getPlayer(args[3]);
+									if (args[2].equalsIgnoreCase("true")) {
+										c.getConfig().set("effects." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+										c.save();
+										log.info(args[3] + "'s effects mode has been set to true");
+										WolfAPI.message("Your effects mode has been set to true by the console", player, "Settings");
+									} else if (args[2].equalsIgnoreCase("false")) {
+										c.getConfig().set("effects." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
+										c.save();
+										log.info(args[3] + "'s effects mode has been set to false");
+										WolfAPI.message("Your effects mode has been set to false by the console", player, "Settings");
+									} else if (args[2].equalsIgnoreCase("toggle")) {
+										if (c.getConfig().getBoolean("effects." + Bukkit.getPlayer(args[3]).getUniqueId())) {
+											c.getConfig().set("effects." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
+											c.save();
+											log.info(args[3] + "'s effects mode has been set to false");
+											WolfAPI.message("Your effects mode has been set to false by the console", player, "Settings");
+										} else if (!c.getConfig().getBoolean("effects." + Bukkit.getPlayer(args[3]).getUniqueId())) {
+											c.getConfig().set("effects." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+											c.save();
+											log.info(args[3] + "'s effects mode has been set to true");
+											WolfAPI.message("Your effects mode has been set to true by the console", player, "Settings");
+										} else {
+											c.getConfig().set("effects." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+											c.save();
+											log.info(args[3] + "'s effects mode has been set to true");
+											WolfAPI.message("Your effects mode has been set to true by the console", player, "Settings");
+										}
+									} else {
+										log.info("The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
+									}
+								} else {
+									log.info("Because the PlayerEffects plugin is not installed, the setting " + args[1] + " does not exist. Possible settings are " + settings + ".");
 								}
 							} else if (args[1].equalsIgnoreCase("scoreboard")) {
 								Player player = Bukkit.getServer().getPlayer(args[3]);
@@ -371,7 +407,7 @@ public class SettingsC implements CommandExecutor {
 										Errors.sendError(Errors.NO_PERMISSION, p, "Settings");
 									}
 								} else if (args[1].equalsIgnoreCase("music")) {
-									if (Bukkit.getPluginManager().getPlugin("Music") != null) {
+									if (Bukkit.getPluginManager().getPlugin("Utils") != null) {
 										if (sender.hasPermission("settings.set.music")) {
 											if (args[2].equalsIgnoreCase("true")) {
 												c.getConfig().set("music." + Bukkit.getPlayer(player).getUniqueId().toString(), true);
@@ -402,7 +438,41 @@ public class SettingsC implements CommandExecutor {
 											Errors.sendError(Errors.NO_PERMISSION, Bukkit.getServer().getPlayer(player), "Settings");
 										}
 									} else {
-										Errors.sendError(Errors.CUSTOM, p, "Settings", "Because the music plugin is not installed, the setting " + args[1] + " does not exist. Possible settings are " + settings + ".");
+										Errors.sendError(Errors.CUSTOM, p, "Settings", "Because the Utils plugin is not installed, the setting " + args[1] + " does not exist. Possible settings are " + settings + ".");
+									}
+								} else if (args[1].equalsIgnoreCase("effects")) {
+									if (Bukkit.getPluginManager().getPlugin("Utils") != null) {
+										if (sender.hasPermission("settings.set.effects")) {
+											if (args[2].equalsIgnoreCase("true")) {
+												c.getConfig().set("effects." + Bukkit.getPlayer(player).getUniqueId().toString(), true);
+												c.save();
+												WolfAPI.message("Your effects mode has been set to true", Bukkit.getServer().getPlayer(player), "Settings");
+											} else if (args[2].equalsIgnoreCase("false")) {
+												c.getConfig().set("effects." + Bukkit.getPlayer(player).getUniqueId().toString(), false);
+												c.save();
+												WolfAPI.message("Your effects mode has been set to false", Bukkit.getServer().getPlayer(player), "Settings");
+											} else if (args[2].equalsIgnoreCase("toggle")) {
+												if (c.getConfig().getBoolean("effects." + Bukkit.getPlayer(player).getUniqueId())) {
+													c.getConfig().set("effects." + Bukkit.getPlayer(player).getUniqueId().toString(), false);
+													c.save();
+													WolfAPI.message("Your effects mode has been set to false", Bukkit.getServer().getPlayer(player), "Settings");
+												} else if (!c.getConfig().getBoolean("effects." + Bukkit.getPlayer(player).getUniqueId())) {
+													c.getConfig().set("effects." + Bukkit.getPlayer(player).getUniqueId().toString(), true);
+													c.save();
+													WolfAPI.message("Your effects mode has been set to true", Bukkit.getServer().getPlayer(player), "Settings");
+												} else {
+													c.getConfig().set("effects." + Bukkit.getPlayer(player).getUniqueId().toString(), true);
+													c.save();;
+													WolfAPI.message("Your effects mode has been set to true", Bukkit.getServer().getPlayer(player), "Settings");
+												}
+											} else {
+												Errors.sendError(Errors.CUSTOM, p, "Settings", "The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
+											}
+										} else {
+											Errors.sendError(Errors.NO_PERMISSION, Bukkit.getServer().getPlayer(player), "Settings");
+										}
+									} else {
+										Errors.sendError(Errors.CUSTOM, p, "Settings", "Because the PlayerEffects plugin is not installed, the setting " + args[1] + " does not exist. Possible settings are " + settings + ".");
 									}
 								} else if (args[1].equalsIgnoreCase("scoreboard")) {
 									if (sender.hasPermission("settings.set.scoreboard")) {
@@ -527,7 +597,7 @@ public class SettingsC implements CommandExecutor {
 									}
 								} else if (args[1].equalsIgnoreCase("music")) {
 									Player target = Bukkit.getServer().getPlayer(args[3]);
-									if (Bukkit.getPluginManager().getPlugin("Music") != null) {
+									if (Bukkit.getPluginManager().getPlugin("Utils") != null) {
 										if (sender.hasPermission("settings.set.other.music")) {
 											if (args[2].equalsIgnoreCase("true")) {
 												c.getConfig().set("music." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
@@ -563,7 +633,47 @@ public class SettingsC implements CommandExecutor {
 											Errors.sendError(Errors.NO_PERMISSION, Bukkit.getServer().getPlayer(send), "Settings");
 										}
 									} else {
-										Errors.sendError(Errors.CUSTOM, p, "Settings", "Because the music plugin is not installed, the setting " + args[1] + " does not exist. Possible settings are " + settings + ".");
+										Errors.sendError(Errors.CUSTOM, p, "Settings", "Because the Utils plugin is not installed, the setting " + args[1] + " does not exist. Possible settings are " + settings + ".");
+									}
+								} else if (args[1].equalsIgnoreCase("effects")) {
+									Player target = Bukkit.getServer().getPlayer(args[3]);
+									if (Bukkit.getPluginManager().getPlugin("PlayerEffects") != null) {
+										if (sender.hasPermission("settings.set.other.effects")) {
+											if (args[2].equalsIgnoreCase("true")) {
+												c.getConfig().set("effects." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+												c.save();
+												WolfAPI.message(ChatColor.RESET + args[3] + ChatColor.GREEN + "'s effects mode has been set to true", p, "Settings");
+												WolfAPI.message("Your effects mode has been set to true by " + ChatColor.RESET + send, target, "Settings");
+											} else if (args[2].equalsIgnoreCase("false")) {
+												c.getConfig().set("effects." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
+												c.save();
+												WolfAPI.message(ChatColor.RESET + args[3] + ChatColor.GREEN + "'s effects mode has been set to false", p, "Settings");
+												WolfAPI.message("Your effects mode has been set to false by " + ChatColor.RESET + send, target, "Settings");
+											} else if (args[2].equalsIgnoreCase("toggle")) {
+												if (c.getConfig().getBoolean("effects." + Bukkit.getPlayer(args[3]).getUniqueId())) {
+													c.getConfig().set("effects." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), false);
+													c.save();
+													WolfAPI.message(ChatColor.RESET + args[3] + ChatColor.GREEN + "'s effects mode has been set to false", p, "Settings");
+													WolfAPI.message("Your effects mode has been set to false by " + ChatColor.RESET + send, target, "Settings");
+												} else if (!c.getConfig().getBoolean("effects." + Bukkit.getPlayer(args[3]).getUniqueId())) {
+													c.getConfig().set("effects." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+													c.save();
+													WolfAPI.message(ChatColor.RESET + args[3] + ChatColor.GREEN + "'s effects mode has been set to true", p, "Settings");
+													WolfAPI.message("Your effects mode has been set to true by " + ChatColor.RESET + send, target, "Settings");
+												} else {
+													c.getConfig().set("effects." + Bukkit.getPlayer(args[3]).getUniqueId().toString(), true);
+													c.save();
+													WolfAPI.message(ChatColor.RESET + args[3] + ChatColor.GREEN + "'s effects mode has been set to true", p, "Settings");
+													WolfAPI.message("Your effects mode has been set to true by " + ChatColor.RESET + send, target, "Settings");
+												}
+											} else {
+												Errors.sendError(Errors.CUSTOM, p, "Settings", "The value " + args[2] + " is not possible. Possible values are true/false/toggle.");
+											}
+										} else {
+											Errors.sendError(Errors.NO_PERMISSION, Bukkit.getServer().getPlayer(send), "Settings");
+										}
+									} else {
+										Errors.sendError(Errors.CUSTOM, p, "Settings", "Because the PlayerEffects plugin is not installed, the setting " + args[1] + " does not exist. Possible settings are " + settings + ".");
 									}
 								} else if (args[1].equalsIgnoreCase("scoreboard")) {
 									Player target = Bukkit.getServer().getPlayer(args[3]);

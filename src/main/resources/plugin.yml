@@ -1,7 +1,7 @@
 name: Settings
 author: WolfLeader116
 main: io.github.wolfleader116.settings.Settings
-version: 3.0.2
+version: 3.0.3
 description: Settings plugin.
 commands:
   fly:
@@ -9,6 +9,8 @@ commands:
     aliases: [flight]
   music:
     description: Toggle music command.
+  effects:
+    description: Toggle effects command.
   afk:
     description: Toggle afk command.
     aliases: [awayfromkeyboard, away]
@@ -36,12 +38,16 @@ permissions:
     description: Lets the player set their afk setting.
   settings.set.music:
     description: Lets the player set their music setting.
+  settings.set.effects:
+    description: Lets the player set their effects setting.
   settings.set.other.fly:
     description: Lets the player set another player's fly setting.
   settings.set.other.afk:
     description: Lets the player set another player's afk setting.
   settings.set.other.music:
     description: Lets the player set another player's music setting.
+  settings.set.other.effects:
+    description: Lets the player set another player's effects setting.
   settings.reset:
     description: Lets the player reset the config.
   settings.reload:
@@ -67,6 +73,8 @@ permissions:
       settings.set.fly: true
       settings.set.afk: true
       settings.set.music: true
+      settings.set.effects: true
       settings.set.other.fly: true
       settings.set.other.afk: true
       settings.set.other.music: true
+      settings.set.other.effects: true
